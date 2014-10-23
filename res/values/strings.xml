@@ -1,0 +1,21 @@
+<resources>
+
+    <string name="app_name">DAOB</string>
+    <string name="hint_uname">Tên đăng nhập</string>
+    <string name="hint_pwd">Mật khẩu</string>
+	<string name="login">Đăng nhập</string>
+	<string name="logout">Đăng xuất</string>
+	<string name="login_process">Đang kết nối tới hệ thống. Xin vui lòng chờ trong giây lát.</string>
+	<string name="connect_fail">Không thể kết nối tới hệ thống. Xin vui lòng thử lại.</string>
+	<string name="login_fail">Tài khoản hoặc mật khẩu không đúng. Xin vui lòng thử lại.</string>
+	<string name="uname_empty">Tên tài khoản không được để trống.</string>
+	<string name="pwd_empty">Mật khẩu không được để trống.</string>
+	<string name="home">Trang chủ</string>
+	<string name="search_doctor">Tìm bác sĩ</string>
+	<string name="hospital">Bệnh viện / Phòng khám</string>
+	<string name="speciality">Chuyên khoa</string>
+	<string name="doctor_name">Tìm theo tên bác sĩ</string>
+	<string name="search">Tìm kiếm</string>
+	<string name="view_calendar">Xem lịch</string>
+	<string name="doctor_detail">Thông tin bác sĩ</string>
+</resources>
