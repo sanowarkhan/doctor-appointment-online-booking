@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/top_right_button"
-        android:showAsAction="collapseActionView"
+        android:showAsAction="ifRoom"
         android:title="@string/home"/>
     
     <item
