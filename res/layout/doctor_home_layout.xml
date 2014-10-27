@@ -1,13 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <RelativeLayout
+        android:id="@+id/rl_not_approved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/standar_margin" >
+
+        <Button
+            android:id="@+id/btn_not_approved"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:background="@drawable/button_selector"
+            android:text="@string/meeting_not_approved" />
+
+        <Button
+            android:id="@+id/tv_indicator"
+            android:layout_width="@dimen/button_height"
+            android:layout_height="@dimen/button_height"
+            android:layout_alignBaseline="@+id/btn_not_approved"
+            android:layout_alignParentRight="true"
+            android:background="@color/Red_FireBrick"
+            android:text="1" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_next_meeting"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_above="@+id/rl_not_approved"
+        android:layout_margin="@dimen/standar_margin"
+        android:background="@drawable/button_selector"
+        android:text="@string/meeting_next" />
+
+    <View
+        android:id="@+id/lineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/btn_next_meeting"
+        android:background="@color/black" />
+    
+    <ListView
+        android:id="@+id/lv_meeting_today"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lineBottom"
+        android:layout_below="@+id/lineTop" >
+    </ListView>
+
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/tv_meeting_today"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="doctor" />
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/standar_margin"
+        android:text="@string/meeting_today" />
 
-</LinearLayout>
+    <View
+        android:id="@+id/lineTop"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_meeting_today"
+        android:background="@color/black" />
+
+</RelativeLayout>

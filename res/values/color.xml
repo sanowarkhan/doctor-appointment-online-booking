@@ -53,6 +53,8 @@
     <color name="transparent_black_percent_85">#D9000000</color>
     <color name="transparent_black_percent_90">#E6000000</color>
     <color name="transparent_black_percent_95">#F2000000</color>
+    <color name="translucent_light_white">#80FFFFFF</color>
+    <color name="translucent_light_orange">#80ffb933</color>
     <color name="BlanchedAlmond">#FFEBCD</color>
     <color name="Blue_AliceBlue">#F0F8FF</color>
     <color name="Blue_Aqua">#00FFFF</color>

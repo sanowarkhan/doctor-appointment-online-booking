@@ -18,4 +18,7 @@
 	<string name="search">Tìm kiếm</string>
 	<string name="view_calendar">Xem lịch</string>
 	<string name="doctor_detail">Thông tin bác sĩ</string>
+	<string name="meeting_next">Cuộc hẹn sắp tới</string>
+	<string name="meeting_not_approved">Cuộc hẹn chưa xác nhận</string>
+	<string name="meeting_today">Các cuộc hẹn hôm nay</string>
 </resources>
