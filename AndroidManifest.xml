@@ -86,6 +86,26 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
+
+        <!-- Next Meeting Activity -->
+        <activity
+            android:name="com.android.daob.activity.NextMeetingActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+
+        <!-- Meeting Not Approved Activity -->
+        <activity
+            android:name="com.android.daob.activity.MeetingNotApprovedActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
     </application>
 
 </manifest>
