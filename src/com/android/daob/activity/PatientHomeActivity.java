@@ -141,7 +141,7 @@ public class PatientHomeActivity extends BaseActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView != null) {
+            if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                         Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.patient_meeting_item_layout, parent, false);
