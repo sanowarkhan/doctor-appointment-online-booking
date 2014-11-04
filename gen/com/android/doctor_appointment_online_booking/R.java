@@ -264,35 +264,40 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int btn_logout=0x7f09001d;
+        public static final int btn_logout=0x7f090022;
         public static final int btn_next_meeting=0x7f090007;
         public static final int btn_not_approved=0x7f090005;
-        public static final int btn_search_doctor=0x7f09001a;
+        public static final int btn_search_doctor=0x7f09001f;
         public static final int btn_view_calendar=0x7f090003;
         public static final int calendarView=0x7f090001;
-        public static final int ddl_hospital=0x7f090017;
-        public static final int ddl_speciality=0x7f090018;
+        public static final int ddl_hospital=0x7f09001c;
+        public static final int ddl_speciality=0x7f09001d;
         public static final int img_Logo=0x7f090010;
         public static final int lbl_status_login=0x7f09000f;
         public static final int lineBottom=0x7f090008;
         public static final int lineTop=0x7f09000a;
-        public static final int listView1=0x7f09001b;
-        public static final int login_btn=0x7f09000c;
-        public static final int login_progress=0x7f09000e;
-        public static final int lvMeeting=0x7f090016;
-        public static final int lv_meeting_not_approved=0x7f090012;
+        public static final int listView1=0x7f090020;
+        public static final int login_btn=0x7f09000d;
+        public static final int login_progress=0x7f090012;
+        public static final int lvMeeting=0x7f090017;
+        public static final int lv_meeting_not_approved=0x7f090013;
         public static final int lv_meeting_today=0x7f090009;
-        public static final int lv_next_meeting=0x7f090015;
+        public static final int lv_next_meeting=0x7f090016;
+        public static final int rlLogin=0x7f09000c;
         public static final int rl_not_approved=0x7f090004;
-        public static final int spinner1=0x7f090013;
-        public static final int spinner2=0x7f090014;
+        public static final int spinner1=0x7f090014;
+        public static final int spinner2=0x7f090015;
         public static final int textView1=0x7f090002;
-        public static final int top_right_button=0x7f09001c;
+        public static final int top_right_button=0x7f090021;
+        public static final int tv_date_meeting=0x7f090019;
         public static final int tv_doctor_name=0x7f090000;
+        public static final int tv_hospital_name=0x7f090018;
+        public static final int tv_hour_meeting=0x7f09001a;
         public static final int tv_indicator=0x7f090006;
         public static final int tv_meeting_today=0x7f09000b;
-        public static final int tv_search_doctor=0x7f090019;
-        public static final int txtPwd=0x7f09000d;
+        public static final int tv_search_doctor=0x7f09001e;
+        public static final int tv_status_meeting=0x7f09001b;
+        public static final int txtPwd=0x7f09000e;
         public static final int txtUsername=0x7f090011;
     }
     public static final class layout {
@@ -303,7 +308,8 @@ public final class R {
         public static final int meeting_not_approved_layout=0x7f030004;
         public static final int next_meeting_layout=0x7f030005;
         public static final int patient_home_layout=0x7f030006;
-        public static final int search_layout=0x7f030007;
+        public static final int patient_meeting_item_layout=0x7f030007;
+        public static final int search_layout=0x7f030008;
     }
     public static final class menu {
         public static final int top_right_menu=0x7f080000;
@@ -311,12 +317,16 @@ public final class R {
     public static final class string {
         public static final int app_name=0x7f060000;
         public static final int connect_fail=0x7f060006;
+        public static final int date=0x7f060017;
+        public static final int doctor=0x7f060015;
         public static final int doctor_detail=0x7f060011;
         public static final int doctor_name=0x7f06000e;
         public static final int hint_pwd=0x7f060002;
         public static final int hint_uname=0x7f060001;
         public static final int home=0x7f06000a;
         public static final int hospital=0x7f06000c;
+        public static final int hour=0x7f060018;
+        public static final int loading=0x7f06001a;
         public static final int login=0x7f060003;
         public static final int login_fail=0x7f060007;
         public static final int login_process=0x7f060005;
@@ -324,10 +334,16 @@ public final class R {
         public static final int meeting_next=0x7f060012;
         public static final int meeting_not_approved=0x7f060013;
         public static final int meeting_today=0x7f060014;
+        public static final int place=0x7f060016;
         public static final int pwd_empty=0x7f060009;
         public static final int search=0x7f06000f;
         public static final int search_doctor=0x7f06000b;
         public static final int speciality=0x7f06000d;
+        public static final int status=0x7f060019;
+        public static final int status_canceled=0x7f06001e;
+        public static final int status_confirmed=0x7f06001c;
+        public static final int status_done=0x7f06001d;
+        public static final int status_new=0x7f06001b;
         public static final int uname_empty=0x7f060008;
         public static final int view_calendar=0x7f060010;
     }

@@ -18,7 +18,17 @@
 	<string name="search">Tìm kiếm</string>
 	<string name="view_calendar">Xem lịch</string>
 	<string name="doctor_detail">Thông tin bác sĩ</string>
-	<string name="meeting_next">Cuộc hẹn sắp tới</string>
+	<string name="meeting_next">Các cuộc hẹn của bạn</string>
 	<string name="meeting_not_approved">Cuộc hẹn chưa xác nhận</string>
 	<string name="meeting_today">Các cuộc hẹn hôm nay</string>
+	<string name="doctor">Bác sĩ:</string>
+	<string name="place">Nơi khám:</string>
+	<string name="date">Ngày khám:</string>
+	<string name="hour">Giờ khám:</string>
+	<string name="status">Trạng thái:</string>
+	<string name="loading">Đang tải dữ liệu...</string>
+	<string name="status_new">Mới</string>
+	<string name="status_confirmed">Đã xác nhận</string>
+	<string name="status_done">Đã khám</string>
+	<string name="status_canceled">Hủy</string>
 </resources>

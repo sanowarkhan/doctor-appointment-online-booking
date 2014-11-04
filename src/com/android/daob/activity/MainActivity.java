@@ -3,6 +3,7 @@ package com.android.daob.activity;
 
 import java.util.HashMap;
 
+import com.android.daob.utils.Constants;
 import com.android.daob.utils.SessionManager;
 
 import android.app.Activity;
@@ -13,6 +14,8 @@ public class MainActivity extends Activity {
 
     SessionManager sessionManager;
 
+    public static String username;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -20,12 +23,13 @@ public class MainActivity extends Activity {
         sessionManager = new SessionManager(getApplicationContext());
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetails();
+        username = user.get(SessionManager.KEY_NAME);
         String role = user.get(SessionManager.KEY_ROLE);
         if (role != null) {
             Intent i;
-            if (role.equalsIgnoreCase("0")) { // redirect to patient activity
+            if (role.equalsIgnoreCase(Constants.ROLE_PATIENT)) { // redirect to patient activity
                 i = new Intent(MainActivity.this, PatientHomeActivity.class);
-            } else if (role.equalsIgnoreCase("1")) { // redirect to doctor
+            } else if (role.equalsIgnoreCase(Constants.ROLE_DOCTOR)) { // redirect to doctor
                                                      // activity
                 i = new Intent(MainActivity.this, DoctorHomeActivity.class);
             } else { // redirect to doctor login activity

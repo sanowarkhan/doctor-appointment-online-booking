@@ -1,25 +1,39 @@
 
 package com.android.daob.activity;
 
+import java.util.HashMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.daob.application.AppController;
+import com.android.daob.utils.Constants;
 import com.android.daob.utils.SessionManager;
 import com.android.doctor_appointment_online_booking.R;
+import com.android.volley.Request.Method;
+import com.android.volley.Response;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 public class LoginActivity extends Activity implements OnClickListener {
+    public static String TAG = LoginActivity.class.getSimpleName();
+
+    private String url = Constants.URL + "login";
 
     private EditText txtUsername, txtPwd;
 
@@ -29,13 +43,11 @@ public class LoginActivity extends Activity implements OnClickListener {
 
     private ProgressBar loginProgressBar;
 
-    private String url;
-
-    private ImageView imgLogo;
+    RelativeLayout rlLogin;
 
     boolean loginStatus = false;
 
-    boolean error = false;
+    String role;
 
     SessionManager sessionManager;
 
@@ -56,11 +68,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         lblStatusLogin = (TextView) findViewById(R.id.lbl_status_login);
         btnLogin = (Button) findViewById(R.id.login_btn);
         loginProgressBar = (ProgressBar) findViewById(R.id.login_progress);
-        imgLogo = (ImageView) findViewById(R.id.img_Logo);
-        // imgUname = (ImageView) findViewById(R.id.img_Username);
-        // imgPwd = (ImageView) findViewById(R.id.imgPwd);
-        // url = this.getString(R.string.url_server) + "api/accountapi/login/";
-
+        rlLogin = (RelativeLayout) findViewById(R.id.rlLogin);
         btnLogin.setOnClickListener(this);
     }
 
@@ -78,9 +86,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                     if (txtPwd.getText().length() != 0 && txtPwd.getText().toString() != "") {
 
                         lblStatusLogin.setText("");
-                        AsyncLogin task = new AsyncLogin();
-                        // Call execute
-                        task.execute();
+                        checkLogin();
                     }
                     // If Password text control is empty
                     else {
@@ -96,118 +102,73 @@ public class LoginActivity extends Activity implements OnClickListener {
     }
 
     @Override
-    public void onBackPressed() {        
+    public void onBackPressed() {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 
-    private class AsyncLogin extends AsyncTask {
-        ProgressDialog loginDialog = new ProgressDialog(LoginActivity.this);
+    private void checkLogin() {
+        showDialog();
+        String tag_json_login = "json_login_req";
 
-        String uName = txtUsername.getText().toString().trim();
+        final String uName = txtUsername.getText().toString().trim();
 
         String pwd = txtPwd.getText().toString().trim();
 
-        String role;
+        HashMap<String, String> loginParams = new HashMap<String, String>();
+        loginParams.put("username", uName);
+        loginParams.put("password", pwd);
 
-        @Override
-        protected Object doInBackground(Object... params) {
-            // HttpClient client = new DefaultHttpClient();
-            // HttpResponse response;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, url,
+                new JSONObject(loginParams), new Listener<JSONObject>() {
 
-            try {
-                // HttpGet get = new HttpGet(url + "?username=" + uName +
-                // "&password=" + pwd);
-                // response = client.execute(get);
-                // if (response != null) {
-                // InputStream is = response.getEntity().getContent();
-                // String stringRespone = JsonUtil.convertStreamToString(is);
-                // is.close();
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {                           
+                            loginStatus = response.getBoolean("login");
+                            role = response.getString("role");
+                            if (loginStatus) {
+                                sessionManager.createLoginSession(uName, role);
+                                Intent intObj = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intObj);
+                            } else {
+                                loginFail();
+                            }
+                        } catch (JSONException e) {
+                            connectFail();
+                            e.printStackTrace();
+                        }
+                        loginProgressBar.setVisibility(View.GONE);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.e(TAG, "Error: " + error.getMessage());
+                        loginProgressBar.setVisibility(View.GONE);
+                        connectFail();
+                    }
+                }) {
 
-                // loginStatus = Boolean.parseBoolean(stringRespone.toString());
-                if (uName.equals("patient") && pwd.equals("1234")) {
-                    role = "0";
-                    loginStatus = true;
-                } else if (uName.equals("doctor") && pwd.equals("1234")) {
-                    role = "1";
-                    loginStatus = true;
-                }
-            } catch (Exception exp) {
-                exp.printStackTrace();
-                error = true;
-            }
-            return null;
-        }
+        };
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest, tag_json_login);
+    }
 
-        /*
-         * (non-Javadoc)
-         * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
-         */
-        @Override
-        protected void onPostExecute(Object result) {
-            super.onPostExecute(result);
-            loginDialog.dismiss();
-            if (!error) {
-                if (loginStatus) {
-                    // User.setUsername(uName);
-                    // dbAdapter.open();
-                    // dbAdapter.insertUser(uName, pwd);
-                    // dbAdapter.close();
-                    // getUserData();
+    private void showDialog() {
+        loginProgressBar.setVisibility(View.VISIBLE);
+        rlLogin.setVisibility(View.GONE);
+    }
 
-                    sessionManager.createLoginSession(uName, role);
-                    Intent intObj = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intObj);
-                } else {
-                    loginProgressBar.setVisibility(View.INVISIBLE);
-                    txtUsername.setVisibility(View.VISIBLE);
-                    txtPwd.setVisibility(View.VISIBLE);
-                    btnLogin.setVisibility(View.VISIBLE);
-                    imgLogo.setVisibility(View.VISIBLE);
-                    lblStatusLogin.setText(getResources().getString(R.string.login_fail));
-                    txtPwd.setText("");
-                }
-            } else { // connect fail
-                loginProgressBar.setVisibility(View.INVISIBLE);
-                txtUsername.setVisibility(View.VISIBLE);
-                txtPwd.setVisibility(View.VISIBLE);
-                btnLogin.setVisibility(View.VISIBLE);
-                imgLogo.setVisibility(View.VISIBLE);
-                lblStatusLogin.setText(getResources().getString(R.string.connect_fail));
-            }
+    private void loginFail() {
+        rlLogin.setVisibility(View.VISIBLE);
+        lblStatusLogin.setText(getResources().getString(R.string.login_fail));
+        txtPwd.setText("");
+    }
 
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see android.os.AsyncTask#onPreExecute()
-         */
-        @Override
-        protected void onPreExecute() {
-            // TODO Auto-generated method stub
-            super.onPreExecute();
-            loginDialog.setMessage(getResources().getString(R.string.login_process));
-            loginDialog.setCanceledOnTouchOutside(false);
-            loginDialog.show();
-            // loginProgressBar.setVisibility(View.VISIBLE);
-            txtUsername.setVisibility(View.INVISIBLE);
-            txtPwd.setVisibility(View.INVISIBLE);
-            btnLogin.setVisibility(View.INVISIBLE);
-            imgLogo.setVisibility(View.INVISIBLE);
-
-            // lblStatusLogin.setVisibility(View.INVISIBLE);
-        }
-
-        /*
-         * (non-Javadoc)
-         * @see android.os.AsyncTask#onProgressUpdate(Progress[])
-         */
-        @Override
-        protected void onProgressUpdate(Object... values) {
-            // TODO Auto-generated method stub
-        }
-
+    private void connectFail() {
+        rlLogin.setVisibility(View.VISIBLE);
+        lblStatusLogin.setText(getResources().getString(R.string.connect_fail));
     }
 }
