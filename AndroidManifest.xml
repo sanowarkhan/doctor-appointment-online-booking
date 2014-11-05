@@ -62,7 +62,7 @@
 
         <!-- Search Doctor Activity -->
         <activity
-            android:name="com.android.daob.activity.SearchDoctorActivity"
+            android:name="com.android.daob.activity.PatientSearchDoctorActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/search_doctor"
             android:launchMode="singleTop"
@@ -72,7 +72,7 @@
 
         <!-- Doctor Detail Activity -->
         <activity
-            android:name="com.android.daob.activity.DoctorDetailActivity"
+            android:name="com.android.daob.activity.PatientViewDoctorDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/doctor_detail"
             android:launchMode="singleTop"
@@ -82,7 +82,7 @@
 
         <!-- Calendar Activity -->
         <activity
-            android:name="com.android.daob.activity.CalendarActivity"
+            android:name="com.android.daob.activity.PatientCalendarActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/view_calendar"
             android:launchMode="singleTop"
@@ -92,7 +92,7 @@
 
         <!-- Next Meeting Activity -->
         <activity
-            android:name="com.android.daob.activity.NextMeetingActivity"
+            android:name="com.android.daob.activity.DoctorNextMeetingActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:launchMode="singleTop"
@@ -102,7 +102,7 @@
 
         <!-- Meeting Not Approved Activity -->
         <activity
-            android:name="com.android.daob.activity.MeetingNotApprovedActivity"
+            android:name="com.android.daob.activity.DoctorMeetingNotApprovedActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
             android:launchMode="singleTop"

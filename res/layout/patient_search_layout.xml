@@ -57,6 +57,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/standar_margin"
+        android:background="@drawable/button_selector"
         android:text="@string/search" />
 
     <ListView

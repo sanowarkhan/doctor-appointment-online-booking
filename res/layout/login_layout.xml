@@ -19,6 +19,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="15dp"
+            android:background="@drawable/button_selector"
             android:text="@string/login"
             android:textColor="@color/White_Snow" />
 

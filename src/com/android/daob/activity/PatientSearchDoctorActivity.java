@@ -11,14 +11,14 @@ import android.widget.Button;
 
 import com.android.doctor_appointment_online_booking.R;
 
-public class SearchDoctorActivity extends BaseActivity implements OnClickListener{
+public class PatientSearchDoctorActivity extends BaseActivity implements OnClickListener{
 
     Button btnSearch;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search_layout);
+        setContentView(R.layout.patient_search_layout);
         init();
     }
 
@@ -31,6 +31,7 @@ public class SearchDoctorActivity extends BaseActivity implements OnClickListene
     public boolean onCreateOptionsMenu(Menu menu) {   
         getMenuInflater().inflate(R.menu.top_right_menu, menu);
         menu.getItem(0).setTitle(getResources().getString(R.string.home));
+        menu.getItem(0).setIcon(this.getResources().getDrawable(R.drawable.ic_action_go_to_today));
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -49,7 +50,7 @@ public class SearchDoctorActivity extends BaseActivity implements OnClickListene
 
     @Override
     public void onClick(View v) {
-        Intent intentDetail = new Intent(SearchDoctorActivity.this, DoctorDetailActivity.class);
+        Intent intentDetail = new Intent(PatientSearchDoctorActivity.this, PatientViewDoctorDetailActivity.class);
         startActivity(intentDetail);
     }
 

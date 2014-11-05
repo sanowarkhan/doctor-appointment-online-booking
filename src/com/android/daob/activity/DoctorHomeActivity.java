@@ -34,12 +34,12 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
         switch (v.getId()) {
             case R.id.btn_not_approved:
                 Intent naIntent = new Intent(DoctorHomeActivity.this,
-                        MeetingNotApprovedActivity.class);
+                        DoctorMeetingNotApprovedActivity.class);
                 startActivity(naIntent);
                 break;
 
             case R.id.btn_next_meeting:
-                Intent nmIntent = new Intent(DoctorHomeActivity.this, NextMeetingActivity.class);
+                Intent nmIntent = new Intent(DoctorHomeActivity.this, DoctorNextMeetingActivity.class);
                 startActivity(nmIntent);
                 break;
 

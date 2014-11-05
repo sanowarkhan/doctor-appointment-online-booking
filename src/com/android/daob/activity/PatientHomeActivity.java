@@ -59,6 +59,7 @@ public class PatientHomeActivity extends BaseActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.top_right_menu, menu);
         menu.getItem(0).setTitle(getResources().getString(R.string.search_doctor));
+        menu.getItem(0).setIcon(this.getResources().getDrawable(R.drawable.ic_action_search));
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -66,7 +67,7 @@ public class PatientHomeActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.top_right_button:
-                Intent intentSearch = new Intent(this, SearchDoctorActivity.class);
+                Intent intentSearch = new Intent(this, PatientSearchDoctorActivity.class);
                 startActivity(intentSearch);
                 return true;
             default:
@@ -96,6 +97,7 @@ public class PatientHomeActivity extends BaseActivity {
                     UserMeetingModel umm = new UserMeetingModel();
                     JSONObject jsonObjDoctor = new JSONObject();
                     try {
+                        listUserMeetingModels.clear();
                         jsonObjDoctor = jsonArr.getJSONObject(i).getJSONObject("doctor");
                         umm.setDoctorName(jsonObjDoctor.getString("displayName"));
                         umm.setHospital(jsonArr.getJSONObject(i).getString("location"));

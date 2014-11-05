@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import com.android.doctor_appointment_online_booking.R;
 
-public class DoctorDetailActivity extends BaseActivity implements OnClickListener {
+public class PatientViewDoctorDetailActivity extends BaseActivity implements OnClickListener {
 
     Button btnViewCalendar;
 
@@ -19,7 +19,7 @@ public class DoctorDetailActivity extends BaseActivity implements OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.doctor_details_layout);
+        setContentView(R.layout.patient_view_doctor_details_layout);
         init();
     }
 
@@ -30,7 +30,7 @@ public class DoctorDetailActivity extends BaseActivity implements OnClickListene
 
     @Override
     public void onClick(View v) {
-        Intent intentCalendar = new Intent(DoctorDetailActivity.this, CalendarActivity.class);
+        Intent intentCalendar = new Intent(PatientViewDoctorDetailActivity.this, PatientCalendarActivity.class);
         startActivity(intentCalendar);
     }
 
@@ -38,6 +38,7 @@ public class DoctorDetailActivity extends BaseActivity implements OnClickListene
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.top_right_menu, menu);
         menu.getItem(0).setTitle(getResources().getString(R.string.home));
+        menu.getItem(0).setIcon(this.getResources().getDrawable(R.drawable.ic_action_go_to_today));
         return super.onCreateOptionsMenu(menu);
     }
 
