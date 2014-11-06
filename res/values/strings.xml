@@ -12,8 +12,8 @@
 	<string name="pwd_empty">Mật khẩu không được để trống.</string>
 	<string name="home">Trang chủ</string>
 	<string name="search_doctor">Tìm bác sĩ</string>
-	<string name="hospital">Bệnh viện / Phòng khám</string>
-	<string name="speciality">Chuyên khoa</string>
+	<string name="hospital">Bệnh viện / Phòng khám:</string>
+	<string name="speciality">Chuyên khoa:</string>
 	<string name="doctor_name">Tìm theo tên bác sĩ</string>
 	<string name="search">Tìm kiếm</string>
 	<string name="view_calendar">Xem lịch</string>
