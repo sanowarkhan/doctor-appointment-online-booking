@@ -15,6 +15,12 @@ public interface Constants {
     public String STATUS_DONE = "done";
 
     public String STATUS_CANCELED = "canceled";
+    
+    //doctor table
+    public String DOCTOR_TABLE = "Doctor";
+    public String DESCRIPTION = "Desctiption";
+    public String EDUCATION = "Education";
+    public String WORKING_PLACE = "WorkingPlace";
 
     // hospital table
     public String HOSPITAL_TABLE = "WorkingPlace";

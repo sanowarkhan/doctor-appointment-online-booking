@@ -23,6 +23,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 + " integer primary key, " + Constants.NAME + " text, " + Constants.ADDRESS + " text)");
         db.execSQL("Create table " + Constants.SPECIALTY_TABLE + " (" + Constants.ID
                 + " integer primary key, " + Constants.NAME + " text)");
+        db.execSQL("Create table " + Constants.DOCTOR_TABLE + " (" + Constants.ID
+                + " integer primary key, " + Constants.NAME + " text)"
+                + " (" + Constants.DESCRIPTION + " text"
+                + " (" + Constants.EDUCATION + " text"
+                + " (" + Constants.WORKING_PLACE + " interger");
     }
 
     @Override
