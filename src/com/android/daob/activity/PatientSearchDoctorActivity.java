@@ -18,6 +18,7 @@ import android.widget.Spinner;
 
 import com.android.daob.application.AppController;
 import com.android.daob.database.SQLiteTable;
+import com.android.daob.model.DoctorModel;
 import com.android.daob.model.SpecialtyModel;
 import com.android.daob.model.WorkingPlaceModel;
 import com.android.daob.utils.Constants;
@@ -32,7 +33,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
 
     public static String TAG = PatientSearchDoctorActivity.class.getSimpleName();
 
-    String urlGetListWorkingAndSpecialty = Constants.URL + "getListWorkingAndSpecialty";
+    String urlGetListWorkingAndSpecialty = Constants.URL + "getListDoctorWorkingSpecialty";
 
     String urlSearch = Constants.URL + "";
 
@@ -43,6 +44,8 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
     List<WorkingPlaceModel> listWorkingPlaceModels = new ArrayList<WorkingPlaceModel>();
 
     List<SpecialtyModel> listSpecialtyModels = new ArrayList<SpecialtyModel>();
+    
+    List<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,14 +99,16 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
         boolean hasData = false;
         long countSpe = 0;
         long countWP = 0;
+        long countDoc = 0;
 
         SQLiteTable sqLiteTable = new SQLiteTable(PatientSearchDoctorActivity.this);
 
         sqLiteTable.open();
         countSpe = sqLiteTable.getCountSpecialty();
         countWP = sqLiteTable.getCountWorkingPlace();
+        countDoc = sqLiteTable.getCountDoctor();
 
-        if (countSpe > 0 && countWP > 0) {
+        if (countSpe > 0 && countWP > 0 && countDoc > 0) {
             hasData = true;
         }
 
@@ -119,6 +124,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
         showProgressDialog(content, false);
         listWorkingPlaceModels.clear();
         listSpecialtyModels.clear();
+        listDoctorModels.clear();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlGetListWorkingAndSpecialty,
                 new Listener<JSONArray>() {
 
@@ -132,7 +138,20 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
 
                         JSONArray arrWp = new JSONArray();
                         JSONArray arrSpec = new JSONArray();
+                        JSONArray arrDoc = new JSONArray();
                         try {
+                        	arrDoc = arr.getJSONObject(2).getJSONArray("doctor");
+                            for (int i = 0; i < arrDoc.length(); i++){
+                            	DoctorModel doc = new DoctorModel();
+                            	doc.setDoctorId(arrDoc.getJSONObject(i).getInt("id"));
+                            	doc.setDoctorName(arrDoc.getJSONObject(i).getString("name"));
+                            	doc.setDescription(arrDoc.getJSONObject(i).getString("description"));
+                            	doc.setEducation(arrDoc.getJSONObject(i).getString("education"));
+                            	doc.setSpecialty(arrDoc.getJSONObject(i).getInt("specialty"));
+                            	sqLiteTable.insertDoctor(doc);
+                            	listDoctorModels.add(doc);
+                            }
+                            
                             arrWp = arr.getJSONObject(0).getJSONArray("workingPlace");
                             for (int j = 0; j < arrWp.length(); j++) {
                                 WorkingPlaceModel wp = new WorkingPlaceModel();
@@ -151,6 +170,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
                                 sqLiteTable.insertSpecialty(spec);
                                 listSpecialtyModels.add(spec);
                             }
+                            
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

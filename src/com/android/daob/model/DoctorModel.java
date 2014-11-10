@@ -6,6 +6,8 @@ public class DoctorModel {
 	private int doctorWorkingPlace;
 	private String description;
 	private String education;
+	private int specialty;
+	
 	public int getDoctorId() {
 		return doctorId;
 	}
@@ -35,6 +37,12 @@ public class DoctorModel {
 	}
 	public void setEducation(String education) {
 		this.education = education;
+	}
+	public int getSpecialty() {
+		return specialty;
+	}
+	public void setSpecialty(int specialty) {
+		this.specialty = specialty;
 	}
 	
 }

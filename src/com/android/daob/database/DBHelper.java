@@ -24,16 +24,17 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("Create table " + Constants.SPECIALTY_TABLE + " (" + Constants.ID
                 + " integer primary key, " + Constants.NAME + " text)");
         db.execSQL("Create table " + Constants.DOCTOR_TABLE + " (" + Constants.ID
-                + " integer primary key, " + Constants.NAME + " text)"
-                + " (" + Constants.DESCRIPTION + " text"
-                + " (" + Constants.EDUCATION + " text"
-                + " (" + Constants.WORKING_PLACE + " interger");
+                + " integer primary key, " + Constants.NAME + " text, "
+                + Constants.DESCRIPTION + " text, "
+                + Constants.EDUCATION + " text, "
+                + Constants.WORKING_PLACE + " interger)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Constants.HOSPITAL_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Constants.SPECIALTY_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Constants.DOCTOR_TABLE);
         onCreate(db);
     }
 }

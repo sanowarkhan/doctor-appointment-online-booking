@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.android.daob.utils.Constants;
 import com.android.doctor_appointment_online_booking.R;
 
 public class DoctorHomeActivity extends BaseActivity implements OnClickListener {
 
     Button btnNextMeeting, btnMeetingNotApproved;
+    public static String TAG = PatientHomeActivity.class.getSimpleName();
 
+    String url = Constants.URL + "doctorDashboard/" + MainActivity.username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

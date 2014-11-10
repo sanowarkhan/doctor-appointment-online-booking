@@ -4,6 +4,7 @@ package com.android.daob.database;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.android.daob.model.DoctorModel;
 import com.android.daob.model.SpecialtyModel;
 import com.android.daob.model.WorkingPlaceModel;
 import com.android.daob.utils.Constants;
@@ -42,6 +43,16 @@ public class SQLiteTable {
     public void close() {
         mDbHelper.close();
     }
+    
+    DoctorModel initDoctorModelFromCursor(Cursor c){
+    	DoctorModel doc = new DoctorModel();
+    	doc.setDoctorId(c.getInt(c.getColumnIndex(Constants.ID)));
+    	doc.setDoctorName(c.getString(c.getColumnIndex(Constants.NAME)));
+    	doc.setDescription(c.getString(c.getColumnIndex(Constants.DESCRIPTION)));
+    	doc.setEducation(c.getString(c.getColumnIndex(Constants.EDUCATION)));
+    	doc.setDoctorWorkingPlace(c.getInt(c.getColumnIndex(Constants.WORKING_PLACE)));
+		return doc;
+    }
 
     WorkingPlaceModel initWorkingPlaceFromCursor(Cursor c) {
         WorkingPlaceModel wp = new WorkingPlaceModel();
@@ -56,6 +67,43 @@ public class SQLiteTable {
         spec.setSpecialtyId(c.getInt(c.getColumnIndex(Constants.ID)));
         spec.setSpecialtyName(c.getString(c.getColumnIndex(Constants.NAME)));
         return spec;
+    }
+    
+    //get all doctor
+    public List<DoctorModel> getAllDoctor(){
+    	List<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
+    	try {
+    		String sql = "Select * from " + Constants.DOCTOR_TABLE;
+    		Cursor mCur = mDb.rawQuery(sql, null);
+    		if(mCur != null){
+    			DoctorModel doc = new DoctorModel();
+    			
+    			while (mCur.moveToNext()) {
+    				 doc = initDoctorModelFromCursor(mCur);
+    				 listDoctorModels.add(doc);
+    			}
+    		}
+    	} catch (SQLException mSQLException) {
+    		Log.e(TAG, "getTestData >>" + mSQLException.toString());
+            throw mSQLException;
+    	}
+    	return listDoctorModels;
+    }
+    
+ // insert specialty to db
+    public void insertDoctor(DoctorModel doc) {
+        ContentValues values = new ContentValues();
+        values.put(Constants.ID, doc.getDoctorId());
+        values.put(Constants.NAME, doc.getDoctorName());
+        values.put(Constants.DESCRIPTION, doc.getDescription());
+        values.put(Constants.EDUCATION, doc.getEducation());
+        //values.put(Constants.WORKING_PLACE, doc.getDoctorWorkingPlace());
+        mDb.insert(Constants.DOCTOR_TABLE, null, values);
+    }
+
+    // delete all data
+    public void deleteDoctor() {
+        mDb.delete(Constants.DOCTOR_TABLE, null, null);
     }
 
     // get all specialty
@@ -127,6 +175,25 @@ public class SQLiteTable {
     // delete all data
     public void deleteSpecialty() {
         mDb.delete(Constants.SPECIALTY_TABLE, null, null);
+    }
+    
+    public long getCountDoctor() {
+        long count = 0;
+
+        try {
+            String sql = "Select count (*) from " + Constants.DOCTOR_TABLE;
+
+            Cursor mCur = mDb.rawQuery(sql, null);
+            if (mCur != null) {
+                while (mCur.moveToNext()) {
+                    count = mCur.getLong(0);
+                }
+            }
+            return count;
+        } catch (SQLException mSQLException) {
+            Log.e(TAG, "getTestData >>" + mSQLException.toString());
+            throw mSQLException;
+        }
     }
 
     public long getCountWorkingPlace() {
