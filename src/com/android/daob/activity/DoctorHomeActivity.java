@@ -34,7 +34,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 public class DoctorHomeActivity extends BaseActivity implements OnClickListener {
 
     Button btnNextMeeting, btnMeetingNotApproved;
-    public static String TAG = PatientHomeActivity.class.getSimpleName();
+    public static String TAG = DoctorHomeActivity.class.getSimpleName();
     String url = Constants.URLHome + "doctorDashboard/" + MainActivity.username;
 
     ListView lvMeeting;
@@ -142,7 +142,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
         ArrayList<DoctorAppointmentModel> listData;
 
         public DoctorAppViewAdapter(ArrayList<DoctorAppointmentModel> listData) {
-            super(DoctorHomeActivity.this, R.layout.doctor_home_layout, listData);
+            super(DoctorHomeActivity.this, R.layout.doctor_home_meeting_item_layout, listData);
             this.listData = listData;
         }
 
@@ -155,14 +155,14 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
             if (convertView == null) {
                 LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
                         Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.patient_meeting_item_layout, parent, false);
+                convertView = inflater.inflate(R.layout.doctor_home_meeting_item_layout, parent, false);
                 holder = new ViewHolder();
-                holder.tvPatientName = (TextView) convertView.findViewById(R.id.tv_doctor_name);
-                holder.tvLocation = (TextView) convertView.findViewById(R.id.tv_hospital_name);
-                holder.tvDate = (TextView) convertView.findViewById(R.id.tv_date_meeting);
-                holder.tvStartTime = (TextView) convertView.findViewById(R.id.tv_hour_meeting);
-                holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status_meeting);
-                holder.tvNotes = (TextView) convertView.findViewById(R.id.tv_note_meeting);
+                holder.tvPatientName = (TextView) convertView.findViewById(R.id.tv_patient_name);
+                holder.tvLocation = (TextView) convertView.findViewById(R.id.tv_location_name);
+                holder.tvDate = (TextView) convertView.findViewById(R.id.tv_date_appointment);
+                holder.tvStartTime = (TextView) convertView.findViewById(R.id.tv_start_time);
+                holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_appointment_status);
+                holder.tvNotes = (TextView) convertView.findViewById(R.id.tv_appointment_notes);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();

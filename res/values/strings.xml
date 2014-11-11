@@ -22,6 +22,7 @@
 	<string name="meeting_not_approved">Cuộc hẹn chưa xác nhận</string>
 	<string name="meeting_today">Các cuộc hẹn hôm nay</string>
 	<string name="doctor">Bác sĩ:</string>
+	<string name="patient">Bệnh nhân:</string>
 	<string name="place">Nơi khám:</string>
 	<string name="date">Ngày khám:</string>
 	<string name="hour">Giờ khám:</string>
