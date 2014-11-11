@@ -3,6 +3,8 @@ package com.android.daob.utils;
 
 public interface Constants {
     public String URL = "https://doctor-app-booking-online.herokuapp.com/api/";
+    public String URLHome = "http://192.168.1.48:1337/api/";
+    public String URLPhone = "https://192.168.43.103:1337/api/";
 
     public String ROLE_DOCTOR = "doctor";
 

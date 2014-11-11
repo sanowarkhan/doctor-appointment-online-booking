@@ -26,6 +26,7 @@
 	<string name="date">Ngày khám:</string>
 	<string name="hour">Giờ khám:</string>
 	<string name="status">Trạng thái:</string>
+	<string name="notes">Ghi chú:</string>
 	<string name="loading">Đang tải dữ liệu...</string>
 	<string name="status_new">Mới</string>
 	<string name="status_confirmed">Đã xác nhận</string>
