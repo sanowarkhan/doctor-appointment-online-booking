@@ -49,6 +49,13 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 		init();
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		getDashboard();
+	}
+	
 	void init() {
 		lvMeeting = (ListView) findViewById(R.id.lv_meeting_today);
 		btnMeetingNotApproved = (Button) findViewById(R.id.btn_not_approved);
