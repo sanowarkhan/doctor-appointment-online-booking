@@ -33,4 +33,5 @@
 	<string name="status_confirmed">Đã xác nhận</string>
 	<string name="status_done">Đã khám</string>
 	<string name="status_canceled">Hủy</string>
+	<string name="all">Tất cả</string>
 </resources>

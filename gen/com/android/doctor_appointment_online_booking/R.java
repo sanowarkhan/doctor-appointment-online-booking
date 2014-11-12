@@ -325,6 +325,7 @@ public final class R {
         public static final int top_right_menu=0x7f080000;
     }
     public static final class string {
+        public static final int all=0x7f060021;
         public static final int app_name=0x7f060000;
         public static final int connect_fail=0x7f060006;
         public static final int date=0x7f060018;
