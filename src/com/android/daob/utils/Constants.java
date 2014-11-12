@@ -2,10 +2,14 @@
 package com.android.daob.utils;
 
 public interface Constants {
-    public String URL = "https://doctor-app-booking-online.herokuapp.com/api/";
-    public String URLHome = "http://192.168.1.48:1337/api/";
-    public String URLPhone = "http://192.168.43.103:1337/api/";
-    public String URLCty = "http://10.88.136.88:1337/api/";
+	// heroku
+    //public String URL = "https://doctor-app-booking-online.herokuapp.com/api/";
+    // home
+    public String URL = "http://192.168.1.48:1337/api/";
+    // phone
+    //public String URL = "http://192.168.43.103:1337/api/";
+    // com
+    //public String URL = "http://10.88.136.88:1337/api/";
 
     public String ROLE_DOCTOR = "doctor";
 
@@ -24,6 +28,7 @@ public interface Constants {
     public String DESCRIPTION = "Desctiption";
     public String EDUCATION = "Education";
     public String WORKING_PLACE = "WorkingPlace";
+    public String DOCTOR_SPECIALTY = "Specialty";
 
     // hospital table
     public String HOSPITAL_TABLE = "WorkingPlace";

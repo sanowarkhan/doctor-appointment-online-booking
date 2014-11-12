@@ -31,7 +31,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 public class PatientHomeActivity extends BaseActivity {
 	public static String TAG = PatientHomeActivity.class.getSimpleName();
 
-	String url = Constants.URL + "patientDashboard/" + MainActivity.username;
+    String url = Constants.URL + "patientDashboard/" + MainActivity.username;
 
 	ListView lvMeeting;
 

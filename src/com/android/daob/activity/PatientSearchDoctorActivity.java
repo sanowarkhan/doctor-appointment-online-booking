@@ -5,17 +5,24 @@ import java.util.List;
 
 import org.json.JSONArray;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.daob.application.AppController;
@@ -43,6 +50,10 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 	String urlSearch = Constants.URL + "";
 
 	Button btnSearch;
+	
+	EditText doctorNameTxt;
+	
+	ListView lvDoctor;
 
 	Spinner spinnerWorkingPlace, spinnerSpecialty;
 
@@ -51,6 +62,9 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 	List<SpecialtyModel> listSpecialtyModels = new ArrayList<SpecialtyModel>();
 
 	List<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
+	
+	ArrayAdapter<DoctorModel> listDoctorResultAdapter;
+	ArrayList<DoctorModel> listDoctors = new ArrayList<DoctorModel>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +73,11 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 		init();
 	}
 
-	int id = 0;
+	int workingPlaceId = 0;
+	int specialtyId = 0;
 	
 	void init() {
+		lvDoctor = (ListView) findViewById(R.id.lv_doctor_search_result);
 		spinnerWorkingPlace = (Spinner) findViewById(R.id.ddl_hospital);
 		spinnerWorkingPlace
 				.setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -77,7 +93,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 									wp.getWorkingPlaceName() + " "
 											+ wp.getWorkingPlaceId(),
 									Toast.LENGTH_SHORT).show();
-							id = wp.getWorkingPlaceId();
+							workingPlaceId = wp.getWorkingPlaceId();
 						}
 						else {
 							Toast.makeText(
@@ -94,6 +110,36 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 				});
 
 		spinnerSpecialty = (Spinner) findViewById(R.id.ddl_speciality);
+		spinnerSpecialty.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				if (position != 0) {
+					SpecialtyModel wp = (SpecialtyModel) parent
+							.getItemAtPosition(position);
+					Toast.makeText(
+							PatientSearchDoctorActivity.this,
+							wp.getSpecialtyName() + " "
+									+ wp.getSpecialtyId(),
+							Toast.LENGTH_SHORT).show();
+					specialtyId = wp.getSpecialtyId();
+				}
+				else {
+					Toast.makeText(
+							PatientSearchDoctorActivity.this,
+							"All",
+							Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 
 		btnSearch = (Button) findViewById(R.id.btn_search_doctor);
 		btnSearch.setOnClickListener(this);
@@ -132,7 +178,18 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 //		Intent intentDetail = new Intent(PatientSearchDoctorActivity.this,
 //				PatientViewDoctorDetailActivity.class);
 //		startActivity(intentDetail);
-		
+		listDoctorModels.clear();
+		SQLiteTable sqLiteTable = new SQLiteTable(
+				PatientSearchDoctorActivity.this);
+		doctorNameTxt = (EditText)findViewById(R.id.tv_search_doctor);
+		sqLiteTable.open();
+		listDoctors = sqLiteTable.searchDoctor(specialtyId, workingPlaceId, doctorNameTxt.getText().toString());
+		listDoctorResultAdapter  = new DoctorResultViewAdapter(listDoctors);
+		lvDoctor.setAdapter(listDoctorResultAdapter);
+		listDoctorResultAdapter.notifyDataSetChanged();
+		InputMethodManager imm = (InputMethodManager)getSystemService(
+			      Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(btnSearch.getWindowToken(), 0);
 		
 	}
 
@@ -197,6 +254,8 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 										.getString("education"));
 								doc.setSpecialty(arrDoc.getJSONObject(i)
 										.getInt("specialty"));
+								doc.setDoctorWorkingPlace(arrDoc.getJSONObject(i)
+										.getString("workingPlace"));
 								sqLiteTable.insertDoctor(doc);
 								listDoctorModels.add(doc);
 							}
@@ -283,5 +342,47 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 		specAdapter
 				.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
 		spinnerSpecialty.setAdapter(specAdapter);
+	}
+
+	class DoctorResultViewAdapter extends ArrayAdapter<DoctorModel> {
+		ViewHolder holder;
+
+		ArrayList<DoctorModel> listData;
+
+		public DoctorResultViewAdapter(ArrayList<DoctorModel> listData) {
+			super(PatientSearchDoctorActivity.this,
+					R.layout.doctor_search_items_result_layout, listData);
+			this.listData = listData;
+		}
+
+		public ArrayList<DoctorModel> getListData() {
+			return listData;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = (LayoutInflater) getContext()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				convertView = inflater
+						.inflate(R.layout.doctor_search_items_result_layout,
+								parent, false);
+				holder = new ViewHolder();
+				holder.tvDoctorName = (TextView) convertView
+						.findViewById(R.id.tv_doctor_search_result);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			DoctorModel doc = listData.get(position);
+
+			holder.tvDoctorName.setText(doc.getDoctorName());
+
+			return convertView;
+		}
+	}
+	
+	private class ViewHolder {
+		TextView tvDoctorName;
 	}
 }

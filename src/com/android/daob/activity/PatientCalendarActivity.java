@@ -3,7 +3,6 @@ package com.android.daob.activity;
 
 import com.android.doctor_appointment_online_booking.R;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;

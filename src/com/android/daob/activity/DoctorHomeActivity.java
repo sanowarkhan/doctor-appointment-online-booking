@@ -32,9 +32,10 @@ import com.android.volley.toolbox.JsonArrayRequest;
 
 public class DoctorHomeActivity extends BaseActivity implements OnClickListener {
 
-	Button btnNextMeeting, btnMeetingNotApproved;
-	public static String TAG = DoctorHomeActivity.class.getSimpleName();
-	String url = Constants.URLCty + "doctorDashboard/" + MainActivity.username;
+    Button btnNextMeeting, btnMeetingNotApproved;
+    public static String TAG = DoctorHomeActivity.class.getSimpleName();
+    String url = Constants.URL + "doctorDashboard/" + MainActivity.username;
+
 
 	ListView lvMeeting;
 

@@ -26,6 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("Create table " + Constants.DOCTOR_TABLE + " (" + Constants.ID
                 + " integer primary key, " + Constants.NAME + " text, "
                 + Constants.DESCRIPTION + " text, "
+                + Constants.DOCTOR_SPECIALTY + " text, "
                 + Constants.EDUCATION + " text, "
                 + Constants.WORKING_PLACE + " interger)");
     }

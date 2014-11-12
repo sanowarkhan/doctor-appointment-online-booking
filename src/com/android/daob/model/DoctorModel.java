@@ -3,7 +3,7 @@ package com.android.daob.model;
 public class DoctorModel {
 	private int doctorId;
 	private String doctorName;
-	private int doctorWorkingPlace;
+	private String doctorWorkingPlace;
 	private String description;
 	private String education;
 	private int specialty;
@@ -20,10 +20,10 @@ public class DoctorModel {
 	public void setDoctorName(String doctorName) {
 		this.doctorName = doctorName;
 	}
-	public int getDoctorWorkingPlace() {
+	public String getDoctorWorkingPlace() {
 		return doctorWorkingPlace;
 	}
-	public void setDoctorWorkingPlace(int doctorWorkingPlace) {
+	public void setDoctorWorkingPlace(String doctorWorkingPlace) {
 		this.doctorWorkingPlace = doctorWorkingPlace;
 	}
 	public String getDescription() {

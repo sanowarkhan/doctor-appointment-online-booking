@@ -1,6 +1,7 @@
 
 package com.android.daob.database;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class SQLiteTable {
     	doc.setDoctorName(c.getString(c.getColumnIndex(Constants.NAME)));
     	doc.setDescription(c.getString(c.getColumnIndex(Constants.DESCRIPTION)));
     	doc.setEducation(c.getString(c.getColumnIndex(Constants.EDUCATION)));
-    	doc.setDoctorWorkingPlace(c.getInt(c.getColumnIndex(Constants.WORKING_PLACE)));
+    	doc.setDoctorWorkingPlace(c.getString(c.getColumnIndex(Constants.WORKING_PLACE)));
 		return doc;
     }
 
@@ -67,6 +68,43 @@ public class SQLiteTable {
         spec.setSpecialtyId(c.getInt(c.getColumnIndex(Constants.ID)));
         spec.setSpecialtyName(c.getString(c.getColumnIndex(Constants.NAME)));
         return spec;
+    }
+    
+    //search doctor
+    public ArrayList<DoctorModel> searchDoctor(int specialtyId, int workingPlaceId, String name){
+    	ArrayList<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
+    	try{
+    		String sql = "";
+    		if(specialtyId == 0 && workingPlaceId == 0 && name != ""){
+    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Name like '%" + name + "%'";
+    		} else if(specialtyId == 0 && workingPlaceId != 0){
+    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where WorkingPlace like '%" + workingPlaceId +";%'"
+        				+ " and Name like '%" + name + "%'";
+    		} else if(workingPlaceId == 0 && specialtyId != 0){
+    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty='" + specialtyId +"'"
+        				+ " and Name like '%" + name + "%'";
+    		} else if(specialtyId != 0 && workingPlaceId != 0){
+    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty='"
+        				+ specialtyId + "' and WorkingPlace like '%" + workingPlaceId +";%'"
+        				+ " and Name like '%" + name + "%'";
+    		} else{
+    			sql = "Select * from " + Constants.DOCTOR_TABLE;
+    		}
+    		
+    		Cursor mCur = mDb.rawQuery(sql, null);
+    		if(mCur != null){
+    			DoctorModel doc = new DoctorModel();
+    			
+    			while (mCur.moveToNext()) {
+   				 doc = initDoctorModelFromCursor(mCur);
+   				 listDoctorModels.add(doc);
+   			}
+    		}
+    	} catch (SQLException mSQLException){
+    		Log.e(TAG, "getTestData >>" + mSQLException.toString());
+    		throw mSQLException;
+    	}
+    	return (ArrayList<DoctorModel>) listDoctorModels;
     }
     
     //get all doctor
@@ -97,7 +135,7 @@ public class SQLiteTable {
         values.put(Constants.NAME, doc.getDoctorName());
         values.put(Constants.DESCRIPTION, doc.getDescription());
         values.put(Constants.EDUCATION, doc.getEducation());
-        //values.put(Constants.WORKING_PLACE, doc.getDoctorWorkingPlace());
+        values.put(Constants.WORKING_PLACE, doc.getDoctorWorkingPlace());
         mDb.insert(Constants.DOCTOR_TABLE, null, values);
     }
 
