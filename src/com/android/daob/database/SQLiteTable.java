@@ -98,7 +98,7 @@ public class SQLiteTable {
     			while (mCur.moveToNext()) {
    				 doc = initDoctorModelFromCursor(mCur);
    				 listDoctorModels.add(doc);
-   			}
+    			}
     		}
     	} catch (SQLException mSQLException){
     		Log.e(TAG, "getTestData >>" + mSQLException.toString());
