@@ -75,22 +75,22 @@ public class SQLiteTable {
     	ArrayList<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
     	try{
     		String sql = "";
-    		if(specialtyId == 0 && workingPlaceId == 0 && name != ""){
+    		if(specialtyId == 0 && workingPlaceId == 0 && !name.isEmpty()){
     			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Name like '%" + name + "%'";
     		} else if(specialtyId == 0 && workingPlaceId != 0){
     			sql = "Select * from " + Constants.DOCTOR_TABLE + " where WorkingPlace like '%" + workingPlaceId +";%'"
         				+ " and Name like '%" + name + "%'";
     		} else if(workingPlaceId == 0 && specialtyId != 0){
-    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty='" + specialtyId +"'"
+    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty=" + specialtyId 
         				+ " and Name like '%" + name + "%'";
     		} else if(specialtyId != 0 && workingPlaceId != 0){
-    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty='"
-        				+ specialtyId + "' and WorkingPlace like '%" + workingPlaceId +";%'"
+    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty="
+        				+ specialtyId + " and WorkingPlace like '%" + workingPlaceId +";%'"
         				+ " and Name like '%" + name + "%'";
     		} else{
     			sql = "Select * from " + Constants.DOCTOR_TABLE;
     		}
-    		
+    		Log.i("aa", sql);
     		Cursor mCur = mDb.rawQuery(sql, null);
     		if(mCur != null){
     			DoctorModel doc = new DoctorModel();
@@ -133,6 +133,7 @@ public class SQLiteTable {
         ContentValues values = new ContentValues();
         values.put(Constants.ID, doc.getDoctorId());
         values.put(Constants.NAME, doc.getDoctorName());
+        values.put(Constants.DOCTOR_SPECIALTY, doc.getSpecialty());
         values.put(Constants.DESCRIPTION, doc.getDescription());
         values.put(Constants.EDUCATION, doc.getEducation());
         values.put(Constants.WORKING_PLACE, doc.getDoctorWorkingPlace());
