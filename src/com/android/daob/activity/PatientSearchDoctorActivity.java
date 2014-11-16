@@ -79,15 +79,20 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 
 	void init() {
 		lvDoctor = (ListView) findViewById(R.id.lv_doctor_search_result);
+//		lvDoctor.setOnItemClickListener((OnItemClickListener) this);
 		lvDoctor.setOnItemClickListener(new OnItemClickListener() {
-
+			
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				DoctorModel doctor = (DoctorModel) parent
-						.getItemAtPosition(position);
-				Toast.makeText(PatientSearchDoctorActivity.this,
-						doctor.getDoctorName(), Toast.LENGTH_SHORT).show();
+//				DoctorModel doctor = (DoctorModel) parent
+//						.getItemAtPosition(position);
+//				Toast.makeText(PatientSearchDoctorActivity.this,
+//						doctor.getDoctorName(), Toast.LENGTH_SHORT).show();
+				if(position == 1) {
+			        Intent intent = new Intent(view.getContext(), PatientViewDoctorFreeTimeActivity.class);
+			        startActivity(intent);
+			    }
 			}
 		});
 		spinnerWorkingPlace = (Spinner) findViewById(R.id.ddl_hospital);
@@ -185,7 +190,9 @@ public class PatientSearchDoctorActivity extends BaseActivity implements
 		listDoctorResultAdapter.notifyDataSetChanged();
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(btnSearch.getWindowToken(), 0);
-
+//		Intent intent = new Intent(this, PatientViewDoctorFreeTimeActivity.class);
+//		startActivity(intent);
+		
 	}
 
 	private boolean checkHasData() {

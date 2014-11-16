@@ -19,10 +19,12 @@
 	<string name="view_calendar">Xem lịch</string>
 	<string name="doctor_detail">Thông tin bác sĩ</string>
 	<string name="meeting_next">Các cuộc hẹn của bạn</string>
+	<string name="doctor_free_time">Các giờ rảnh của bác sĩ trong ngày:</string>
 	<string name="meeting_not_approved">Cuộc hẹn chưa xác nhận</string>
 	<string name="meeting_today">Các cuộc hẹn hôm nay</string>
 	<string name="doctor">Bác sĩ:</string>
 	<string name="patient">Bệnh nhân:</string>
+	<string name="start_time">Giờ hẹn:</string>
 	<string name="place">Nơi khám:</string>
 	<string name="date">Ngày khám:</string>
 	<string name="hour">Giờ khám:</string>
