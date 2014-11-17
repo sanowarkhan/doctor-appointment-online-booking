@@ -2,6 +2,7 @@
 package com.android.daob.application;
 
 import android.app.Application;
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -14,6 +15,8 @@ public class AppController extends Application {
     private RequestQueue mRequestQueue;
 
     private static AppController mInstance;
+    
+    Context appContext;// application context
 
     @Override
     public void onCreate() {
@@ -47,5 +50,13 @@ public class AppController extends Application {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+    
+    public Context getActivityContext() {
+        return this.appContext;
+    }
+    
+    public synchronized void setActivityContext(Context context) {
+        this.appContext = context;
     }
 }

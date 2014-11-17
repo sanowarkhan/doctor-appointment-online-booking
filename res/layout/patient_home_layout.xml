@@ -21,5 +21,15 @@
         android:divider="@color/black"
         android:dividerHeight="1dp" >
     </ListView>
+    
+    <TextView
+        android:id="@+id/tv_no_result_patient_meeting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_result"
+        android:textSize="8pt"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 </LinearLayout>

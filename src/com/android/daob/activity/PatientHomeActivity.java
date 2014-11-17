@@ -1,3 +1,4 @@
+
 package com.android.daob.activity;
 
 import java.util.ArrayList;
@@ -6,14 +7,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,190 +37,209 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 
 public class PatientHomeActivity extends BaseActivity {
-	public static String TAG = PatientHomeActivity.class.getSimpleName();
+    public static String TAG = PatientHomeActivity.class.getSimpleName();
 
     String url = Constants.URL + "patientDashboard/" + MainActivity.username;
 
-	ListView lvMeeting;
+    ListView lvMeeting;
 
-	ArrayAdapter<UserMeetingModel> listMeetingAdapter;
+    TextView tvNoResult;
 
-	ArrayList<UserMeetingModel> listUserMeetingModels = new ArrayList<UserMeetingModel>();
+    ArrayAdapter<UserMeetingModel> listMeetingAdapter;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.patient_home_layout);
-		lvMeeting = (ListView) findViewById(R.id.lvMeeting);
-	}
+    ArrayList<UserMeetingModel> listUserMeetingModels = new ArrayList<UserMeetingModel>();
 
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		getDashboard();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.patient_home_layout);
+        lvMeeting = (ListView) findViewById(R.id.lvMeeting);
+        tvNoResult = (TextView) findViewById(R.id.tv_no_result_patient_meeting);
+        lvMeeting.setOnItemClickListener(new OnItemClickListener() {
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.top_right_menu, menu);
-		menu.getItem(0).setTitle(
-				getResources().getString(R.string.search_doctor));
-		menu.getItem(0).setIcon(
-				this.getResources().getDrawable(R.drawable.ic_action_search));
-		return super.onCreateOptionsMenu(menu);
-	}
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                UserMeetingModel um = (UserMeetingModel) parent.getItemAtPosition(position);
+                if (um.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
+                    final AlertDialog alertDialog = new AlertDialog.Builder(PatientHomeActivity.this)
+                            .create();
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.top_right_button:
-			Intent intentSearch = new Intent(this,
-					PatientSearchDoctorActivity.class);
-			startActivity(intentSearch);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+                    alertDialog.setMessage(PatientHomeActivity.this.getResources().getString(
+                            R.string.message_cancel_booking));
+                    alertDialog.setButton(
+                            PatientHomeActivity.this.getResources().getString(
+                                    R.string.btn_cancel_booking), new OnClickListener() {
 
-	}
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // huy cuoc hen
+                                }
+                            });
 
-	@Override
-	public void onBackPressed() {
-		Intent intent = new Intent(Intent.ACTION_MAIN);
-		intent.addCategory(Intent.CATEGORY_HOME);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		startActivity(intent);
-	}
+                    alertDialog.setButton2(
+                            PatientHomeActivity.this.getResources().getString(R.string.btn_cancel),
+                            new OnClickListener() {
 
-	void getDashboard() {
-		String tag_json_getDashboard = "json_getDashboard_req";
-		String content = PatientHomeActivity.this.getResources().getString(
-				R.string.loading);
-		showProgressDialog(content, false);
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.dismiss();
+                                }
+                            });
+                    alertDialog.show();
+                }
+            }
+        });
+    }
 
-		JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
-				new Listener<JSONArray>() {
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        getDashboard();
+    }
 
-					@Override
-					public void onResponse(JSONArray jsonArr) {
-						listUserMeetingModels.clear();
-						for (int i = 0; i < jsonArr.length(); i++) {
-							UserMeetingModel umm = new UserMeetingModel();
-							JSONObject jsonObjDoctor = new JSONObject();
-							try {
-								jsonObjDoctor = jsonArr.getJSONObject(i)
-										.getJSONObject("doctor");
-								umm.setDoctorName(jsonObjDoctor
-										.getString("displayName"));
-								umm.setHospital(jsonArr.getJSONObject(i)
-										.getString("location"));
-								umm.setDate(jsonArr.getJSONObject(i).getString(
-										"meetingDate"));
-								umm.setHour(jsonArr.getJSONObject(i).getString(
-										"startTime"));
-								umm.setStatus(jsonArr.getJSONObject(i)
-										.getString("status"));
-								listUserMeetingModels.add(umm);
-							} catch (JSONException e) {
-								e.printStackTrace();
-							}
-						}
-						if (listUserMeetingModels != null
-								&& listUserMeetingModels.size() > 0) {
-							listMeetingAdapter = new UserMeetingViewAdapter(
-									listUserMeetingModels);
-							lvMeeting.setAdapter(listMeetingAdapter);
-							listMeetingAdapter.notifyDataSetChanged();
-						}
-						closeProgressDialog();
-					}
-				}, new Response.ErrorListener() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.top_right_menu, menu);
+        menu.getItem(0).setTitle(getResources().getString(R.string.search_doctor));
+        menu.getItem(0).setIcon(this.getResources().getDrawable(R.drawable.ic_action_search));
+        return super.onCreateOptionsMenu(menu);
+    }
 
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						VolleyLog.e(TAG, "Error: " + error.getMessage());
-						closeProgressDialog();
-					}
-				});
-		AppController.getInstance().addToRequestQueue(jsonArrayRequest,
-				tag_json_getDashboard);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.top_right_button:
+                Intent intentSearch = new Intent(this, PatientSearchDoctorActivity.class);
+                startActivity(intentSearch);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
-	class UserMeetingViewAdapter extends ArrayAdapter<UserMeetingModel> {
-		ViewHolder holder;
+    }
 
-		ArrayList<UserMeetingModel> listData;
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
-		public UserMeetingViewAdapter(ArrayList<UserMeetingModel> listData) {
-			super(PatientHomeActivity.this,
-					R.layout.patient_meeting_item_layout, listData);
-			this.listData = listData;
-		}
+    void getDashboard() {
+        String tag_json_getDashboard = "json_getDashboard_req";
+        String content = PatientHomeActivity.this.getResources().getString(R.string.loading);
+        showProgressDialog(content, false);
+        Log.i("aa", url);
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url, new Listener<JSONArray>() {
 
-		public ArrayList<UserMeetingModel> getListData() {
-			return listData;
-		}
+            @Override
+            public void onResponse(JSONArray jsonArr) {
+                listUserMeetingModels.clear();
+                for (int i = 0; i < jsonArr.length(); i++) {
+                    UserMeetingModel umm = new UserMeetingModel();
+                    JSONObject jsonObjDoctor = new JSONObject();
+                    try {
+                        jsonObjDoctor = jsonArr.getJSONObject(i).getJSONObject("doctor");
+                        umm.setDoctorName(jsonObjDoctor.getString("name"));
+                        umm.setHospital(jsonArr.getJSONObject(i).getString("location"));
+                        umm.setDate(jsonArr.getJSONObject(i).getString("meetingDate"));
+                        umm.setHour(jsonArr.getJSONObject(i).getString("startTime"));
+                        umm.setStatus(jsonArr.getJSONObject(i).getString("status"));
+                        listUserMeetingModels.add(umm);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (listUserMeetingModels != null && listUserMeetingModels.size() > 0) {
+                    tvNoResult.setVisibility(View.GONE);
+                    lvMeeting.setVisibility(View.VISIBLE);
+                    listMeetingAdapter = new UserMeetingViewAdapter(listUserMeetingModels);
+                    lvMeeting.setAdapter(listMeetingAdapter);
+                    listMeetingAdapter.notifyDataSetChanged();
+                } else {
+                    tvNoResult.setVisibility(View.VISIBLE);
+                    lvMeeting.setVisibility(View.GONE);
+                }
+                closeProgressDialog();
+            }
+        }, new Response.ErrorListener() {
 
-		@Override
-		public View getView(int position, View convertView, ViewGroup parent) {
-			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) getContext()
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = inflater.inflate(
-						R.layout.patient_meeting_item_layout, parent, false);
-				holder = new ViewHolder();
-				holder.tvDoctorName = (TextView) convertView
-						.findViewById(R.id.tv_doctor_name);
-				holder.tvHospital = (TextView) convertView
-						.findViewById(R.id.tv_hospital_name);
-				holder.tvDate = (TextView) convertView
-						.findViewById(R.id.tv_date_meeting);
-				holder.tvHour = (TextView) convertView
-						.findViewById(R.id.tv_hour_meeting);
-				holder.tvStatus = (TextView) convertView
-						.findViewById(R.id.tv_status_meeting);
-				convertView.setTag(holder);
-			} else {
-				holder = (ViewHolder) convertView.getTag();
-			}
-			UserMeetingModel umm = listData.get(position);
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e(TAG, "Error: " + error.getMessage());
+                closeProgressDialog();
+            }
+        });
+        AppController.getInstance().addToRequestQueue(jsonArrayRequest, tag_json_getDashboard);
+    }
 
-			holder.tvDoctorName.setText(umm.getDoctorName());
-			holder.tvHospital.setText(umm.getHospital());
-			holder.tvDate.setText(umm.getDate());
-			holder.tvHour.setText(umm.getHour());
+    class UserMeetingViewAdapter extends ArrayAdapter<UserMeetingModel> {
+        ViewHolder holder;
 
-			if (umm.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.status_new));
-			} else if (umm.getStatus().equalsIgnoreCase(
-					Constants.STATUS_CONFIRMED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.status_confirmed));
-			} else if (umm.getStatus().equalsIgnoreCase(Constants.STATUS_DONE)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.status_done));
-			} else if (umm.getStatus().equalsIgnoreCase(
-					Constants.STATUS_CANCELED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.status_canceled));
-			}
+        ArrayList<UserMeetingModel> listData;
 
-			return convertView;
-		}
-	}
+        public UserMeetingViewAdapter(ArrayList<UserMeetingModel> listData) {
+            super(PatientHomeActivity.this, R.layout.patient_meeting_item_layout, listData);
+            this.listData = listData;
+        }
 
-	private class ViewHolder {
-		TextView tvDoctorName;
+        public ArrayList<UserMeetingModel> getListData() {
+            return listData;
+        }
 
-		TextView tvHospital;
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
+                        Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.patient_meeting_item_layout, parent, false);
+                holder = new ViewHolder();
+                holder.tvDoctorName = (TextView) convertView.findViewById(R.id.tv_doctor_name);
+                holder.tvHospital = (TextView) convertView.findViewById(R.id.tv_hospital_name);
+                holder.tvDate = (TextView) convertView.findViewById(R.id.tv_date_meeting);
+                holder.tvHour = (TextView) convertView.findViewById(R.id.tv_hour_meeting);
+                holder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status_meeting);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+            UserMeetingModel umm = listData.get(position);
 
-		TextView tvDate;
+            holder.tvDoctorName.setText(umm.getDoctorName());
+            holder.tvHospital.setText(umm.getHospital());
+            holder.tvDate.setText(umm.getDate());
+            holder.tvHour.setText(umm.getHour());
 
-		TextView tvHour;
+            if (umm.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
+                holder.tvStatus.setText(getApplicationContext().getResources().getString(
+                        R.string.status_new));
+            } else if (umm.getStatus().equalsIgnoreCase(Constants.STATUS_CONFIRMED)) {
+                holder.tvStatus.setText(getApplicationContext().getResources().getString(
+                        R.string.status_confirmed));
+            } else if (umm.getStatus().equalsIgnoreCase(Constants.STATUS_DONE)) {
+                holder.tvStatus.setText(getApplicationContext().getResources().getString(
+                        R.string.status_done));
+            } else if (umm.getStatus().equalsIgnoreCase(Constants.STATUS_CANCELED)) {
+                holder.tvStatus.setText(getApplicationContext().getResources().getString(
+                        R.string.status_canceled));
+            }
 
-		TextView tvStatus;
-	}
+            return convertView;
+        }
+    }
+
+    private class ViewHolder {
+        TextView tvDoctorName;
+
+        TextView tvHospital;
+
+        TextView tvDate;
+
+        TextView tvHour;
+
+        TextView tvStatus;
+    }
 }

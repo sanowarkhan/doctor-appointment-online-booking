@@ -1,7 +1,13 @@
 package com.android.daob.model;
 
-public class DoctorModel {
-	private int doctorId;
+import java.io.Serializable;
+
+public class DoctorModel implements Serializable{
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    private int doctorId;
 	private String doctorName;
 	private String doctorWorkingPlace;
 	private String description;

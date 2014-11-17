@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical" >
-    
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/standar_margin"
+        android:textColor="@color/black"
         android:text="@string/doctor_free_time" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -21,5 +24,15 @@
         android:divider="@color/black"
         android:dividerHeight="1dp" >
     </ListView>
+
+    <TextView
+        android:id="@+id/tv_no_result_free_time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/no_result"
+        android:textSize="8pt"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 </LinearLayout>

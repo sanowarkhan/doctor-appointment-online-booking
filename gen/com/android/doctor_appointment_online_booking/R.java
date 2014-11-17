@@ -257,6 +257,7 @@ public final class R {
     }
     public static final class dimen {
         public static final int button_height=0x7f050001;
+        public static final int margin_dialog_vertical=0x7f050002;
         public static final int standar_margin=0x7f050000;
     }
     public static final class drawable {
@@ -266,50 +267,63 @@ public final class R {
         public static final int ic_launcher=0x7f020003;
     }
     public static final class id {
-        public static final int btn_logout=0x7f09002d;
+        public static final int btn_booking=0x7f090022;
+        public static final int btn_logout=0x7f09003a;
         public static final int btn_next_meeting=0x7f090003;
         public static final int btn_not_approved=0x7f090001;
-        public static final int btn_search_doctor=0x7f090025;
-        public static final int btn_view_calendar=0x7f090028;
-        public static final int calendarView=0x7f09001a;
-        public static final int ddl_hospital=0x7f090022;
-        public static final int ddl_speciality=0x7f090023;
+        public static final int btn_search_doctor=0x7f090031;
+        public static final int btn_select_hour=0x7f090025;
+        public static final int btn_view_calendar=0x7f090034;
+        public static final int calendarView=0x7f090024;
+        public static final int ddl_hospital=0x7f09002e;
+        public static final int ddl_speciality=0x7f09002f;
+        public static final int edDescription=0x7f090021;
+        public static final int ed_booking_name=0x7f09001c;
+        public static final int ed_booking_old=0x7f09001d;
+        public static final int ed_booking_phone=0x7f090020;
         public static final int img_Logo=0x7f090016;
         public static final int lbl_status_login=0x7f090015;
         public static final int lineBottom=0x7f090004;
         public static final int lineTop=0x7f090006;
+        public static final int ll_booking_for_other=0x7f09001b;
         public static final int login_btn=0x7f090013;
         public static final int login_progress=0x7f090018;
-        public static final int lvDoctorFreeTime=0x7f09002b;
-        public static final int lvMeeting=0x7f09001b;
-        public static final int lv_doctor_search_result=0x7f090026;
+        public static final int lvDoctorFreeTime=0x7f090037;
+        public static final int lvMeeting=0x7f090026;
+        public static final int lv_doctor_search_result=0x7f090032;
         public static final int lv_meeting_not_approved=0x7f09000e;
         public static final int lv_meeting_today=0x7f090005;
         public static final int lv_next_meeting=0x7f090011;
+        public static final int rb_female=0x7f09001f;
+        public static final int rb_for_me=0x7f090019;
+        public static final int rb_for_other=0x7f09001a;
+        public static final int rb_male=0x7f09001e;
         public static final int rlLogin=0x7f090012;
         public static final int rl_not_approved=0x7f090000;
         public static final int spinner1=0x7f09000f;
         public static final int spinner2=0x7f090010;
-        public static final int textView1=0x7f090027;
-        public static final int top_right_button=0x7f09002c;
+        public static final int textView1=0x7f090033;
+        public static final int top_right_button=0x7f090039;
         public static final int tv_appointment_notes=0x7f09000c;
         public static final int tv_appointment_status=0x7f09000d;
         public static final int tv_date_appointment=0x7f09000a;
-        public static final int tv_date_meeting=0x7f09001d;
-        public static final int tv_doctor_name=0x7f090019;
-        public static final int tv_doctor_search_result=0x7f090021;
-        public static final int tv_free_location_name=0x7f09002a;
-        public static final int tv_free_start_time=0x7f090029;
-        public static final int tv_hospital_name=0x7f09001c;
-        public static final int tv_hour_meeting=0x7f09001e;
+        public static final int tv_date_meeting=0x7f090029;
+        public static final int tv_doctor_name=0x7f090023;
+        public static final int tv_doctor_search_result=0x7f09002d;
+        public static final int tv_free_location_name=0x7f090036;
+        public static final int tv_free_start_time=0x7f090035;
+        public static final int tv_hospital_name=0x7f090028;
+        public static final int tv_hour_meeting=0x7f09002a;
         public static final int tv_indicator=0x7f090002;
         public static final int tv_location_name=0x7f090009;
         public static final int tv_meeting_today=0x7f090007;
-        public static final int tv_note_meeting=0x7f09001f;
+        public static final int tv_no_result_free_time=0x7f090038;
+        public static final int tv_no_result_patient_meeting=0x7f090027;
+        public static final int tv_note_meeting=0x7f09002b;
         public static final int tv_patient_name=0x7f090008;
-        public static final int tv_search_doctor=0x7f090024;
+        public static final int tv_search_doctor=0x7f090030;
         public static final int tv_start_time=0x7f09000b;
-        public static final int tv_status_meeting=0x7f090020;
+        public static final int tv_status_meeting=0x7f09002c;
         public static final int txtPwd=0x7f090014;
         public static final int txtUsername=0x7f090017;
     }
@@ -319,14 +333,15 @@ public final class R {
         public static final int doctor_meeting_not_approved_layout=0x7f030002;
         public static final int doctor_next_meeting_layout=0x7f030003;
         public static final int login_layout=0x7f030004;
-        public static final int patient_calendar_layout=0x7f030005;
-        public static final int patient_home_layout=0x7f030006;
-        public static final int patient_meeting_item_layout=0x7f030007;
-        public static final int patient_search_doctor_items_result_layout=0x7f030008;
-        public static final int patient_search_layout=0x7f030009;
-        public static final int patient_view_doctor_details_layout=0x7f03000a;
-        public static final int patient_view_doctor_free_time_item_layout=0x7f03000b;
-        public static final int patient_view_doctor_free_time_layout=0x7f03000c;
+        public static final int patient_booking_dtep1_layout=0x7f030005;
+        public static final int patient_calendar_layout=0x7f030006;
+        public static final int patient_home_layout=0x7f030007;
+        public static final int patient_meeting_item_layout=0x7f030008;
+        public static final int patient_search_doctor_items_result_layout=0x7f030009;
+        public static final int patient_search_layout=0x7f03000a;
+        public static final int patient_view_doctor_details_layout=0x7f03000b;
+        public static final int patient_view_doctor_free_time_item_layout=0x7f03000c;
+        public static final int patient_view_doctor_free_time_layout=0x7f03000d;
     }
     public static final class menu {
         public static final int top_right_menu=0x7f080000;
@@ -334,12 +349,23 @@ public final class R {
     public static final class string {
         public static final int all=0x7f060023;
         public static final int app_name=0x7f060000;
+        public static final int booking=0x7f060027;
+        public static final int booking_description=0x7f06002b;
+        public static final int booking_for=0x7f060028;
+        public static final int booking_name=0x7f06002d;
+        public static final int booking_old=0x7f06002e;
+        public static final int btn_cancel=0x7f060033;
+        public static final int btn_cancel_booking=0x7f060032;
+        public static final int btn_select_hour=0x7f060025;
         public static final int connect_fail=0x7f060006;
         public static final int date=0x7f06001a;
         public static final int doctor=0x7f060016;
         public static final int doctor_detail=0x7f060011;
         public static final int doctor_free_time=0x7f060013;
         public static final int doctor_name=0x7f06000e;
+        public static final int female=0x7f060030;
+        public static final int for_me=0x7f060029;
+        public static final int for_other=0x7f06002a;
         public static final int hint_pwd=0x7f060002;
         public static final int hint_uname=0x7f060001;
         public static final int home=0x7f06000a;
@@ -350,15 +376,20 @@ public final class R {
         public static final int login_fail=0x7f060007;
         public static final int login_process=0x7f060005;
         public static final int logout=0x7f060004;
+        public static final int male=0x7f06002f;
         public static final int meeting_next=0x7f060012;
         public static final int meeting_not_approved=0x7f060014;
         public static final int meeting_today=0x7f060015;
+        public static final int message_cancel_booking=0x7f060031;
+        public static final int no_result=0x7f060026;
         public static final int notes=0x7f06001d;
         public static final int patient=0x7f060017;
+        public static final int phone=0x7f06002c;
         public static final int place=0x7f060019;
         public static final int pwd_empty=0x7f060009;
         public static final int search=0x7f06000f;
         public static final int search_doctor=0x7f06000b;
+        public static final int select_old_day=0x7f060024;
         public static final int speciality=0x7f06000d;
         public static final int start_time=0x7f060018;
         public static final int status=0x7f06001c;
@@ -373,11 +404,13 @@ public final class R {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -396,5 +429,6 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int Dialog=0x7f070002;
     }
 }

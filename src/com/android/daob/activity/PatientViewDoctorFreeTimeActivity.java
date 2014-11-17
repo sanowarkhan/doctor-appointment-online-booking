@@ -32,7 +32,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 
 public class PatientViewDoctorFreeTimeActivity extends BaseActivity implements OnClickListener {
 
-    public static String TAG = DoctorHomeActivity.class.getSimpleName();
+    public static String TAG = PatientViewDoctorFreeTimeActivity.class.getSimpleName();
     String url = Constants.URL + "getDoctorFreeTime?id=1&date=18-11-2014" ;
 
 	ListView lvDoctorFreeTime;
@@ -53,7 +53,7 @@ public class PatientViewDoctorFreeTimeActivity extends BaseActivity implements O
 //        btnViewCalendar = (Button) findViewById(R.id.btn_view_calendar);
 //        btnViewCalendar.setOnClickListener(this);
     	lvDoctorFreeTime = (ListView) findViewById(R.id.lvDoctorFreeTime);
-    	lvDoctorFreeTime.setOnClickListener(this);
+    	
         getDoctorFreeTime();
     }
 
@@ -108,8 +108,8 @@ public class PatientViewDoctorFreeTimeActivity extends BaseActivity implements O
 
 	@Override
     public void onClick(View v) {
-        Intent intentCalendar = new Intent(PatientViewDoctorFreeTimeActivity.this, PatientCalendarActivity.class);
-        startActivity(intentCalendar);
+//        Intent intentCalendar = new Intent(PatientViewDoctorFreeTimeActivity.this, PatientCalendarActivity.class);
+//        startActivity(intentCalendar);
     }
 
     @Override

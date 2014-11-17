@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.android.daob.application.AppController;
 import com.android.daob.utils.SessionManager;
 import com.android.doctor_appointment_online_booking.R;
 
@@ -19,6 +20,7 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppController.getInstance().setActivityContext(this);
         sessionManager = new SessionManager(getApplicationContext());
     }
 

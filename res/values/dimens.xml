@@ -2,4 +2,5 @@
 <resources>
     <dimen name="standar_margin">8dp</dimen>
     <dimen name="button_height">40dp</dimen>
+    <dimen name="margin_dialog_vertical">60dp</dimen>
 </resources>

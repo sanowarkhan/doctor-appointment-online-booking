@@ -4,17 +4,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/tv_doctor_name"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/standar_margin"
-        android:text="Doctor name" />
+        android:orientation="horizontal" >
 
-    <CalendarView
-        android:id="@+id/calendarView"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/doctor" />
+
+        <TextView
+            android:id="@+id/tv_doctor_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:showWeekNumber="false" />
+        android:layout_height="1dp"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_select_hour"
+            android:showWeekNumber="false" />
+
+        <Button
+            android:id="@+id/btn_select_hour"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/standar_margin"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/button_selector"
+            android:text="@string/btn_select_hour" />
+    </RelativeLayout>
 
 </LinearLayout>

@@ -1,7 +1,13 @@
 package com.android.daob.model;
 
-public class DoctorFreeTimeModel {
-	private String meetingDate;
+import java.io.Serializable;
+
+public class DoctorFreeTimeModel implements Serializable{
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    private String meetingDate;
 	private String startTime;
 	private String endTime;
 	private String location;
