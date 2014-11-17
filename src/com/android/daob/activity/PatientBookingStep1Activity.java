@@ -4,6 +4,10 @@
 
 package com.android.daob.activity;
 
+import java.util.HashMap;
+
+import org.json.JSONObject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -16,54 +20,71 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.android.daob.application.AppController;
 import com.android.daob.model.DoctorFreeTimeModel;
 import com.android.daob.utils.Constants;
 import com.android.doctor_appointment_online_booking.R;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 public class PatientBookingStep1Activity extends BaseActivity implements OnClickListener {
 
     public static String TAG = PatientBookingStep1Activity.class.getSimpleName();
-
+    
+    private String url = Constants.URL + "processStep1";
+    
     RadioButton rbForMe, rbForOther, rbMale, rbFemale;
 
     Button btnBooking;
 
     LinearLayout llForOther;
 
-    EditText edName, edOld, edPhone, edDes;
+    EditText txtDeName, txtDeOld, txtDePhone, txtNotes, txtEmail;
 
-    TextView tvStartTime, tvLocation;
+    TextView tvStartTime, tvLocation, tvDoctorName;
 
     boolean isDelegated = false;
 
     boolean gender = false;
 
+    int doctorId = 0;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.patient_booking_dtep1_layout);
+        setContentView(R.layout.patient_booking_step1_layout);
         init(getIntent().getExtras());
     }
 
     void init(Bundle bun) {
         DoctorFreeTimeModel dft = (DoctorFreeTimeModel) bun.get(Constants.DATA_KEY);
+//        DoctorModel doctor = (DoctorModel) bun.getSerializable(Constants.DATA_KEY);
+//        doctorId = doctor.getDoctorId();
         rbForMe = (RadioButton) findViewById(R.id.rb_for_me);
         rbForOther = (RadioButton) findViewById(R.id.rb_for_other);
         rbMale = (RadioButton) findViewById(R.id.rb_male);
         rbFemale = (RadioButton) findViewById(R.id.rb_female);
 
         llForOther = (LinearLayout) findViewById(R.id.ll_booking_for_other);
-        edName = (EditText) findViewById(R.id.ed_booking_name);
-        edOld = (EditText) findViewById(R.id.ed_booking_old);
-        edPhone = (EditText) findViewById(R.id.ed_booking_phone);
-        edDes = (EditText) findViewById(R.id.edDescription);
+        txtDeName = (EditText) findViewById(R.id.ed_booking_name);
+        txtDeOld = (EditText) findViewById(R.id.ed_booking_old);
+        txtDePhone = (EditText) findViewById(R.id.ed_booking_phone);
+        txtNotes = (EditText) findViewById(R.id.edDescription);
+        txtEmail = (EditText) findViewById(R.id.tbEmail);
 
+//        tvDoctorName = (TextView) findViewById(R.id.tv_doctor_name);
+//        tvDoctorName.setText(dft.get)
         tvStartTime = (TextView) findViewById(R.id.tv_start_time);
         tvStartTime.setText(dft.getStartTime());
         tvLocation = (TextView) findViewById(R.id.tv_location_name);
         tvLocation.setText(dft.getLocation());
 
         btnBooking = (Button) findViewById(R.id.btn_booking);
+        btnBooking.setOnClickListener(this);
     }
 
     @Override
@@ -102,7 +123,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements OnClick
             case R.id.rb_for_other:
                 if (checked) {
                     llForOther.setVisibility(View.VISIBLE);
-                    edName.requestFocus();
+                    txtDeName.requestFocus();
                     isDelegated = true;
                 }
             case R.id.rb_male:
@@ -120,6 +141,47 @@ public class PatientBookingStep1Activity extends BaseActivity implements OnClick
 
     @Override
     public void onClick(View arg0) {
+    	switch (arg0.getId()) {
+        	case R.id.btn_booking:
+        		String tag_json_booking = "json_booking_req";
+        		String deName = txtDeName.getText().toString().trim();
+                String deOle = txtDeOld.getText().toString().trim();
+                String dePgone = txtDePhone.getText().toString().trim();
+                String startTime = tvStartTime.getText().toString().trim();
+                String endTime = tvStartTime.getText().toString().trim();
+                String email = txtEmail.getText().toString().trim();
+                String note = txtNotes.getText().toString().trim();
+                String location = tvLocation.getText().toString().trim();
+                Boolean deGender = gender;
+                HashMap<String, String> bookingParams = new HashMap<String, String>();
+                bookingParams.put("startTime", "09:30");
+                bookingParams.put("endTime", "10:10");
+                bookingParams.put("meetingDate", "18-11-2014");
+                bookingParams.put("isDelegated", "false");
+                bookingParams.put("location", location);
+                bookingParams.put("email", email);
+                bookingParams.put("notes", note);
+                bookingParams.put("doctor", "1");
+                bookingParams.put("patientId", "1");
+				JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, url,
+		                new JSONObject(bookingParams), new Listener<JSONObject>(){
+							@Override
+							public void onResponse(JSONObject arg0) {
+								// TODO Auto-generated method stub
+								
+							}
+					
+				}, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.e(TAG, "Error: " + error.getMessage());
+                    }
+                }) {
+
+				};
+				AppController.getInstance().addToRequestQueue(jsonObjectRequest, tag_json_booking);
+        	
+    	}
 
     }
 

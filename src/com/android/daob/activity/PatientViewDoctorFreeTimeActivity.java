@@ -58,7 +58,7 @@ public class PatientViewDoctorFreeTimeActivity extends BaseActivity implements O
     }
 
     private void getDoctorFreeTime() {
-    	String tag_json_getDashboard = "json_getDashboard_req";
+    	String tag_json_getDoctorFreeTime = "json_getDashboard_req";
 		String content = PatientViewDoctorFreeTimeActivity.this.getResources().getString(
 				R.string.loading);
 		showProgressDialog(content, false);
@@ -75,7 +75,7 @@ public class PatientViewDoctorFreeTimeActivity extends BaseActivity implements O
 								dft.setLocation(jsonArr.getJSONObject(i)
 										.getString("location"));
 								dft.setStartTime(jsonArr.getJSONObject(i)
-										.getString("startTime") + "-" + 
+										.getString("startTime") + " - " + 
 										jsonArr.getJSONObject(i).getString("endTime") );
 								listDoctorFreeTimeModel.add(dft);
 							} catch (JSONException e) {
@@ -103,7 +103,7 @@ public class PatientViewDoctorFreeTimeActivity extends BaseActivity implements O
 					}
 				});
 		AppController.getInstance().addToRequestQueue(jsonArrayRequest,
-				tag_json_getDashboard);
+				tag_json_getDoctorFreeTime);
 	}
 
 	@Override

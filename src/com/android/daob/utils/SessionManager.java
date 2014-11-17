@@ -24,6 +24,7 @@ public class SessionManager {
     public static final String IS_LOGIN = "IsLoggedIn";
     public static final String KEY_NAME = "name";
     public static final String KEY_ROLE = "role";
+    public static final String KEY_ROLEID = "loginId";
     
     public SessionManager(Context mContext) {
         this.mContext = mContext;

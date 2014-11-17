@@ -37,13 +37,14 @@
 	<string name="status_canceled">Hủy</string>
 	<string name="all">Tất cả</string>
 	<string name="select_old_day">Không thể chọn ngày cũ.</string>
-	<string name="btn_select_hour">Chọn giờ</string>
+	<string name="btn_view_schedule">Xem lịch</string>
 	<string name="no_result">Không có dữ liệu.</string>
 	<string name="booking">Đặt lịch</string>
 	<string name="booking_for">Bạn đặt lịch khám cho ai</string>
 	<string name="for_me">Cho tôi</string>
 	<string name="for_other">Đặt hộ người khác</string>
 	<string name="booking_description">Miêu tả bệnh gửi bác sĩ</string>
+	<string name="booking_email">Nhập email để nhận mã xác nhận</string>
 	<string name="phone">Số điện thoại</string>
 	<string name="booking_name">Tên người khám</string>
 	<string name="booking_old">Tuổi</string>

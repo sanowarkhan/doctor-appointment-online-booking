@@ -44,7 +44,7 @@
             android:layout_margin="@dimen/standar_margin"
             android:layout_alignParentBottom="true"
             android:background="@drawable/button_selector"
-            android:text="@string/btn_select_hour" />
+            android:text="@string/btn_view_schedule" />
     </RelativeLayout>
 
 </LinearLayout>
