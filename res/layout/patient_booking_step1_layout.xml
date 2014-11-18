@@ -34,7 +34,12 @@
                 android:onClick="onRadioButtonClicked"
                 android:text="@string/for_other" />
         </RadioGroup>
-
+        
+		<View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@color/black" />
+		
         <LinearLayout
             android:id="@+id/ll_booking_for_other"
             android:layout_width="match_parent"
@@ -86,8 +91,22 @@
                 android:layout_margin="@dimen/standar_margin"
                 android:hint="@string/phone"
                 android:inputType="phone" />
+            
+            <EditText
+                android:id="@+id/ed_booking_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standar_margin"
+                android:hint="@string/address"
+                android:inputType="text" />
+            
         </LinearLayout>
-
+        
+		<View
+	        android:layout_width="match_parent"
+	        android:layout_height="1dp"
+	        android:background="@color/black" />
+		
         <EditText
             android:id="@+id/edDescription"
             android:layout_width="match_parent"
@@ -125,7 +144,7 @@
             <TextView
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:text="@string/hour" />
+                android:text="@string/date" />
 
             <TextView
                 android:id="@+id/tv_start_time"
@@ -133,11 +152,26 @@
                 android:layout_height="wrap_content" />
             
             <TextView
+            android:layout_width="6dp"
+            android:layout_height="wrap_content"
+            android:text="@string/start_space" />
+            
+            <TextView
                 android:id="@+id/tv_end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            
+            <TextView
+            android:layout_width="6dp"
+            android:layout_height="wrap_content"
+            android:text="@string/white_space" />
+            
+            <TextView
+                android:id="@+id/tv_booking_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </LinearLayout>
-
+        
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

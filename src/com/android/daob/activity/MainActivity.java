@@ -16,6 +16,10 @@ public class MainActivity extends Activity {
 
     public static String username;
     
+    public static String role;
+    
+    public static String patientId;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -24,6 +28,11 @@ public class MainActivity extends Activity {
         sessionManager.checkLogin();
         HashMap<String, String> user = sessionManager.getUserDetails();
         username = user.get(SessionManager.KEY_NAME);
+        role = user.get(SessionManager.KEY_ROLE);
+        if(role.equals("patient")){
+        	patientId = user.get(SessionManager.KEY_ROLEID);
+        }
+        
         String role = user.get(SessionManager.KEY_ROLE);
         if (role != null) {
             Intent i;

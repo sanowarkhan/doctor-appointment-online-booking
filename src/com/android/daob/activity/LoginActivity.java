@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -48,6 +49,10 @@ public class LoginActivity extends Activity implements OnClickListener {
     boolean loginStatus = false;
 
     String role;
+    
+    String userId;
+    
+    String roleId; 
 
     SessionManager sessionManager;
 
@@ -126,11 +131,14 @@ public class LoginActivity extends Activity implements OnClickListener {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        try {                           
+                        try {               
+                        	Log.i("aa", "" + response);
                             loginStatus = response.getBoolean("login");
                             role = response.getString("role");
+                            userId = response.getString("userId");
+                            roleId = response.getString("roleId");
                             if (loginStatus) {
-                                sessionManager.createLoginSession(uName, role);
+                                sessionManager.createLoginSession(uName, role, userId, roleId);
                                 Intent intObj = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(intObj);
                             } else {

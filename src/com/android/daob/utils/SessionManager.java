@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.util.Log;
 
 public class SessionManager {
     SharedPreferences pref;
@@ -24,7 +25,8 @@ public class SessionManager {
     public static final String IS_LOGIN = "IsLoggedIn";
     public static final String KEY_NAME = "name";
     public static final String KEY_ROLE = "role";
-    public static final String KEY_ROLEID = "loginId";
+    public static final String KEY_USERID = "userId";
+    public static final String KEY_ROLEID = "roleId";
     
     public SessionManager(Context mContext) {
         this.mContext = mContext;
@@ -33,11 +35,14 @@ public class SessionManager {
         editor.commit();
     }
     
-    public void createLoginSession(String name, String role) {
+    public void createLoginSession(String name, String role, String userId, String roleId) {
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_NAME, name);
         editor.putString(KEY_ROLE, role);
+        editor.putString(KEY_USERID, userId);
+        editor.putString(KEY_ROLEID, roleId);
         editor.commit();
+        Log.i("editor", "" + editor);
     }
     
     public void checkLogin() {
@@ -54,7 +59,9 @@ public class SessionManager {
         HashMap<String, String> user = new HashMap<String, String>();
         user.put(KEY_NAME, pref.getString(KEY_NAME, null));
         user.put(KEY_ROLE, pref.getString(KEY_ROLE, null));
-        
+        user.put(KEY_USERID, pref.getString(KEY_USERID, null));
+        user.put(KEY_ROLEID, pref.getString(KEY_ROLEID, null));
+        Log.i("user", "" + user);
         return user;
         
     }

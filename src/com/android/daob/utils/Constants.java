@@ -10,9 +10,9 @@ public interface Constants {
     
 	// phone
     // public String URL = "http://192.168.43.103:1337/api/";
-    
+	public String URL = "http://192.168.1.102:1337/api/";
 	// com
-    public String URL = "http://10.88.136.133:1337/api/";
+    // public String URL = "http://10.88.136.133:1337/api/";
 
     public String ROLE_DOCTOR = "doctor";
 
@@ -50,4 +50,8 @@ public interface Constants {
     public String SPECIALTY_TABLE = "Specialty";
 
     public String DATA_KEY = "data_key";
+    
+    public String DATA_KEY1 = "data_key_booking";
+
+	public String CONFIRM_KEY = "confirm_key";
 }

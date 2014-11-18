@@ -201,6 +201,7 @@ public class PatientCalendarActivity extends BaseActivity {
                                 dft.setStartTime(jsonArr.getJSONObject(i).getString("startTime"));
                                 dft.setEndTime(jsonArr.getJSONObject(i).getString("endTime"));
                                 dft.setDoctorId(jsonArr.getJSONObject(i).getInt("doctor"));
+                                dft.setMeetingDate(jsonArr.getJSONObject(i).getString("meetingDate"));
                                 listDoctorFreeTimeModel.add(dft);
                             } catch (JSONException e) {
                                 e.printStackTrace();
