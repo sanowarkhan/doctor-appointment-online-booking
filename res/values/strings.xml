@@ -25,6 +25,7 @@
 	<string name="doctor">Bác sĩ:</string>
 	<string name="patient">Bệnh nhân:</string>
 	<string name="start_time">Giờ rảnh:</string>
+	<string name="start_space"> - </string>
 	<string name="place">Nơi khám:</string>
 	<string name="date">Ngày khám:</string>
 	<string name="hour">Giờ khám:</string>

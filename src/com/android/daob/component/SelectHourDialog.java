@@ -111,6 +111,7 @@ public class SelectHourDialog extends CommonDialog {
                 holder = new ViewHolder();
                 holder.tvLocation = (TextView) convertView.findViewById(R.id.tv_free_location_name);
                 holder.tvStartTime = (TextView) convertView.findViewById(R.id.tv_free_start_time);
+                holder.tvEndTime = (TextView) convertView.findViewById(R.id.tv_free_end_time);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -119,6 +120,7 @@ public class SelectHourDialog extends CommonDialog {
 
             holder.tvLocation.setText(dft.getLocation());
             holder.tvStartTime.setText(dft.getStartTime());
+            holder.tvEndTime.setText(dft.getEndTime());
             return convertView;
         }
     }
@@ -126,5 +128,6 @@ public class SelectHourDialog extends CommonDialog {
     private class ViewHolder {
         TextView tvLocation;
         TextView tvStartTime;
+        TextView tvEndTime;
     }
 }

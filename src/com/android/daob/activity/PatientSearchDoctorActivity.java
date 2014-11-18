@@ -25,7 +25,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.daob.application.AppController;
 import com.android.daob.database.SQLiteTable;
@@ -65,6 +64,10 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
     ArrayAdapter<DoctorModel> listDoctorResultAdapter;
 
     ArrayList<DoctorModel> listDoctors = new ArrayList<DoctorModel>();
+    
+    public static int doctorId = 0;
+    
+    public static String doctorName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +88,8 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 DoctorModel doctor = (DoctorModel) parent.getItemAtPosition(position);
+                doctorId = doctor.getDoctorId();
+                doctorName = doctor.getDoctorName();
                 Bundle bun = new Bundle();
                 bun.putSerializable(Constants.DATA_KEY, doctor);
                 Intent intent = new Intent(PatientSearchDoctorActivity.this,

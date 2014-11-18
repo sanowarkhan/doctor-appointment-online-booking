@@ -112,7 +112,7 @@ public class PatientCalendarActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 long dateSelected = calendarView.getDate();
-                String dateSelectedFormat = new SimpleDateFormat("dd/MM/yyyy").format(new Date(
+                String dateSelectedFormat = new SimpleDateFormat("dd-MM-yyyy").format(new Date(
                         dateSelected));
                 Log.i("aa", dateSelectedFormat);
                 getDoctorFreeTime(dateSelectedFormat);
@@ -184,6 +184,8 @@ public class PatientCalendarActivity extends BaseActivity {
         showProgressDialog(content, false);
 
         String url = urlGetFreeTime + "doctorId=" + doctorId + "&date=" + date;
+        
+        Log.i("aa", url);
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
                 new Listener<JSONArray>() {
@@ -191,12 +193,14 @@ public class PatientCalendarActivity extends BaseActivity {
                     @Override
                     public void onResponse(JSONArray jsonArr) {
                         listDoctorFreeTimeModel.clear();
+                        Log.i("aa", "" + jsonArr.toString());
                         for (int i = 0; i < jsonArr.length(); i++) {
                             DoctorFreeTimeModel dft = new DoctorFreeTimeModel();
                             try {
                                 dft.setLocation(jsonArr.getJSONObject(i).getString("location"));
-                                dft.setStartTime(jsonArr.getJSONObject(i).getString("startTime")
-                                        + " - " + jsonArr.getJSONObject(i).getString("endTime"));
+                                dft.setStartTime(jsonArr.getJSONObject(i).getString("startTime"));
+                                dft.setEndTime(jsonArr.getJSONObject(i).getString("endTime"));
+                                dft.setDoctorId(jsonArr.getJSONObject(i).getInt("doctor"));
                                 listDoctorFreeTimeModel.add(dft);
                             } catch (JSONException e) {
                                 e.printStackTrace();

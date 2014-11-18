@@ -13,6 +13,7 @@ public class DoctorFreeTimeModel implements Serializable{
 	private String location;
 	private String address;
 	private String note;
+	private int doctorId;
 	
 	public String getMeetingDate() {
 		return meetingDate;
@@ -49,6 +50,12 @@ public class DoctorFreeTimeModel implements Serializable{
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public int getDoctorId() {
+		return doctorId;
+	}
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
 	}
 	
 	

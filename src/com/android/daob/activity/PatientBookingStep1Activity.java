@@ -45,7 +45,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements OnClick
 
     EditText txtDeName, txtDeOld, txtDePhone, txtNotes, txtEmail;
 
-    TextView tvStartTime, tvLocation, tvDoctorName;
+    TextView tvStartTime, tvEndTime, tvLocation, tvDoctorName;
 
     boolean isDelegated = false;
 
@@ -76,10 +76,12 @@ public class PatientBookingStep1Activity extends BaseActivity implements OnClick
         txtNotes = (EditText) findViewById(R.id.edDescription);
         txtEmail = (EditText) findViewById(R.id.tbEmail);
 
-//        tvDoctorName = (TextView) findViewById(R.id.tv_doctor_name);
-//        tvDoctorName.setText(dft.get)
+        tvDoctorName = (TextView) findViewById(R.id.tv_doctor_name);
+        tvDoctorName.setText(PatientSearchDoctorActivity.doctorName);
         tvStartTime = (TextView) findViewById(R.id.tv_start_time);
         tvStartTime.setText(dft.getStartTime());
+        tvEndTime = (TextView) findViewById(R.id.tv_end_time);
+        tvEndTime.setText(dft.getEndTime());
         tvLocation = (TextView) findViewById(R.id.tv_location_name);
         tvLocation.setText(dft.getLocation());
 
@@ -152,6 +154,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements OnClick
                 String email = txtEmail.getText().toString().trim();
                 String note = txtNotes.getText().toString().trim();
                 String location = tvLocation.getText().toString().trim();
+                int doctorId = PatientSearchDoctorActivity.doctorId;
                 Boolean deGender = gender;
                 HashMap<String, String> bookingParams = new HashMap<String, String>();
                 bookingParams.put("startTime", "09:30");
@@ -161,7 +164,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements OnClick
                 bookingParams.put("location", location);
                 bookingParams.put("email", email);
                 bookingParams.put("notes", note);
-                bookingParams.put("doctor", "1");
+                bookingParams.put("doctor", "" + doctorId );
                 bookingParams.put("patientId", "1");
 				JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, url,
 		                new JSONObject(bookingParams), new Listener<JSONObject>(){
