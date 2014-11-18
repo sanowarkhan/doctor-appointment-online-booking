@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,11 +25,11 @@ import com.android.daob.application.AppController;
 import com.android.daob.model.DoctorFreeTimeModel;
 import com.android.daob.utils.Constants;
 import com.android.doctor_appointment_online_booking.R;
+import com.android.volley.Request.Method;
 import com.android.volley.Response;
+import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.Request.Method;
-import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 public class PatientBookingStep1Activity extends BaseActivity implements OnClickListener {
@@ -150,15 +151,15 @@ public class PatientBookingStep1Activity extends BaseActivity implements OnClick
                 String deOle = txtDeOld.getText().toString().trim();
                 String dePgone = txtDePhone.getText().toString().trim();
                 String startTime = tvStartTime.getText().toString().trim();
-                String endTime = tvStartTime.getText().toString().trim();
+                String endTime = tvEndTime.getText().toString().trim();
                 String email = txtEmail.getText().toString().trim();
                 String note = txtNotes.getText().toString().trim();
                 String location = tvLocation.getText().toString().trim();
                 int doctorId = PatientSearchDoctorActivity.doctorId;
                 Boolean deGender = gender;
                 HashMap<String, String> bookingParams = new HashMap<String, String>();
-                bookingParams.put("startTime", "09:30");
-                bookingParams.put("endTime", "10:10");
+                bookingParams.put("startTime", startTime);
+                bookingParams.put("endTime", endTime);
                 bookingParams.put("meetingDate", "18-11-2014");
                 bookingParams.put("isDelegated", "false");
                 bookingParams.put("location", location);
@@ -166,8 +167,10 @@ public class PatientBookingStep1Activity extends BaseActivity implements OnClick
                 bookingParams.put("notes", note);
                 bookingParams.put("doctor", "" + doctorId );
                 bookingParams.put("patientId", "1");
+                Log.i("aa", ""+bookingParams);
 				JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, url,
 		                new JSONObject(bookingParams), new Listener<JSONObject>(){
+							
 							@Override
 							public void onResponse(JSONObject arg0) {
 								// TODO Auto-generated method stub
