@@ -9,333 +9,736 @@ package com.android.doctor_appointment_online_booking;
 
 public final class R {
     public static final class attr {
+        /** 
+    The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
+    MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, or
+    &lt;width&gt;x&lt;height&gt;.
+    
+         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int adSize=0x7f010000;
+        /** 
+    A comma-separated list of the supported ad sizes. The sizes must be one of
+    BANNER, FULL_BANNER, LEADERBOARD, MEDIUM_RECTANGLE, SMART_BANNER,
+    WIDE_SKYSCRAPER, or &lt;width&gt;x&lt;height&gt;.
+    
+         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int adSizes=0x7f010001;
+        /**  The ad unit ID. 
+         <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int adUnitId=0x7f010002;
+        /**  Appearance of the buy button. Must be one of "classic", "grayscale" and "monochrome" 
+         <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>classic</code></td><td>1</td><td></td></tr>
+<tr><td><code>grayscale</code></td><td>2</td><td></td></tr>
+<tr><td><code>monochrome</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static final int buyButtonAppearance=0x7f010018;
+        /**  Height of the buy button. This includes an 8dp padding (4dp on each side) used for
+             pressed and focused states of the button. The value can be a specific height, e.g.
+             "48dp", or special values "match_parent" and "wrap_content". 
+         <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+<p>May be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>match_parent</code></td><td>-1</td><td></td></tr>
+<tr><td><code>wrap_content</code></td><td>-2</td><td></td></tr>
+</table>
+         */
+        public static final int buyButtonHeight=0x7f010015;
+        /**  Text on the buy button. Must be one of "buy_with_google", "buy_now" and "book_now" 
+         <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>buy_with_google</code></td><td>1</td><td></td></tr>
+<tr><td><code>buy_now</code></td><td>2</td><td></td></tr>
+<tr><td><code>book_now</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static final int buyButtonText=0x7f010017;
+        /**  Width of the buy button. This includes an 8dp padding (4dp on each side) used for
+             pressed and focused states of the button. The value can be a specific width, e.g.
+             "300dp", or special values "match_parent" and "wrap_content". 
+         <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+<p>May be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>match_parent</code></td><td>-1</td><td></td></tr>
+<tr><td><code>wrap_content</code></td><td>-2</td><td></td></tr>
+</table>
+         */
+        public static final int buyButtonWidth=0x7f010016;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraBearing=0x7f010004;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTargetLat=0x7f010005;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTargetLng=0x7f010006;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraTilt=0x7f010007;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int cameraZoom=0x7f010008;
+        /**  Google Wallet environment to use 
+         <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>production</code></td><td>1</td><td></td></tr>
+<tr><td><code>sandbox</code></td><td>0</td><td></td></tr>
+<tr><td><code>strict_sandbox</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int environment=0x7f010012;
+        /**  Fragment mode 
+         <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>buyButton</code></td><td>1</td><td></td></tr>
+<tr><td><code>selectionDetails</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int fragmentMode=0x7f010014;
+        /**  A style resource specifing attributes to customize the look and feel of WalletFragment 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int fragmentStyle=0x7f010013;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>none</code></td><td>0</td><td></td></tr>
+<tr><td><code>normal</code></td><td>1</td><td></td></tr>
+<tr><td><code>satellite</code></td><td>2</td><td></td></tr>
+<tr><td><code>terrain</code></td><td>3</td><td></td></tr>
+<tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
+</table>
+         */
+        public static final int mapType=0x7f010003;
+        /**  Masked wallet details background 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int maskedWalletDetailsBackground=0x7f01001b;
+        /**  "Change" button background in masked wallet details view 
+         <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+         */
+        public static final int maskedWalletDetailsButtonBackground=0x7f01001d;
+        /**  TextAppearance for the "Change" button in masked wallet details view 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int maskedWalletDetailsButtonTextAppearance=0x7f01001c;
+        /**  TextAppearance for headers describing masked wallet details 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int maskedWalletDetailsHeaderTextAppearance=0x7f01001a;
+        /**  Type of the wallet logo image in masked wallet details view 
+         <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>classic</code></td><td>1</td><td></td></tr>
+<tr><td><code>monochrome</code></td><td>2</td><td></td></tr>
+</table>
+         */
+        public static final int maskedWalletDetailsLogoImageType=0x7f01001f;
+        /**  Color of the Google Wallet logo text in masked wallet details view 
+         <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int maskedWalletDetailsLogoTextColor=0x7f01001e;
+        /**  TextAppearance for masked wallet details 
+         <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int maskedWalletDetailsTextAppearance=0x7f010019;
+        /**  Theme to be used for the Wallet selector 
+         <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>holo_dark</code></td><td>0</td><td></td></tr>
+<tr><td><code>holo_light</code></td><td>1</td><td></td></tr>
+</table>
+         */
+        public static final int theme=0x7f010011;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiCompass=0x7f010009;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiRotateGestures=0x7f01000a;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiScrollGestures=0x7f01000b;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiTiltGestures=0x7f01000c;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiZoomControls=0x7f01000d;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int uiZoomGestures=0x7f01000e;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int useViewLifecycle=0x7f01000f;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int zOrderOnTop=0x7f010010;
     }
     public static final class color {
-        public static final int BlanchedAlmond=0x7f040034;
-        public static final int Blue=0x7f040038;
-        public static final int BlueLi=0x7f040039;
-        public static final int Blue_AliceBlue=0x7f040035;
-        public static final int Blue_Aqua=0x7f040036;
-        public static final int Blue_Aquamarine=0x7f040037;
-        public static final int Blue_BlueNavy=0x7f04003a;
-        public static final int Blue_BlueViolet=0x7f04003b;
-        public static final int Blue_CadetBlue=0x7f04003c;
-        public static final int Blue_CornflowerBlue=0x7f04003d;
-        public static final int Blue_DarkBlue=0x7f04003e;
-        public static final int Blue_DarkSlateBlue=0x7f04003f;
-        public static final int Blue_DeepSkyBlue=0x7f040040;
-        public static final int Blue_DodgerBlue=0x7f040041;
-        public static final int Blue_Lavender=0x7f040042;
-        public static final int Blue_LavenderBlush=0x7f040043;
-        public static final int Blue_LightBlue=0x7f040044;
-        public static final int Blue_LightSkyBlue=0x7f040045;
-        public static final int Blue_LightSteelBlue=0x7f040046;
-        public static final int Blue_MediumBlue=0x7f040047;
-        public static final int Blue_MediumSlateBlue=0x7f040048;
-        public static final int Blue_MidnightBlue=0x7f040049;
-        public static final int Blue_Navy=0x7f04004a;
-        public static final int Blue_PowderBlue=0x7f04004b;
-        public static final int Blue_RoyalBlue=0x7f04004c;
-        public static final int Blue_SkyBlue=0x7f04004d;
-        public static final int Blue_SlateBlue=0x7f04004e;
-        public static final int Blue_SteelBlue=0x7f04004f;
-        public static final int Brown=0x7f040050;
-        public static final int Brown_BurlyWood=0x7f040051;
-        public static final int Brown_Chocolate=0x7f040052;
-        public static final int Brown_DarkKhaki=0x7f040053;
-        public static final int Brown_RosyBrown=0x7f040054;
-        public static final int Brown_SandyBrown=0x7f040055;
-        public static final int Chartreuse=0x7f040056;
-        public static final int Coral=0x7f040057;
-        public static final int Cornsilk=0x7f040058;
-        public static final int Cyan=0x7f040059;
-        public static final int DarkMagenta=0x7f04005a;
-        public static final int DarkOrchid=0x7f04005b;
-        public static final int DarkSalmon=0x7f04005c;
-        public static final int DarkTurquoise=0x7f04005d;
-        public static final int DarkViolet=0x7f04005e;
-        public static final int Fuchsia=0x7f04005f;
-        public static final int Gainsboro=0x7f040060;
-        public static final int Gray=0x7f040061;
-        public static final int Gray_DarkGray=0x7f040063;
-        public static final int Gray_DarkGray1=0x7f040062;
-        public static final int Gray_DimGray=0x7f040064;
-        public static final int Gray_LightGray=0x7f040065;
-        public static final int Gray_LightSlateGray=0x7f040066;
-        public static final int Gray_SlateGray=0x7f040067;
-        public static final int Green=0x7f040068;
-        public static final int Green_BackGround=0x7f04006a;
-        public static final int Green_DarkGreen=0x7f040069;
-        public static final int Green_DarkOliveGreen=0x7f04006b;
-        public static final int Green_DarkSeaGreen=0x7f04006c;
-        public static final int Green_ForestGreen=0x7f04006d;
-        public static final int Green_GreenYellow=0x7f04006e;
-        public static final int Green_LawnGreen=0x7f04006f;
-        public static final int Green_LightGreen=0x7f040070;
-        public static final int Green_LightSeaGreen=0x7f040071;
-        public static final int Green_LimeGreen=0x7f040072;
-        public static final int Green_MediumSeaGreen=0x7f040073;
-        public static final int Green_MediumSpringGreen=0x7f040074;
-        public static final int Green_PaleGreen=0x7f040075;
-        public static final int Green_SeaGreen=0x7f040076;
-        public static final int Green_SpringGreen=0x7f040077;
-        public static final int Green_YellowGreen=0x7f040078;
-        public static final int Indigo=0x7f040079;
-        public static final int Khaki=0x7f04007a;
-        public static final int LemonChiffon=0x7f04007b;
-        public static final int LightCoral=0x7f04007c;
-        public static final int LightGoldenrodYellow=0x7f04007d;
-        public static final int LightSalmon=0x7f04007e;
-        public static final int Lime=0x7f04007f;
-        public static final int Linen=0x7f040080;
-        public static final int Magenta=0x7f040081;
-        public static final int Maroon=0x7f040082;
-        public static final int MediumAquamarine=0x7f040083;
-        public static final int MediumOrchid=0x7f040084;
-        public static final int MediumPurple=0x7f040085;
-        public static final int MediumTurquoise=0x7f040086;
-        public static final int MintCream=0x7f040087;
-        public static final int Moccasin=0x7f040088;
-        public static final int OldLace=0x7f040089;
-        public static final int Olive=0x7f04008a;
-        public static final int OliveDrab=0x7f04008b;
-        public static final int Orange=0x7f04008c;
-        public static final int Orange_DarkOrange=0x7f04008d;
-        public static final int Orchid=0x7f04008e;
-        public static final int PaleTurquoise=0x7f04008f;
-        public static final int PapayaWhip=0x7f040090;
-        public static final int PeachPuff=0x7f040091;
-        public static final int Peru=0x7f040092;
-        public static final int Pink=0x7f040093;
-        public static final int Pink_DeepPink=0x7f040094;
-        public static final int Pink_HotPink=0x7f040095;
-        public static final int Pink_LightPink=0x7f040096;
-        public static final int Plum=0x7f040097;
-        public static final int Purple=0x7f040098;
-        public static final int Red=0x7f040099;
-        public static final int Red_Crimson=0x7f04009a;
-        public static final int Red_DarkCyan=0x7f04009b;
-        public static final int Red_DarkRed=0x7f04009c;
-        public static final int Red_FireBrick=0x7f04009d;
-        public static final int Red_IndianRed=0x7f04009e;
-        public static final int Red_LightCyan=0x7f04009f;
-        public static final int Red_MediumVioletRed=0x7f0400a0;
-        public static final int Red_MistyRose=0x7f0400a1;
-        public static final int Red_OrangeRed=0x7f0400a2;
-        public static final int Red_PaleVioletRed=0x7f0400a3;
-        public static final int Red_Tomato=0x7f0400a4;
-        public static final int SaddleBrown=0x7f0400a5;
-        public static final int Salmon=0x7f0400a6;
-        public static final int Seashell=0x7f0400a7;
-        public static final int Sienna=0x7f0400a8;
-        public static final int Silver=0x7f0400a9;
-        public static final int Tan=0x7f0400aa;
-        public static final int Thistle=0x7f0400ab;
-        public static final int Turquoise=0x7f0400ac;
-        public static final int Violet=0x7f0400ad;
-        public static final int White_AntiqueWhite=0x7f0400ae;
-        public static final int White_Azure=0x7f0400af;
-        public static final int White_Beige=0x7f0400b0;
-        public static final int White_Bisque=0x7f0400b1;
-        public static final int White_FloralWhite=0x7f0400b2;
-        public static final int White_GhostWhite=0x7f0400b3;
-        public static final int White_Honeydew=0x7f0400b4;
-        public static final int White_Ivory=0x7f0400b5;
-        public static final int White_NavajoWhite=0x7f0400b6;
-        public static final int White_Snow=0x7f0400b7;
-        public static final int White_Teal=0x7f0400b8;
-        public static final int White_Wheat=0x7f0400db;
-        public static final int White_White=0x7f0400dc;
-        public static final int White_WhiteSmoke=0x7f0400dd;
-        public static final int White_transparent_white_hex_1=0x7f0400b9;
-        public static final int White_transparent_white_hex_10=0x7f0400ba;
-        public static final int White_transparent_white_hex_11=0x7f0400bb;
-        public static final int White_transparent_white_hex_12=0x7f0400bc;
-        public static final int White_transparent_white_hex_13=0x7f0400bd;
-        public static final int White_transparent_white_hex_14=0x7f0400be;
-        public static final int White_transparent_white_hex_15=0x7f0400bf;
-        public static final int White_transparent_white_hex_2=0x7f0400c0;
-        public static final int White_transparent_white_hex_3=0x7f0400c1;
-        public static final int White_transparent_white_hex_4=0x7f0400c2;
-        public static final int White_transparent_white_hex_5=0x7f0400c3;
-        public static final int White_transparent_white_hex_6=0x7f0400c4;
-        public static final int White_transparent_white_hex_7=0x7f0400c5;
-        public static final int White_transparent_white_hex_8=0x7f0400c6;
-        public static final int White_transparent_white_hex_9=0x7f0400c7;
-        public static final int White_transparent_white_percent_10=0x7f0400c8;
-        public static final int White_transparent_white_percent_15=0x7f0400c9;
-        public static final int White_transparent_white_percent_20=0x7f0400ca;
-        public static final int White_transparent_white_percent_25=0x7f0400cb;
-        public static final int White_transparent_white_percent_30=0x7f0400cc;
-        public static final int White_transparent_white_percent_35=0x7f0400cd;
-        public static final int White_transparent_white_percent_40=0x7f0400ce;
-        public static final int White_transparent_white_percent_45=0x7f0400cf;
-        public static final int White_transparent_white_percent_5=0x7f0400d0;
-        public static final int White_transparent_white_percent_50=0x7f0400d1;
-        public static final int White_transparent_white_percent_55=0x7f0400d2;
-        public static final int White_transparent_white_percent_60=0x7f0400d3;
-        public static final int White_transparent_white_percent_65=0x7f0400d4;
-        public static final int White_transparent_white_percent_70=0x7f0400d5;
-        public static final int White_transparent_white_percent_75=0x7f0400d6;
-        public static final int White_transparent_white_percent_80=0x7f0400d7;
-        public static final int White_transparent_white_percent_85=0x7f0400d8;
-        public static final int White_transparent_white_percent_90=0x7f0400d9;
-        public static final int White_transparent_white_percent_95=0x7f0400da;
-        public static final int Yellow=0x7f0400de;
-        public static final int Yellow_DarkGoldenrod=0x7f0400df;
-        public static final int Yellow_Gold=0x7f0400e0;
-        public static final int Yellow_GoldenRod=0x7f0400e1;
-        public static final int Yellow_LightYellow=0x7f0400e2;
-        public static final int Yellow_PaleGoldenrod=0x7f0400e3;
-        public static final int Yellow_Transparent=0x7f0400e4;
-        public static final int aqua=0x7f040009;
-        public static final int black=0x7f04000f;
-        public static final int blue=0x7f04000d;
-        public static final int fuchsia=0x7f040002;
-        public static final int gray=0x7f040005;
-        public static final int green=0x7f04000c;
-        public static final int lime=0x7f04000a;
-        public static final int maroon=0x7f040008;
-        public static final int navy=0x7f04000e;
-        public static final int olive=0x7f040006;
-        public static final int purple=0x7f040007;
-        public static final int red=0x7f040003;
-        public static final int silver=0x7f040004;
-        public static final int sysBlack=0x7f0400e5;
-        public static final int sysBlue=0x7f0400e6;
-        public static final int sysCyan=0x7f0400e7;
-        public static final int sysDkGray=0x7f0400e8;
-        public static final int sysGray=0x7f0400e9;
-        public static final int sysGreen=0x7f0400ea;
-        public static final int sysLtGray=0x7f0400eb;
-        public static final int sysMagenta=0x7f0400ec;
-        public static final int sysRed=0x7f0400ed;
-        public static final int sysTransparent=0x7f0400ee;
-        public static final int sysWhite=0x7f0400ef;
-        public static final int sysYellow=0x7f0400f0;
-        public static final int teal=0x7f04000b;
-        public static final int translucent_light_orange=0x7f040033;
-        public static final int translucent_light_white=0x7f040032;
+        public static final int BlanchedAlmond=0x7f06004b;
+        public static final int Blue=0x7f06004f;
+        public static final int BlueLi=0x7f060050;
+        public static final int Blue_AliceBlue=0x7f06004c;
+        public static final int Blue_Aqua=0x7f06004d;
+        public static final int Blue_Aquamarine=0x7f06004e;
+        public static final int Blue_BlueNavy=0x7f060051;
+        public static final int Blue_BlueViolet=0x7f060052;
+        public static final int Blue_CadetBlue=0x7f060053;
+        public static final int Blue_CornflowerBlue=0x7f060054;
+        public static final int Blue_DarkBlue=0x7f060055;
+        public static final int Blue_DarkSlateBlue=0x7f060056;
+        public static final int Blue_DeepSkyBlue=0x7f060057;
+        public static final int Blue_DodgerBlue=0x7f060058;
+        public static final int Blue_Lavender=0x7f060059;
+        public static final int Blue_LavenderBlush=0x7f06005a;
+        public static final int Blue_LightBlue=0x7f06005b;
+        public static final int Blue_LightSkyBlue=0x7f06005c;
+        public static final int Blue_LightSteelBlue=0x7f06005d;
+        public static final int Blue_MediumBlue=0x7f06005e;
+        public static final int Blue_MediumSlateBlue=0x7f06005f;
+        public static final int Blue_MidnightBlue=0x7f060060;
+        public static final int Blue_Navy=0x7f060061;
+        public static final int Blue_PowderBlue=0x7f060062;
+        public static final int Blue_RoyalBlue=0x7f060063;
+        public static final int Blue_SkyBlue=0x7f060064;
+        public static final int Blue_SlateBlue=0x7f060065;
+        public static final int Blue_SteelBlue=0x7f060066;
+        public static final int Brown=0x7f060067;
+        public static final int Brown_BurlyWood=0x7f060068;
+        public static final int Brown_Chocolate=0x7f060069;
+        public static final int Brown_DarkKhaki=0x7f06006a;
+        public static final int Brown_RosyBrown=0x7f06006b;
+        public static final int Brown_SandyBrown=0x7f06006c;
+        public static final int Chartreuse=0x7f06006d;
+        public static final int Coral=0x7f06006e;
+        public static final int Cornsilk=0x7f06006f;
+        public static final int Cyan=0x7f060070;
+        public static final int DarkMagenta=0x7f060071;
+        public static final int DarkOrchid=0x7f060072;
+        public static final int DarkSalmon=0x7f060073;
+        public static final int DarkTurquoise=0x7f060074;
+        public static final int DarkViolet=0x7f060075;
+        public static final int Fuchsia=0x7f060076;
+        public static final int Gainsboro=0x7f060077;
+        public static final int Gray=0x7f060078;
+        public static final int Gray_DarkGray=0x7f06007a;
+        public static final int Gray_DarkGray1=0x7f060079;
+        public static final int Gray_DimGray=0x7f06007b;
+        public static final int Gray_LightGray=0x7f06007c;
+        public static final int Gray_LightSlateGray=0x7f06007d;
+        public static final int Gray_SlateGray=0x7f06007e;
+        public static final int Green=0x7f06007f;
+        public static final int Green_BackGround=0x7f060081;
+        public static final int Green_DarkGreen=0x7f060080;
+        public static final int Green_DarkOliveGreen=0x7f060082;
+        public static final int Green_DarkSeaGreen=0x7f060083;
+        public static final int Green_ForestGreen=0x7f060084;
+        public static final int Green_GreenYellow=0x7f060085;
+        public static final int Green_LawnGreen=0x7f060086;
+        public static final int Green_LightGreen=0x7f060087;
+        public static final int Green_LightSeaGreen=0x7f060088;
+        public static final int Green_LimeGreen=0x7f060089;
+        public static final int Green_MediumSeaGreen=0x7f06008a;
+        public static final int Green_MediumSpringGreen=0x7f06008b;
+        public static final int Green_PaleGreen=0x7f06008c;
+        public static final int Green_SeaGreen=0x7f06008d;
+        public static final int Green_SpringGreen=0x7f06008e;
+        public static final int Green_YellowGreen=0x7f06008f;
+        public static final int Indigo=0x7f060090;
+        public static final int Khaki=0x7f060091;
+        public static final int LemonChiffon=0x7f060092;
+        public static final int LightCoral=0x7f060093;
+        public static final int LightGoldenrodYellow=0x7f060094;
+        public static final int LightSalmon=0x7f060095;
+        public static final int Lime=0x7f060096;
+        public static final int Linen=0x7f060097;
+        public static final int Magenta=0x7f060098;
+        public static final int Maroon=0x7f060099;
+        public static final int MediumAquamarine=0x7f06009a;
+        public static final int MediumOrchid=0x7f06009b;
+        public static final int MediumPurple=0x7f06009c;
+        public static final int MediumTurquoise=0x7f06009d;
+        public static final int MintCream=0x7f06009e;
+        public static final int Moccasin=0x7f06009f;
+        public static final int OldLace=0x7f0600a0;
+        public static final int Olive=0x7f0600a1;
+        public static final int OliveDrab=0x7f0600a2;
+        public static final int Orange=0x7f0600a3;
+        public static final int Orange_DarkOrange=0x7f0600a4;
+        public static final int Orchid=0x7f0600a5;
+        public static final int PaleTurquoise=0x7f0600a6;
+        public static final int PapayaWhip=0x7f0600a7;
+        public static final int PeachPuff=0x7f0600a8;
+        public static final int Peru=0x7f0600a9;
+        public static final int Pink=0x7f0600aa;
+        public static final int Pink_DeepPink=0x7f0600ab;
+        public static final int Pink_HotPink=0x7f0600ac;
+        public static final int Pink_LightPink=0x7f0600ad;
+        public static final int Plum=0x7f0600ae;
+        public static final int Purple=0x7f0600af;
+        public static final int Red=0x7f0600b0;
+        public static final int Red_Crimson=0x7f0600b1;
+        public static final int Red_DarkCyan=0x7f0600b2;
+        public static final int Red_DarkRed=0x7f0600b3;
+        public static final int Red_FireBrick=0x7f0600b4;
+        public static final int Red_IndianRed=0x7f0600b5;
+        public static final int Red_LightCyan=0x7f0600b6;
+        public static final int Red_MediumVioletRed=0x7f0600b7;
+        public static final int Red_MistyRose=0x7f0600b8;
+        public static final int Red_OrangeRed=0x7f0600b9;
+        public static final int Red_PaleVioletRed=0x7f0600ba;
+        public static final int Red_Tomato=0x7f0600bb;
+        public static final int SaddleBrown=0x7f0600bc;
+        public static final int Salmon=0x7f0600bd;
+        public static final int Seashell=0x7f0600be;
+        public static final int Sienna=0x7f0600bf;
+        public static final int Silver=0x7f0600c0;
+        public static final int Tan=0x7f0600c1;
+        public static final int Thistle=0x7f0600c2;
+        public static final int Turquoise=0x7f0600c3;
+        public static final int Violet=0x7f0600c4;
+        public static final int White_AntiqueWhite=0x7f0600c5;
+        public static final int White_Azure=0x7f0600c6;
+        public static final int White_Beige=0x7f0600c7;
+        public static final int White_Bisque=0x7f0600c8;
+        public static final int White_FloralWhite=0x7f0600c9;
+        public static final int White_GhostWhite=0x7f0600ca;
+        public static final int White_Honeydew=0x7f0600cb;
+        public static final int White_Ivory=0x7f0600cc;
+        public static final int White_NavajoWhite=0x7f0600cd;
+        public static final int White_Snow=0x7f0600ce;
+        public static final int White_Teal=0x7f0600cf;
+        public static final int White_Wheat=0x7f0600f2;
+        public static final int White_White=0x7f0600f3;
+        public static final int White_WhiteSmoke=0x7f0600f4;
+        public static final int White_transparent_white_hex_1=0x7f0600d0;
+        public static final int White_transparent_white_hex_10=0x7f0600d1;
+        public static final int White_transparent_white_hex_11=0x7f0600d2;
+        public static final int White_transparent_white_hex_12=0x7f0600d3;
+        public static final int White_transparent_white_hex_13=0x7f0600d4;
+        public static final int White_transparent_white_hex_14=0x7f0600d5;
+        public static final int White_transparent_white_hex_15=0x7f0600d6;
+        public static final int White_transparent_white_hex_2=0x7f0600d7;
+        public static final int White_transparent_white_hex_3=0x7f0600d8;
+        public static final int White_transparent_white_hex_4=0x7f0600d9;
+        public static final int White_transparent_white_hex_5=0x7f0600da;
+        public static final int White_transparent_white_hex_6=0x7f0600db;
+        public static final int White_transparent_white_hex_7=0x7f0600dc;
+        public static final int White_transparent_white_hex_8=0x7f0600dd;
+        public static final int White_transparent_white_hex_9=0x7f0600de;
+        public static final int White_transparent_white_percent_10=0x7f0600df;
+        public static final int White_transparent_white_percent_15=0x7f0600e0;
+        public static final int White_transparent_white_percent_20=0x7f0600e1;
+        public static final int White_transparent_white_percent_25=0x7f0600e2;
+        public static final int White_transparent_white_percent_30=0x7f0600e3;
+        public static final int White_transparent_white_percent_35=0x7f0600e4;
+        public static final int White_transparent_white_percent_40=0x7f0600e5;
+        public static final int White_transparent_white_percent_45=0x7f0600e6;
+        public static final int White_transparent_white_percent_5=0x7f0600e7;
+        public static final int White_transparent_white_percent_50=0x7f0600e8;
+        public static final int White_transparent_white_percent_55=0x7f0600e9;
+        public static final int White_transparent_white_percent_60=0x7f0600ea;
+        public static final int White_transparent_white_percent_65=0x7f0600eb;
+        public static final int White_transparent_white_percent_70=0x7f0600ec;
+        public static final int White_transparent_white_percent_75=0x7f0600ed;
+        public static final int White_transparent_white_percent_80=0x7f0600ee;
+        public static final int White_transparent_white_percent_85=0x7f0600ef;
+        public static final int White_transparent_white_percent_90=0x7f0600f0;
+        public static final int White_transparent_white_percent_95=0x7f0600f1;
+        public static final int Yellow=0x7f0600f5;
+        public static final int Yellow_DarkGoldenrod=0x7f0600f6;
+        public static final int Yellow_Gold=0x7f0600f7;
+        public static final int Yellow_GoldenRod=0x7f0600f8;
+        public static final int Yellow_LightYellow=0x7f0600f9;
+        public static final int Yellow_PaleGoldenrod=0x7f0600fa;
+        public static final int Yellow_Transparent=0x7f0600fb;
+        public static final int aqua=0x7f060020;
+        public static final int black=0x7f060026;
+        public static final int blue=0x7f060024;
+        public static final int common_action_bar_splitter=0x7f060009;
+        /**  Sign-in Button Colors 
+         */
+        public static final int common_signin_btn_dark_text_default=0x7f060000;
+        public static final int common_signin_btn_dark_text_disabled=0x7f060002;
+        public static final int common_signin_btn_dark_text_focused=0x7f060003;
+        public static final int common_signin_btn_dark_text_pressed=0x7f060001;
+        public static final int common_signin_btn_default_background=0x7f060008;
+        public static final int common_signin_btn_light_text_default=0x7f060004;
+        public static final int common_signin_btn_light_text_disabled=0x7f060006;
+        public static final int common_signin_btn_light_text_focused=0x7f060007;
+        public static final int common_signin_btn_light_text_pressed=0x7f060005;
+        public static final int common_signin_btn_text_dark=0x7f060108;
+        public static final int common_signin_btn_text_light=0x7f060109;
+        public static final int fuchsia=0x7f060019;
+        public static final int gray=0x7f06001c;
+        public static final int green=0x7f060023;
+        public static final int lime=0x7f060021;
+        public static final int maroon=0x7f06001f;
+        public static final int navy=0x7f060025;
+        public static final int olive=0x7f06001d;
+        public static final int purple=0x7f06001e;
+        public static final int red=0x7f06001a;
+        public static final int silver=0x7f06001b;
+        public static final int sysBlack=0x7f0600fc;
+        public static final int sysBlue=0x7f0600fd;
+        public static final int sysCyan=0x7f0600fe;
+        public static final int sysDkGray=0x7f0600ff;
+        public static final int sysGray=0x7f060100;
+        public static final int sysGreen=0x7f060101;
+        public static final int sysLtGray=0x7f060102;
+        public static final int sysMagenta=0x7f060103;
+        public static final int sysRed=0x7f060104;
+        public static final int sysTransparent=0x7f060105;
+        public static final int sysWhite=0x7f060106;
+        public static final int sysYellow=0x7f060107;
+        public static final int teal=0x7f060022;
+        public static final int translucent_light_orange=0x7f06004a;
+        public static final int translucent_light_white=0x7f060049;
         /**  Black Transparent 
          */
-        public static final int transparent_black_hex_1=0x7f040010;
-        public static final int transparent_black_hex_10=0x7f040019;
-        public static final int transparent_black_hex_11=0x7f04001a;
-        public static final int transparent_black_hex_12=0x7f04001b;
-        public static final int transparent_black_hex_13=0x7f04001c;
-        public static final int transparent_black_hex_14=0x7f04001d;
-        public static final int transparent_black_hex_15=0x7f04001e;
-        public static final int transparent_black_hex_2=0x7f040011;
-        public static final int transparent_black_hex_3=0x7f040012;
-        public static final int transparent_black_hex_4=0x7f040013;
-        public static final int transparent_black_hex_5=0x7f040014;
-        public static final int transparent_black_hex_6=0x7f040015;
-        public static final int transparent_black_hex_7=0x7f040016;
-        public static final int transparent_black_hex_8=0x7f040017;
-        public static final int transparent_black_hex_9=0x7f040018;
-        public static final int transparent_black_percent_10=0x7f040020;
-        public static final int transparent_black_percent_15=0x7f040021;
-        public static final int transparent_black_percent_20=0x7f040022;
-        public static final int transparent_black_percent_25=0x7f040023;
-        public static final int transparent_black_percent_30=0x7f040024;
-        public static final int transparent_black_percent_35=0x7f040025;
-        public static final int transparent_black_percent_40=0x7f040026;
-        public static final int transparent_black_percent_45=0x7f040027;
-        public static final int transparent_black_percent_5=0x7f04001f;
-        public static final int transparent_black_percent_50=0x7f040028;
-        public static final int transparent_black_percent_55=0x7f040029;
-        public static final int transparent_black_percent_60=0x7f04002a;
-        public static final int transparent_black_percent_65=0x7f04002b;
-        public static final int transparent_black_percent_70=0x7f04002c;
-        public static final int transparent_black_percent_75=0x7f04002d;
-        public static final int transparent_black_percent_80=0x7f04002e;
-        public static final int transparent_black_percent_85=0x7f04002f;
-        public static final int transparent_black_percent_90=0x7f040030;
-        public static final int transparent_black_percent_95=0x7f040031;
-        public static final int white=0x7f040000;
-        public static final int yellow=0x7f040001;
+        public static final int transparent_black_hex_1=0x7f060027;
+        public static final int transparent_black_hex_10=0x7f060030;
+        public static final int transparent_black_hex_11=0x7f060031;
+        public static final int transparent_black_hex_12=0x7f060032;
+        public static final int transparent_black_hex_13=0x7f060033;
+        public static final int transparent_black_hex_14=0x7f060034;
+        public static final int transparent_black_hex_15=0x7f060035;
+        public static final int transparent_black_hex_2=0x7f060028;
+        public static final int transparent_black_hex_3=0x7f060029;
+        public static final int transparent_black_hex_4=0x7f06002a;
+        public static final int transparent_black_hex_5=0x7f06002b;
+        public static final int transparent_black_hex_6=0x7f06002c;
+        public static final int transparent_black_hex_7=0x7f06002d;
+        public static final int transparent_black_hex_8=0x7f06002e;
+        public static final int transparent_black_hex_9=0x7f06002f;
+        public static final int transparent_black_percent_10=0x7f060037;
+        public static final int transparent_black_percent_15=0x7f060038;
+        public static final int transparent_black_percent_20=0x7f060039;
+        public static final int transparent_black_percent_25=0x7f06003a;
+        public static final int transparent_black_percent_30=0x7f06003b;
+        public static final int transparent_black_percent_35=0x7f06003c;
+        public static final int transparent_black_percent_40=0x7f06003d;
+        public static final int transparent_black_percent_45=0x7f06003e;
+        public static final int transparent_black_percent_5=0x7f060036;
+        public static final int transparent_black_percent_50=0x7f06003f;
+        public static final int transparent_black_percent_55=0x7f060040;
+        public static final int transparent_black_percent_60=0x7f060041;
+        public static final int transparent_black_percent_65=0x7f060042;
+        public static final int transparent_black_percent_70=0x7f060043;
+        public static final int transparent_black_percent_75=0x7f060044;
+        public static final int transparent_black_percent_80=0x7f060045;
+        public static final int transparent_black_percent_85=0x7f060046;
+        public static final int transparent_black_percent_90=0x7f060047;
+        public static final int transparent_black_percent_95=0x7f060048;
+        public static final int wallet_bright_foreground_disabled_holo_light=0x7f06000f;
+        /** 
+         Wallet colors to support consistent Wallet fragment holo dark UI in client application
+         regardless of the theme and device type
+    
+         */
+        public static final int wallet_bright_foreground_holo_dark=0x7f06000a;
+        public static final int wallet_bright_foreground_holo_light=0x7f060010;
+        public static final int wallet_dim_foreground_disabled_holo_dark=0x7f06000c;
+        public static final int wallet_dim_foreground_holo_dark=0x7f06000b;
+        public static final int wallet_dim_foreground_inverse_disabled_holo_dark=0x7f06000e;
+        public static final int wallet_dim_foreground_inverse_holo_dark=0x7f06000d;
+        public static final int wallet_highlighted_text_holo_dark=0x7f060014;
+        public static final int wallet_highlighted_text_holo_light=0x7f060013;
+        public static final int wallet_hint_foreground_holo_dark=0x7f060012;
+        public static final int wallet_hint_foreground_holo_light=0x7f060011;
+        public static final int wallet_holo_blue_light=0x7f060015;
+        public static final int wallet_link_text_light=0x7f060016;
+        public static final int wallet_primary_text_holo_light=0x7f06010a;
+        public static final int wallet_secondary_text_holo_dark=0x7f06010b;
+        public static final int white=0x7f060017;
+        public static final int yellow=0x7f060018;
     }
     public static final class dimen {
-        public static final int button_height=0x7f050001;
-        public static final int margin_dialog_vertical=0x7f050002;
-        public static final int standar_margin=0x7f050000;
+        public static final int button_height=0x7f090001;
+        public static final int margin_dialog_vertical=0x7f090002;
+        public static final int standar_margin=0x7f090000;
     }
     public static final class drawable {
         public static final int button_selector=0x7f020000;
-        public static final int ic_action_go_to_today=0x7f020001;
-        public static final int ic_action_search=0x7f020002;
-        public static final int ic_launcher=0x7f020003;
+        public static final int common_signin_btn_icon_dark=0x7f020001;
+        public static final int common_signin_btn_icon_disabled_dark=0x7f020002;
+        public static final int common_signin_btn_icon_disabled_focus_dark=0x7f020003;
+        public static final int common_signin_btn_icon_disabled_focus_light=0x7f020004;
+        public static final int common_signin_btn_icon_disabled_light=0x7f020005;
+        public static final int common_signin_btn_icon_focus_dark=0x7f020006;
+        public static final int common_signin_btn_icon_focus_light=0x7f020007;
+        public static final int common_signin_btn_icon_light=0x7f020008;
+        public static final int common_signin_btn_icon_normal_dark=0x7f020009;
+        public static final int common_signin_btn_icon_normal_light=0x7f02000a;
+        public static final int common_signin_btn_icon_pressed_dark=0x7f02000b;
+        public static final int common_signin_btn_icon_pressed_light=0x7f02000c;
+        public static final int common_signin_btn_text_dark=0x7f02000d;
+        public static final int common_signin_btn_text_disabled_dark=0x7f02000e;
+        public static final int common_signin_btn_text_disabled_focus_dark=0x7f02000f;
+        public static final int common_signin_btn_text_disabled_focus_light=0x7f020010;
+        public static final int common_signin_btn_text_disabled_light=0x7f020011;
+        public static final int common_signin_btn_text_focus_dark=0x7f020012;
+        public static final int common_signin_btn_text_focus_light=0x7f020013;
+        public static final int common_signin_btn_text_light=0x7f020014;
+        public static final int common_signin_btn_text_normal_dark=0x7f020015;
+        public static final int common_signin_btn_text_normal_light=0x7f020016;
+        public static final int common_signin_btn_text_pressed_dark=0x7f020017;
+        public static final int common_signin_btn_text_pressed_light=0x7f020018;
+        public static final int ic_action_go_to_today=0x7f020019;
+        public static final int ic_action_search=0x7f02001a;
+        public static final int ic_launcher=0x7f02001b;
+        public static final int ic_plusone_medium_off_client=0x7f02001c;
+        public static final int ic_plusone_small_off_client=0x7f02001d;
+        public static final int ic_plusone_standard_off_client=0x7f02001e;
+        public static final int ic_plusone_tall_off_client=0x7f02001f;
+        public static final int powered_by_google_dark=0x7f020020;
+        public static final int powered_by_google_light=0x7f020021;
     }
     public static final class id {
-        public static final int btn_booking=0x7f090027;
-        public static final int btn_finish_booking=0x7f09002c;
-        public static final int btn_logout=0x7f090044;
-        public static final int btn_next_meeting=0x7f090003;
-        public static final int btn_not_approved=0x7f090001;
-        public static final int btn_search_doctor=0x7f09003a;
-        public static final int btn_select_hour=0x7f09002e;
-        public static final int btn_view_calendar=0x7f09003d;
-        public static final int calendarView=0x7f09002d;
-        public static final int ddl_hospital=0x7f090037;
-        public static final int ddl_speciality=0x7f090038;
-        public static final int edDescription=0x7f090022;
-        public static final int ed_booking_address=0x7f090021;
-        public static final int ed_booking_name=0x7f09001c;
-        public static final int ed_booking_old=0x7f09001d;
-        public static final int ed_booking_phone=0x7f090020;
-        public static final int img_Logo=0x7f090016;
-        public static final int lbl_status_login=0x7f090015;
-        public static final int lineBottom=0x7f090004;
-        public static final int lineTop=0x7f090006;
-        public static final int ll_booking_for_other=0x7f09001b;
-        public static final int login_btn=0x7f090013;
-        public static final int login_progress=0x7f090018;
-        public static final int lvDoctorFreeTime=0x7f090041;
-        public static final int lvMeeting=0x7f09002f;
-        public static final int lv_doctor_search_result=0x7f09003b;
-        public static final int lv_meeting_not_approved=0x7f09000e;
-        public static final int lv_meeting_today=0x7f090005;
-        public static final int lv_next_meeting=0x7f090011;
-        public static final int rb_female=0x7f09001f;
-        public static final int rb_for_me=0x7f090019;
-        public static final int rb_for_other=0x7f09001a;
-        public static final int rb_male=0x7f09001e;
-        public static final int rlLogin=0x7f090012;
-        public static final int rl_not_approved=0x7f090000;
-        public static final int spinner1=0x7f09000f;
-        public static final int spinner2=0x7f090010;
-        public static final int tbEmail=0x7f090026;
-        public static final int tb_confim_key=0x7f09002b;
-        public static final int textView1=0x7f09003c;
-        public static final int top_right_button=0x7f090043;
-        public static final int tv_appointment_notes=0x7f09000c;
-        public static final int tv_appointment_status=0x7f09000d;
-        public static final int tv_booking_date=0x7f090025;
-        public static final int tv_date_appointment=0x7f09000a;
-        public static final int tv_date_meeting=0x7f090032;
-        public static final int tv_doctor_name=0x7f090023;
-        public static final int tv_doctor_search_result=0x7f090036;
-        public static final int tv_end_time=0x7f090024;
-        public static final int tv_free_end_time=0x7f09003f;
-        public static final int tv_free_location_name=0x7f090040;
-        public static final int tv_free_start_time=0x7f09003e;
-        public static final int tv_hospital_name=0x7f090031;
-        public static final int tv_hour_meeting=0x7f090033;
-        public static final int tv_indicator=0x7f090002;
-        public static final int tv_location_name=0x7f090009;
-        public static final int tv_meeting_date=0x7f090029;
-        public static final int tv_meeting_doctor=0x7f090028;
-        public static final int tv_meeting_location=0x7f09002a;
-        public static final int tv_meeting_today=0x7f090007;
-        public static final int tv_no_result_free_time=0x7f090042;
-        public static final int tv_no_result_patient_meeting=0x7f090030;
-        public static final int tv_note_meeting=0x7f090034;
-        public static final int tv_patient_name=0x7f090008;
-        public static final int tv_search_doctor=0x7f090039;
-        public static final int tv_start_time=0x7f09000b;
-        public static final int tv_status_meeting=0x7f090035;
-        public static final int txtPwd=0x7f090014;
-        public static final int txtUsername=0x7f090017;
+        public static final int book_now=0x7f070010;
+        public static final int btn_booking=0x7f07003b;
+        public static final int btn_finish_booking=0x7f070040;
+        public static final int btn_logout=0x7f070058;
+        public static final int btn_next_meeting=0x7f070017;
+        public static final int btn_not_approved=0x7f070015;
+        public static final int btn_search_doctor=0x7f07004e;
+        public static final int btn_select_hour=0x7f070042;
+        public static final int btn_view_calendar=0x7f070051;
+        public static final int buyButton=0x7f07000a;
+        public static final int buy_now=0x7f07000f;
+        public static final int buy_with_google=0x7f07000e;
+        public static final int calendarView=0x7f070041;
+        public static final int classic=0x7f070011;
+        public static final int ddl_hospital=0x7f07004b;
+        public static final int ddl_speciality=0x7f07004c;
+        public static final int edDescription=0x7f070036;
+        public static final int ed_booking_address=0x7f070035;
+        public static final int ed_booking_name=0x7f070030;
+        public static final int ed_booking_old=0x7f070031;
+        public static final int ed_booking_phone=0x7f070034;
+        public static final int grayscale=0x7f070012;
+        public static final int holo_dark=0x7f070005;
+        public static final int holo_light=0x7f070006;
+        public static final int hybrid=0x7f070004;
+        public static final int img_Logo=0x7f07002a;
+        public static final int lbl_status_login=0x7f070029;
+        public static final int lineBottom=0x7f070018;
+        public static final int lineTop=0x7f07001a;
+        public static final int ll_booking_for_other=0x7f07002f;
+        public static final int login_btn=0x7f070027;
+        public static final int login_progress=0x7f07002c;
+        public static final int lvDoctorFreeTime=0x7f070055;
+        public static final int lvMeeting=0x7f070043;
+        public static final int lv_doctor_search_result=0x7f07004f;
+        public static final int lv_meeting_not_approved=0x7f070022;
+        public static final int lv_meeting_today=0x7f070019;
+        public static final int lv_next_meeting=0x7f070025;
+        public static final int match_parent=0x7f07000c;
+        public static final int monochrome=0x7f070013;
+        public static final int none=0x7f070000;
+        public static final int normal=0x7f070001;
+        public static final int production=0x7f070007;
+        public static final int rb_female=0x7f070033;
+        public static final int rb_for_me=0x7f07002d;
+        public static final int rb_for_other=0x7f07002e;
+        public static final int rb_male=0x7f070032;
+        public static final int rlLogin=0x7f070026;
+        public static final int rl_not_approved=0x7f070014;
+        public static final int sandbox=0x7f070008;
+        public static final int satellite=0x7f070002;
+        public static final int selectionDetails=0x7f07000b;
+        public static final int spinner1=0x7f070023;
+        public static final int spinner2=0x7f070024;
+        public static final int strict_sandbox=0x7f070009;
+        public static final int tbEmail=0x7f07003a;
+        public static final int tb_confim_key=0x7f07003f;
+        public static final int terrain=0x7f070003;
+        public static final int textView1=0x7f070050;
+        public static final int top_right_button=0x7f070057;
+        public static final int tv_appointment_notes=0x7f070020;
+        public static final int tv_appointment_status=0x7f070021;
+        public static final int tv_booking_date=0x7f070039;
+        public static final int tv_date_appointment=0x7f07001e;
+        public static final int tv_date_meeting=0x7f070046;
+        public static final int tv_doctor_name=0x7f070037;
+        public static final int tv_doctor_search_result=0x7f07004a;
+        public static final int tv_end_time=0x7f070038;
+        public static final int tv_free_end_time=0x7f070053;
+        public static final int tv_free_location_name=0x7f070054;
+        public static final int tv_free_start_time=0x7f070052;
+        public static final int tv_hospital_name=0x7f070045;
+        public static final int tv_hour_meeting=0x7f070047;
+        public static final int tv_indicator=0x7f070016;
+        public static final int tv_location_name=0x7f07001d;
+        public static final int tv_meeting_date=0x7f07003d;
+        public static final int tv_meeting_doctor=0x7f07003c;
+        public static final int tv_meeting_location=0x7f07003e;
+        public static final int tv_meeting_today=0x7f07001b;
+        public static final int tv_no_result_free_time=0x7f070056;
+        public static final int tv_no_result_patient_meeting=0x7f070044;
+        public static final int tv_note_meeting=0x7f070048;
+        public static final int tv_patient_name=0x7f07001c;
+        public static final int tv_search_doctor=0x7f07004d;
+        public static final int tv_start_time=0x7f07001f;
+        public static final int tv_status_meeting=0x7f070049;
+        public static final int txtPwd=0x7f070028;
+        public static final int txtUsername=0x7f07002b;
+        public static final int wrap_content=0x7f07000d;
+    }
+    public static final class integer {
+        public static final int google_play_services_version=0x7f080000;
     }
     public static final class layout {
         public static final int doctor_home_layout=0x7f030000;
@@ -355,69 +758,168 @@ public final class R {
         public static final int patient_view_doctor_free_time_layout=0x7f03000e;
     }
     public static final class menu {
-        public static final int top_right_menu=0x7f080000;
+        public static final int top_right_menu=0x7f0a0000;
     }
     public static final class string {
-        public static final int address=0x7f060033;
-        public static final int all=0x7f060025;
-        public static final int app_name=0x7f060000;
-        public static final int booking=0x7f060029;
-        public static final int booking_description=0x7f06002e;
-        public static final int booking_email=0x7f06002f;
-        public static final int booking_for=0x7f06002b;
-        public static final int booking_name=0x7f060034;
-        public static final int booking_old=0x7f060035;
-        public static final int btn_cancel=0x7f06003b;
-        public static final int btn_cancel_booking=0x7f06003a;
-        public static final int btn_view_schedule=0x7f060027;
-        public static final int confirm_key=0x7f060030;
-        public static final int connect_fail=0x7f060006;
-        public static final int date=0x7f06001c;
-        public static final int doctor=0x7f060016;
-        public static final int doctor_detail=0x7f060011;
-        public static final int doctor_free_time=0x7f060013;
-        public static final int doctor_name=0x7f06000e;
-        public static final int female=0x7f060038;
-        public static final int finish_booking=0x7f06002a;
-        public static final int for_me=0x7f06002c;
-        public static final int for_other=0x7f06002d;
-        public static final int gender=0x7f060036;
-        public static final int hint_pwd=0x7f060002;
-        public static final int hint_uname=0x7f060001;
-        public static final int home=0x7f06000a;
-        public static final int hospital=0x7f06000c;
-        public static final int hour=0x7f06001d;
-        public static final int loading=0x7f060020;
-        public static final int login=0x7f060003;
-        public static final int login_fail=0x7f060007;
-        public static final int login_process=0x7f060005;
-        public static final int logout=0x7f060004;
-        public static final int male=0x7f060037;
-        public static final int meeting_next=0x7f060012;
-        public static final int meeting_not_approved=0x7f060014;
-        public static final int meeting_today=0x7f060015;
-        public static final int message_cancel_booking=0x7f060039;
-        public static final int no_result=0x7f060028;
-        public static final int notes=0x7f06001f;
-        public static final int patient=0x7f060017;
-        public static final int patient_phone=0x7f060032;
-        public static final int phone=0x7f060031;
-        public static final int place=0x7f06001b;
-        public static final int pwd_empty=0x7f060009;
-        public static final int search=0x7f06000f;
-        public static final int search_doctor=0x7f06000b;
-        public static final int select_old_day=0x7f060026;
-        public static final int speciality=0x7f06000d;
-        public static final int start_space=0x7f060019;
-        public static final int start_time=0x7f060018;
-        public static final int status=0x7f06001e;
-        public static final int status_canceled=0x7f060024;
-        public static final int status_confirmed=0x7f060022;
-        public static final int status_done=0x7f060023;
-        public static final int status_new=0x7f060021;
-        public static final int uname_empty=0x7f060008;
-        public static final int view_calendar=0x7f060010;
-        public static final int white_space=0x7f06001a;
+        public static final int address=0x7f050053;
+        public static final int all=0x7f050045;
+        public static final int app_name=0x7f050020;
+        public static final int auth_client_needs_enabling_title=0x7f050001;
+        public static final int auth_client_needs_installation_title=0x7f050002;
+        public static final int auth_client_needs_update_title=0x7f050003;
+        public static final int auth_client_play_services_err_notification_msg=0x7f050004;
+        public static final int auth_client_requested_by_msg=0x7f050005;
+        public static final int auth_client_using_bad_version_title=0x7f050000;
+        public static final int booking=0x7f050049;
+        public static final int booking_description=0x7f05004e;
+        public static final int booking_email=0x7f05004f;
+        public static final int booking_for=0x7f05004b;
+        public static final int booking_name=0x7f050054;
+        public static final int booking_old=0x7f050055;
+        public static final int btn_cancel=0x7f05005b;
+        public static final int btn_cancel_booking=0x7f05005a;
+        public static final int btn_view_schedule=0x7f050047;
+        /**  Button in confirmation dialog to enable Google Play services.  Clicking it
+        will direct user to application settings of Google Play services where they
+        can enable it [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_enable_button=0x7f050011;
+        /**  Message in confirmation dialog informing user they need to enable
+        Google Play services in application settings [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_enable_text=0x7f050010;
+        /**  Title of confirmation dialog informing user they need to enable
+        Google Play services in application settings [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_enable_title=0x7f05000f;
+        /**   Requested by string saying which app requested the notification. [CHAR LIMIT=42] 
+         */
+        public static final int common_google_play_services_error_notification_requested_by_msg=0x7f05000a;
+        /**  Button in confirmation dialog for installing Google Play services [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_install_button=0x7f05000e;
+        /**  (For phones) Message in confirmation dialog informing user that
+        they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_install_text_phone=0x7f05000c;
+        /**  (For tablets) Message in confirmation dialog informing user that
+        they need to install Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_install_text_tablet=0x7f05000d;
+        /**  Title of confirmation dialog informing user that they need to install
+        Google Play services (from Play Store) [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_install_title=0x7f05000b;
+        /**  Message in confirmation dialog informing the user that they provided an invalid account. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_invalid_account_text=0x7f050017;
+        /**  Title of confirmation dialog informing the user that they provided an invalid account. [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_invalid_account_title=0x7f050016;
+        /**   Title for notification shown when GooglePlayServices needs to be enabled for an
+        application to work. [CHAR LIMIT=70] 
+         */
+        public static final int common_google_play_services_needs_enabling_title=0x7f050009;
+        /**  Message in confirmation dialog informing the user that a network error occurred. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_network_error_text=0x7f050015;
+        /**  Title of confirmation dialog informing the user that a network error occurred. [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_network_error_title=0x7f050014;
+        /**   Title for notification shown when GooglePlayServices needs to be installed
+        for an application to work. [CHAR LIMIT=70] 
+         */
+        public static final int common_google_play_services_notification_needs_installation_title=0x7f050007;
+        /**   Title for notification shown when GooglePlayServices needs to be updated for an
+        application to work. [CHAR LIMIT=70] 
+         */
+        public static final int common_google_play_services_notification_needs_update_title=0x7f050008;
+        /**   Title for notification shown when GooglePlayServices is unavailable [CHAR LIMIT=42] 
+         */
+        public static final int common_google_play_services_notification_ticker=0x7f050006;
+        /**  Message in confirmation dialog informing user there is an unknown issue in Google Play
+        services [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_unknown_issue=0x7f050018;
+        /**  Message in confirmation dialog informing user that date on the device is not correct,
+    causing certificate checks to fail. [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_unsupported_date_text=0x7f05001b;
+        /**  Message in confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_unsupported_text=0x7f05001a;
+        /**  Title of confirmation dialog informing user that Google Play services is not supported on their device [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_unsupported_title=0x7f050019;
+        /**  Button in confirmation dialog for updating Google Play services [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_update_button=0x7f05001c;
+        /**  Message in confirmation dialog informing user that they need to update
+        Google Play services (from Play Store) [CHAR LIMIT=NONE] 
+         */
+        public static final int common_google_play_services_update_text=0x7f050013;
+        /**  Title of confirmation dialog informing user that they need to update
+        Google Play services (from Play Store) [CHAR LIMIT=40] 
+         */
+        public static final int common_google_play_services_update_title=0x7f050012;
+        /**  Sign-in button text [CHAR LIMIT=15] 
+         */
+        public static final int common_signin_button_text=0x7f05001d;
+        /**  Long form sign-in button text [CHAR LIMIT=30] 
+         */
+        public static final int common_signin_button_text_long=0x7f05001e;
+        public static final int confirm_key=0x7f050050;
+        public static final int connect_fail=0x7f050026;
+        public static final int date=0x7f05003c;
+        public static final int doctor=0x7f050036;
+        public static final int doctor_detail=0x7f050031;
+        public static final int doctor_free_time=0x7f050033;
+        public static final int doctor_name=0x7f05002e;
+        public static final int female=0x7f050058;
+        public static final int finish_booking=0x7f05004a;
+        public static final int for_me=0x7f05004c;
+        public static final int for_other=0x7f05004d;
+        public static final int gender=0x7f050056;
+        public static final int hint_pwd=0x7f050022;
+        public static final int hint_uname=0x7f050021;
+        public static final int home=0x7f05002a;
+        public static final int hospital=0x7f05002c;
+        public static final int hour=0x7f05003d;
+        public static final int loading=0x7f050040;
+        public static final int login=0x7f050023;
+        public static final int login_fail=0x7f050027;
+        public static final int login_process=0x7f050025;
+        public static final int logout=0x7f050024;
+        public static final int male=0x7f050057;
+        public static final int meeting_next=0x7f050032;
+        public static final int meeting_not_approved=0x7f050034;
+        public static final int meeting_today=0x7f050035;
+        public static final int message_cancel_booking=0x7f050059;
+        public static final int no_result=0x7f050048;
+        public static final int notes=0x7f05003f;
+        public static final int patient=0x7f050037;
+        public static final int patient_phone=0x7f050052;
+        public static final int phone=0x7f050051;
+        public static final int place=0x7f05003b;
+        public static final int pwd_empty=0x7f050029;
+        public static final int search=0x7f05002f;
+        public static final int search_doctor=0x7f05002b;
+        public static final int select_old_day=0x7f050046;
+        public static final int speciality=0x7f05002d;
+        public static final int start_space=0x7f050039;
+        public static final int start_time=0x7f050038;
+        public static final int status=0x7f05003e;
+        public static final int status_canceled=0x7f050044;
+        public static final int status_confirmed=0x7f050042;
+        public static final int status_done=0x7f050043;
+        public static final int status_new=0x7f050041;
+        public static final int uname_empty=0x7f050028;
+        public static final int view_calendar=0x7f050030;
+        /**  Text on a placeholder buy button when Google Play services is not
+         available or up-to-date 
+         */
+        public static final int wallet_buy_button_place_holder=0x7f05001f;
+        public static final int white_space=0x7f05003a;
     }
     public static final class style {
         /** 
@@ -443,11 +945,665 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f040005;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
-        public static final int Dialog=0x7f070002;
+        public static final int AppTheme=0x7f040006;
+        public static final int Dialog=0x7f040007;
+        public static final int Theme_IAPTheme=0x7f040000;
+        public static final int WalletFragmentDefaultButtonTextAppearance=0x7f040003;
+        public static final int WalletFragmentDefaultDetailsHeaderTextAppearance=0x7f040002;
+        public static final int WalletFragmentDefaultDetailsTextAppearance=0x7f040001;
+        /** 
+         Default style of the wallet fragment that will be used if not set explicitly
+         when fragment is created
+    
+         */
+        public static final int WalletFragmentDefaultStyle=0x7f040004;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a AdsAttrs.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #AdsAttrs_adSize com.android.doctor_appointment_online_booking:adSize}</code></td><td>
+    The size of the ad.</td></tr>
+           <tr><td><code>{@link #AdsAttrs_adSizes com.android.doctor_appointment_online_booking:adSizes}</code></td><td>
+    A comma-separated list of the supported ad sizes.</td></tr>
+           <tr><td><code>{@link #AdsAttrs_adUnitId com.android.doctor_appointment_online_booking:adUnitId}</code></td><td> The ad unit ID.</td></tr>
+           </table>
+           @see #AdsAttrs_adSize
+           @see #AdsAttrs_adSizes
+           @see #AdsAttrs_adUnitId
+         */
+        public static final int[] AdsAttrs = {
+            0x7f010000, 0x7f010001, 0x7f010002
+        };
+        /**
+          <p>
+          @attr description
+          
+    The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
+    MEDIUM_RECTANGLE, SMART_BANNER, WIDE_SKYSCRAPER, or
+    &lt;width&gt;x&lt;height&gt;.
+    
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:adSize
+        */
+        public static final int AdsAttrs_adSize = 0;
+        /**
+          <p>
+          @attr description
+          
+    A comma-separated list of the supported ad sizes. The sizes must be one of
+    BANNER, FULL_BANNER, LEADERBOARD, MEDIUM_RECTANGLE, SMART_BANNER,
+    WIDE_SKYSCRAPER, or &lt;width&gt;x&lt;height&gt;.
+    
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:adSizes
+        */
+        public static final int AdsAttrs_adSizes = 1;
+        /**
+          <p>
+          @attr description
+           The ad unit ID. 
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:adUnitId
+        */
+        public static final int AdsAttrs_adUnitId = 2;
+        /** Attributes that can be used with a MapAttrs.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #MapAttrs_cameraBearing com.android.doctor_appointment_online_booking:cameraBearing}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLat com.android.doctor_appointment_online_booking:cameraTargetLat}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLng com.android.doctor_appointment_online_booking:cameraTargetLng}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTilt com.android.doctor_appointment_online_booking:cameraTilt}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraZoom com.android.doctor_appointment_online_booking:cameraZoom}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_mapType com.android.doctor_appointment_online_booking:mapType}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiCompass com.android.doctor_appointment_online_booking:uiCompass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiRotateGestures com.android.doctor_appointment_online_booking:uiRotateGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiScrollGestures com.android.doctor_appointment_online_booking:uiScrollGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiTiltGestures com.android.doctor_appointment_online_booking:uiTiltGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomControls com.android.doctor_appointment_online_booking:uiZoomControls}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomGestures com.android.doctor_appointment_online_booking:uiZoomGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_useViewLifecycle com.android.doctor_appointment_online_booking:useViewLifecycle}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_zOrderOnTop com.android.doctor_appointment_online_booking:zOrderOnTop}</code></td><td></td></tr>
+           </table>
+           @see #MapAttrs_cameraBearing
+           @see #MapAttrs_cameraTargetLat
+           @see #MapAttrs_cameraTargetLng
+           @see #MapAttrs_cameraTilt
+           @see #MapAttrs_cameraZoom
+           @see #MapAttrs_mapType
+           @see #MapAttrs_uiCompass
+           @see #MapAttrs_uiRotateGestures
+           @see #MapAttrs_uiScrollGestures
+           @see #MapAttrs_uiTiltGestures
+           @see #MapAttrs_uiZoomControls
+           @see #MapAttrs_uiZoomGestures
+           @see #MapAttrs_useViewLifecycle
+           @see #MapAttrs_zOrderOnTop
+         */
+        public static final int[] MapAttrs = {
+            0x7f010003, 0x7f010004, 0x7f010005, 0x7f010006,
+            0x7f010007, 0x7f010008, 0x7f010009, 0x7f01000a,
+            0x7f01000b, 0x7f01000c, 0x7f01000d, 0x7f01000e,
+            0x7f01000f, 0x7f010010
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#cameraBearing}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:cameraBearing
+        */
+        public static final int MapAttrs_cameraBearing = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#cameraTargetLat}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:cameraTargetLat
+        */
+        public static final int MapAttrs_cameraTargetLat = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#cameraTargetLng}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:cameraTargetLng
+        */
+        public static final int MapAttrs_cameraTargetLng = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#cameraTilt}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:cameraTilt
+        */
+        public static final int MapAttrs_cameraTilt = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#cameraZoom}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:cameraZoom
+        */
+        public static final int MapAttrs_cameraZoom = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#mapType}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>none</code></td><td>0</td><td></td></tr>
+<tr><td><code>normal</code></td><td>1</td><td></td></tr>
+<tr><td><code>satellite</code></td><td>2</td><td></td></tr>
+<tr><td><code>terrain</code></td><td>3</td><td></td></tr>
+<tr><td><code>hybrid</code></td><td>4</td><td></td></tr>
+</table>
+          @attr name com.android.doctor_appointment_online_booking:mapType
+        */
+        public static final int MapAttrs_mapType = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#uiCompass}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:uiCompass
+        */
+        public static final int MapAttrs_uiCompass = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#uiRotateGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:uiRotateGestures
+        */
+        public static final int MapAttrs_uiRotateGestures = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#uiScrollGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:uiScrollGestures
+        */
+        public static final int MapAttrs_uiScrollGestures = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#uiTiltGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:uiTiltGestures
+        */
+        public static final int MapAttrs_uiTiltGestures = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#uiZoomControls}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:uiZoomControls
+        */
+        public static final int MapAttrs_uiZoomControls = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#uiZoomGestures}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:uiZoomGestures
+        */
+        public static final int MapAttrs_uiZoomGestures = 11;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#useViewLifecycle}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:useViewLifecycle
+        */
+        public static final int MapAttrs_useViewLifecycle = 12;
+        /**
+          <p>This symbol is the offset where the {@link com.android.doctor_appointment_online_booking.R.attr#zOrderOnTop}
+          attribute's value can be found in the {@link #MapAttrs} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.android.doctor_appointment_online_booking:zOrderOnTop
+        */
+        public static final int MapAttrs_zOrderOnTop = 13;
+        /**  Attributes for the WalletFragment &lt;fragment&gt; tag 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #WalletFragmentOptions_environment com.android.doctor_appointment_online_booking:environment}</code></td><td> Google Wallet environment to use </td></tr>
+           <tr><td><code>{@link #WalletFragmentOptions_fragmentMode com.android.doctor_appointment_online_booking:fragmentMode}</code></td><td> Fragment mode </td></tr>
+           <tr><td><code>{@link #WalletFragmentOptions_fragmentStyle com.android.doctor_appointment_online_booking:fragmentStyle}</code></td><td> A style resource specifing attributes to customize the look and feel of WalletFragment </td></tr>
+           <tr><td><code>{@link #WalletFragmentOptions_theme com.android.doctor_appointment_online_booking:theme}</code></td><td> Theme to be used for the Wallet selector </td></tr>
+           </table>
+           @see #WalletFragmentOptions_environment
+           @see #WalletFragmentOptions_fragmentMode
+           @see #WalletFragmentOptions_fragmentStyle
+           @see #WalletFragmentOptions_theme
+         */
+        public static final int[] WalletFragmentOptions = {
+            0x7f010011, 0x7f010012, 0x7f010013, 0x7f010014
+        };
+        /**
+          <p>
+          @attr description
+           Google Wallet environment to use 
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>production</code></td><td>1</td><td></td></tr>
+<tr><td><code>sandbox</code></td><td>0</td><td></td></tr>
+<tr><td><code>strict_sandbox</code></td><td>2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:environment
+        */
+        public static final int WalletFragmentOptions_environment = 1;
+        /**
+          <p>
+          @attr description
+           Fragment mode 
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>buyButton</code></td><td>1</td><td></td></tr>
+<tr><td><code>selectionDetails</code></td><td>2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:fragmentMode
+        */
+        public static final int WalletFragmentOptions_fragmentMode = 3;
+        /**
+          <p>
+          @attr description
+           A style resource specifing attributes to customize the look and feel of WalletFragment 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:fragmentStyle
+        */
+        public static final int WalletFragmentOptions_fragmentStyle = 2;
+        /**
+          <p>
+          @attr description
+           Theme to be used for the Wallet selector 
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>holo_dark</code></td><td>0</td><td></td></tr>
+<tr><td><code>holo_light</code></td><td>1</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:theme
+        */
+        public static final int WalletFragmentOptions_theme = 0;
+        /**  Attributes that may be specified in a style resource to customize the look and feel of
+         WalletFragment 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_buyButtonAppearance com.android.doctor_appointment_online_booking:buyButtonAppearance}</code></td><td> Appearance of the buy button.</td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_buyButtonHeight com.android.doctor_appointment_online_booking:buyButtonHeight}</code></td><td> Height of the buy button.</td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_buyButtonText com.android.doctor_appointment_online_booking:buyButtonText}</code></td><td> Text on the buy button.</td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_buyButtonWidth com.android.doctor_appointment_online_booking:buyButtonWidth}</code></td><td> Width of the buy button.</td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsBackground com.android.doctor_appointment_online_booking:maskedWalletDetailsBackground}</code></td><td> Masked wallet details background </td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsButtonBackground com.android.doctor_appointment_online_booking:maskedWalletDetailsButtonBackground}</code></td><td> "Change" button background in masked wallet details view </td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsButtonTextAppearance com.android.doctor_appointment_online_booking:maskedWalletDetailsButtonTextAppearance}</code></td><td> TextAppearance for the "Change" button in masked wallet details view </td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsHeaderTextAppearance com.android.doctor_appointment_online_booking:maskedWalletDetailsHeaderTextAppearance}</code></td><td> TextAppearance for headers describing masked wallet details </td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsLogoImageType com.android.doctor_appointment_online_booking:maskedWalletDetailsLogoImageType}</code></td><td> Type of the wallet logo image in masked wallet details view </td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsLogoTextColor com.android.doctor_appointment_online_booking:maskedWalletDetailsLogoTextColor}</code></td><td> Color of the Google Wallet logo text in masked wallet details view </td></tr>
+           <tr><td><code>{@link #WalletFragmentStyle_maskedWalletDetailsTextAppearance com.android.doctor_appointment_online_booking:maskedWalletDetailsTextAppearance}</code></td><td> TextAppearance for masked wallet details </td></tr>
+           </table>
+           @see #WalletFragmentStyle_buyButtonAppearance
+           @see #WalletFragmentStyle_buyButtonHeight
+           @see #WalletFragmentStyle_buyButtonText
+           @see #WalletFragmentStyle_buyButtonWidth
+           @see #WalletFragmentStyle_maskedWalletDetailsBackground
+           @see #WalletFragmentStyle_maskedWalletDetailsButtonBackground
+           @see #WalletFragmentStyle_maskedWalletDetailsButtonTextAppearance
+           @see #WalletFragmentStyle_maskedWalletDetailsHeaderTextAppearance
+           @see #WalletFragmentStyle_maskedWalletDetailsLogoImageType
+           @see #WalletFragmentStyle_maskedWalletDetailsLogoTextColor
+           @see #WalletFragmentStyle_maskedWalletDetailsTextAppearance
+         */
+        public static final int[] WalletFragmentStyle = {
+            0x7f010015, 0x7f010016, 0x7f010017, 0x7f010018,
+            0x7f010019, 0x7f01001a, 0x7f01001b, 0x7f01001c,
+            0x7f01001d, 0x7f01001e, 0x7f01001f
+        };
+        /**
+          <p>
+          @attr description
+           Appearance of the buy button. Must be one of "classic", "grayscale" and "monochrome" 
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>classic</code></td><td>1</td><td></td></tr>
+<tr><td><code>grayscale</code></td><td>2</td><td></td></tr>
+<tr><td><code>monochrome</code></td><td>3</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:buyButtonAppearance
+        */
+        public static final int WalletFragmentStyle_buyButtonAppearance = 3;
+        /**
+          <p>
+          @attr description
+           Height of the buy button. This includes an 8dp padding (4dp on each side) used for
+             pressed and focused states of the button. The value can be a specific height, e.g.
+             "48dp", or special values "match_parent" and "wrap_content". 
+
+
+          <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+<p>May be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>match_parent</code></td><td>-1</td><td></td></tr>
+<tr><td><code>wrap_content</code></td><td>-2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:buyButtonHeight
+        */
+        public static final int WalletFragmentStyle_buyButtonHeight = 0;
+        /**
+          <p>
+          @attr description
+           Text on the buy button. Must be one of "buy_with_google", "buy_now" and "book_now" 
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>buy_with_google</code></td><td>1</td><td></td></tr>
+<tr><td><code>buy_now</code></td><td>2</td><td></td></tr>
+<tr><td><code>book_now</code></td><td>3</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:buyButtonText
+        */
+        public static final int WalletFragmentStyle_buyButtonText = 2;
+        /**
+          <p>
+          @attr description
+           Width of the buy button. This includes an 8dp padding (4dp on each side) used for
+             pressed and focused states of the button. The value can be a specific width, e.g.
+             "300dp", or special values "match_parent" and "wrap_content". 
+
+
+          <p>May be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+<p>May be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>match_parent</code></td><td>-1</td><td></td></tr>
+<tr><td><code>wrap_content</code></td><td>-2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:buyButtonWidth
+        */
+        public static final int WalletFragmentStyle_buyButtonWidth = 1;
+        /**
+          <p>
+          @attr description
+           Masked wallet details background 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:maskedWalletDetailsBackground
+        */
+        public static final int WalletFragmentStyle_maskedWalletDetailsBackground = 6;
+        /**
+          <p>
+          @attr description
+           "Change" button background in masked wallet details view 
+
+
+          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+<p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:maskedWalletDetailsButtonBackground
+        */
+        public static final int WalletFragmentStyle_maskedWalletDetailsButtonBackground = 8;
+        /**
+          <p>
+          @attr description
+           TextAppearance for the "Change" button in masked wallet details view 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:maskedWalletDetailsButtonTextAppearance
+        */
+        public static final int WalletFragmentStyle_maskedWalletDetailsButtonTextAppearance = 7;
+        /**
+          <p>
+          @attr description
+           TextAppearance for headers describing masked wallet details 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:maskedWalletDetailsHeaderTextAppearance
+        */
+        public static final int WalletFragmentStyle_maskedWalletDetailsHeaderTextAppearance = 5;
+        /**
+          <p>
+          @attr description
+           Type of the wallet logo image in masked wallet details view 
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>classic</code></td><td>1</td><td></td></tr>
+<tr><td><code>monochrome</code></td><td>2</td><td></td></tr>
+</table>
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:maskedWalletDetailsLogoImageType
+        */
+        public static final int WalletFragmentStyle_maskedWalletDetailsLogoImageType = 10;
+        /**
+          <p>
+          @attr description
+           Color of the Google Wallet logo text in masked wallet details view 
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:maskedWalletDetailsLogoTextColor
+        */
+        public static final int WalletFragmentStyle_maskedWalletDetailsLogoTextColor = 9;
+        /**
+          <p>
+          @attr description
+           TextAppearance for masked wallet details 
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          <p>This is a private symbol.
+          @attr name com.android.doctor_appointment_online_booking:maskedWalletDetailsTextAppearance
+        */
+        public static final int WalletFragmentStyle_maskedWalletDetailsTextAppearance = 4;
+    };
 }
