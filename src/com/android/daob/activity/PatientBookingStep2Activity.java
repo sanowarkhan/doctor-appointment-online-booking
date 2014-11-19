@@ -48,26 +48,23 @@ public class PatientBookingStep2Activity extends BaseActivity implements
 		btnFinishBooking = (Button) findViewById(R.id.btn_finish_booking);
 		btnFinishBooking.setOnClickListener(this);
 		txtConfirmKey = (EditText) findViewById(R.id.tb_confim_key);
+		init();
 	}
 
-	// private void init(Bundle bun) {
-	// // TODO Auto-generated method stub
-	// PatientBookingModel pbm = (PatientBookingModel)
-	// bun.getSerializable(Constants.DATA_KEY1);
-	// tvName = (TextView) findViewById(R.id.tv_patient_name);
-	// tvOld = (TextView) findViewById(R.id.tv_patient_old);
-	// tvGender = (TextView) findViewById(R.id.tv_patient_gender);
-	// tvPhone = (TextView) findViewById(R.id.tv_patient_phone);
-	// tvAddress = (TextView) findViewById(R.id.tv_patient_address);
-	// tvDoctorName = (TextView) findViewById(R.id.tv_meeting_doctor);
-	// tvMeetingDate = (TextView) findViewById(R.id.tv_meeting_date);
-	// tvLocation = (TextView) findViewById(R.id.tv_meeting_location);
-	//
-	// tvMeetingDate.setText(pbm.getDelPatName());
-	// tvLocation.setText(pbm.getLocation());
-	// tvDoctorName.setText("hehe");
-	//
-	// }
+	private void init() {
+		// TODO Auto-generated method stub
+		tvDoctorName = (TextView) findViewById(R.id.tv_meeting_doctor);
+		tvDoctorName.setText(PatientBookingStep1Activity.doctorname);
+		tvMeetingDate = (TextView) findViewById(R.id.tv_meeting_date);
+		tvMeetingDate.setText(PatientBookingStep1Activity.meetingDate);
+		tvLocation = (TextView) findViewById(R.id.tv_meeting_location);
+		tvLocation.setText(PatientBookingStep1Activity.location);
+
+//		tvMeetingDate.setText(pbm.getDelPatName());
+//		tvLocation.setText(pbm.getLocation());
+		tvDoctorName.setText("Nguyễn Trọng Phát");
+
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

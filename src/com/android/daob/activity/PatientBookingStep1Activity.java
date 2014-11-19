@@ -61,7 +61,16 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 	int doctorId = 0;
 
 	Context context;
-
+	
+	public static String name = "";
+	public static String old = "";
+	public static String sex = "";
+	public static String phone = "";
+	public static String address = "";
+	public static String doctorname = "";
+	public static String meetingDate = "";
+	public static String location = "";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -175,6 +184,17 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 							try {
 								PatientBookingStep1Activity.this
 										.saveBookingToGlobal();
+								if(isDelegated){
+									name = txtDeName.getText().toString();
+									old = txtDeOld.getText().toString();
+									sex = gender? "Nam" : "Nữ";
+									phone = txtDePhone.getText().toString();
+									address = txtAddress.getText().toString();
+								}
+								doctorname = tvDoctorName.getText().toString();
+								meetingDate = tvStartTime.getText().toString() + " - " + tvEndTime.getText().toString() 
+										+ "  " + tvBookDate.getText().toString();
+								location = tvLocation.getText().toString();
 								Intent i = new Intent(context,
 										PatientBookingStep2Activity.class);
 								i.putExtra(Constants.CONFIRM_KEY, response.getInt("confirmKey"));
