@@ -18,7 +18,8 @@
 	<string name="search">Tìm kiếm</string>
 	<string name="view_calendar">Xem lịch</string>
 	<string name="doctor_detail">Thông tin bác sĩ</string>
-	<string name="meeting_next">Các cuộc hẹn của bạn</string>
+	<string name="meeting_all">Tất cả các cuộc hẹn</string>
+	<string name="meeting_next">Tất cả các cuộc hẹn</string>
 	<string name="doctor_free_time">Các giờ rảnh của bác sĩ trong ngày:</string>
 	<string name="meeting_not_approved">Cuộc hẹn chưa xác nhận</string>
 	<string name="meeting_today">Các cuộc hẹn hôm nay</string>
@@ -37,6 +38,7 @@
 	<string name="status_confirmed">Đã xác nhận</string>
 	<string name="status_done">Đã khám</string>
 	<string name="status_canceled">Hủy</string>
+	<string name="status_rejected">Từ chối</string>
 	<string name="all">Tất cả</string>
 	<string name="select_old_day">Không thể chọn ngày cũ.</string>
 	<string name="btn_view_schedule">Xem lịch</string>
@@ -49,6 +51,10 @@
 	<string name="booking_description">Miêu tả bệnh gửi bác sĩ</string>
 	<string name="booking_email">Nhập email để nhận mã xác nhận</string>
 	<string name="confirm_key">Nhập mã xác nhận</string>
+	<string name="confirm_app">Xác nhận</string>
+	<string name="cancled_app">Hủy hẹn</string>
+	<string name="done_app">Đã khám</string>
+	<string name="reject_app">Từ chối</string>
 	<string name="phone">Số điện thoại</string>
 	<string name="patient_phone">Số điện thoại:</string>
 	<string name="address">Địa chỉ:</string>
@@ -58,6 +64,8 @@
 	<string name="male">Nam</string>
 	<string name="female">Nữ</string>
 	<string name="message_cancel_booking">Bạn có muốn hủy cuộc hẹn này?</string>
+	<string name="message_confirm_reject">Xác nhận hoặc từ chối</string>
+	<string name="message_done_cancel">Xác nhận hoặc từ chối</string>
 	<string name="btn_cancel_booking">Hủy</string>
 	<string name="btn_cancel">Thoát</string>
 </resources>

@@ -12,6 +12,18 @@ public class DoctorAppointmentModel {
     String status;
     
     String notes;
+    
+    int id;
+    
+    
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getPatientName() {
 		return patientName;

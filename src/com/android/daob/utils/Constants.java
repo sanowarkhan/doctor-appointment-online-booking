@@ -6,10 +6,10 @@ public interface Constants {
 	// public String URL = "https://doctor-app-booking-online.herokuapp.com/api/";
     
 	// home
-    // public String URL = "http://192.168.1.48:1337/api/";
+     public String URL = "http://192.168.1.48:1337/api/";
     
 	// phone
-    public String URL = "http://192.168.43.103:1337/api/";
+//    public String URL = "http://192.168.43.103:1337/api/";
 	// public String URL = "http://192.168.1.102:1337/api/";
 	// com
     // public String URL = "http://10.88.136.133:1337/api/";
@@ -19,6 +19,8 @@ public interface Constants {
     public String ROLE_PATIENT = "patient";
 
     public String STATUS_NEW = "new";
+    
+    public String STATUS_REJECTED = "rejected";
 
     public String STATUS_CONFIRMED = "confirmed";
 

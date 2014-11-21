@@ -11,6 +11,17 @@ public class UserMeetingModel {
     String hour;
 
     String status;
+    
+    int id;
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 
     public String getDoctorName() {
         return doctorName;
