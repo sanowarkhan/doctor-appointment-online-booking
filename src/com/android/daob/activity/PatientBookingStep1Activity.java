@@ -25,7 +25,6 @@ import android.widget.TextView;
 
 import com.android.daob.application.AppController;
 import com.android.daob.model.DoctorFreeTimeModel;
-import com.android.daob.model.PatientBookingModel;
 import com.android.daob.utils.Constants;
 import com.android.daob.utils.GlobalStorage;
 import com.android.doctor_appointment_online_booking.R;

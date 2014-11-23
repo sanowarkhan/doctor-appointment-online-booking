@@ -7,10 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +28,6 @@ import android.widget.Toast;
 
 import com.android.daob.application.AppController;
 import com.android.daob.model.DoctorAppointmentModel;
-import com.android.daob.model.UserMeetingModel;
 import com.android.daob.utils.Constants;
 import com.android.doctor_appointment_online_booking.R;
 import com.android.volley.Response;
