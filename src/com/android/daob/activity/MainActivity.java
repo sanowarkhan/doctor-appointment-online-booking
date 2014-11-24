@@ -5,8 +5,17 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.json.JSONObject;
+
+import com.android.daob.application.AppController;
 import com.android.daob.utils.Constants;
 import com.android.daob.utils.SessionManager;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -31,6 +40,8 @@ public class MainActivity extends Activity {
     public static String role;
     
     public static String patientId;
+    
+    private String url = Constants.URL + "receiveUserRegId";
     
     public static final String EXTRA_MESSAGE = "message";
     public static final String PROPERTY_REG_ID = "registration_id";
@@ -150,7 +161,7 @@ public class MainActivity extends Activity {
 
                     // You should send the registration ID to your server over HTTP, so it
                     // can use GCM/HTTP or CCS to send messages to your app.
-                    sendRegistrationIdToBackend();
+                    sendRegistrationIdToBackend(regid);
 
                     // For this demo: we don't need to send it because the device will send
                     // upstream messages to a server that echo back the message using the
@@ -174,8 +185,25 @@ public class MainActivity extends Activity {
         }.execute(null, null, null);
     }
 
-    private void sendRegistrationIdToBackend() {
+    private void sendRegistrationIdToBackend(String regid) {
         // Your implementation here.
+		HashMap<String, String> regId = new HashMap<String, String>();
+		regId.put("regId", regid);
+		regId.put("username", MainActivity.username);
+		JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST, url,
+                new JSONObject(regId), new Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                    	VolleyLog.e("sendRegRespone", "sendRegRespone: " + response);
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.e(TAG, "Error: " + error.getMessage());
+                    }
+                }) {
+        };
+        AppController.getInstance().addToRequestQueue(jsonObjectRequest, "sendRegIdtoServer");
     }
     
     private void storeRegistrationId(Context context, String regId) {
