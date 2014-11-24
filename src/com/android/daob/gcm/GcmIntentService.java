@@ -1,7 +1,9 @@
 package com.android.daob.gcm;
 
 import com.android.daob.activity.MainActivity;
+import com.android.doctor_appointment_online_booking.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
+
 
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -51,9 +53,9 @@ public class GcmIntentService extends IntentService {
             // If it's a regular GCM message, do some work.
             } else if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
                 // This loop represents the service doing some work.
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 3; i++) {
                     Log.i(TAG, "Working... " + (i + 1)
-                            + "/5 @ " + SystemClock.elapsedRealtime());
+                            + "/3 @ " + SystemClock.elapsedRealtime());
                     try {
                         Thread.sleep(5000);
                     } catch (InterruptedException e) {
@@ -61,7 +63,7 @@ public class GcmIntentService extends IntentService {
                 }
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
                 // Post notification of received message.
-                sendNotification("Received: " + extras.toString());
+                sendNotification(extras.toString());
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -81,12 +83,15 @@ public class GcmIntentService extends IntentService {
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
-        .setContentTitle("GCM Notification")
+        .setSmallIcon(R.drawable.ic_action_go_to_today)
+        .setContentTitle("DAOB")
         .setStyle(new NotificationCompat.BigTextStyle()
         .bigText(msg))
         .setContentText(msg);
 
         mBuilder.setContentIntent(contentIntent);
+        mBuilder.setAutoCancel(true);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+        
     }
 }
