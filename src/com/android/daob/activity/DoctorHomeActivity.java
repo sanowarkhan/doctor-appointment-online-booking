@@ -351,7 +351,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 								dam.setStatus(jsonArr.getJSONObject(i)
 										.getString("status"));
 								dam.setNotes(jsonArr.getJSONObject(i)
-										.getString("notes"));
+										.getString("preDescription"));
 								dam.setId(jsonArr.getJSONObject(i).getInt("id"));
 								listDoctorAppointmentModels.add(dam);
 							} catch (JSONException e) {

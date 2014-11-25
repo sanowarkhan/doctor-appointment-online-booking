@@ -2,9 +2,11 @@
 package com.android.daob.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import com.android.daob.application.AppController;
 import com.android.daob.model.DoctorAppointmentModel;
@@ -13,9 +15,12 @@ import com.android.doctor_appointment_online_booking.R;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.android.volley.Request.Method;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,16 +30,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class DoctorNextMeetingActivity extends BaseActivity {
-	public static String TAG = DoctorHomeActivity.class.getSimpleName();
+	public static String TAG = DoctorNextMeetingActivity.class.getSimpleName();
     String url = Constants.URL + "doctorAllAppointments/" + MainActivity.username;
     String urlUpdate = Constants.URL +"doctorUpdateAppointments/";
 
-	ListView lvMeeting = (ListView) findViewById(R.id.lv_next_meeting);
+	ListView lvMeeting;
 
 	ArrayAdapter<DoctorAppointmentModel> listDoctorAppointmentAdapter;
 
@@ -49,7 +59,221 @@ public class DoctorNextMeetingActivity extends BaseActivity {
     }
     void init() {
     	lvMeeting = (ListView) findViewById(R.id.lv_next_meeting);
-    	getDashboard();
+    	lvMeeting.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				final DoctorAppointmentModel dam = (DoctorAppointmentModel) parent
+						.getItemAtPosition(position);
+				if(dam.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)){
+					final Dialog dialog = new Dialog(DoctorNextMeetingActivity.this);
+					dialog.setContentView(R.layout.doctor_update_status_dialog);
+					dialog.setTitle(DoctorNextMeetingActivity.this
+							.getResources().getString(R.string.message_confirm_reject));
+					Button dialogConfrim = (Button) dialog.findViewById(R.id.doctor_dialog_confirm);
+					dialogConfrim.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							String urlReq = urlUpdate + dam.getId();
+							HashMap<String, String> updateStatus = new HashMap<String, String>();
+							updateStatus.put("status", "confirmed");
+							JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
+									Method.PUT, urlReq, new JSONObject(updateStatus),
+									new Listener<JSONObject>() {
+
+										@Override
+										public void onResponse(
+												JSONObject response) {
+											try {
+													if(response.getString("message").equals("success")){
+													getDashboard();
+													Toast.makeText(DoctorNextMeetingActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													dialog.dismiss();
+												}
+											} catch (JSONException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+
+									}, new Response.ErrorListener() {
+										@Override
+										public void onErrorResponse(
+												VolleyError arg0) {
+											// TODO Auto-generated
+											// method stub
+											VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+										}
+
+									});
+							AppController.getInstance().addToRequestQueue(jsonObjectReq,
+									"update to confirm");
+						}
+					});
+					
+					Button dialogReject = (Button) dialog.findViewById(R.id.doctor_dialog_reject);
+					dialogReject.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							String urlReq = urlUpdate + dam.getId();
+							HashMap<String, String> updateStatus = new HashMap<String, String>();
+							updateStatus.put("status", "rejected");
+							JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
+									Method.PUT, urlReq, new JSONObject(updateStatus),
+									new Listener<JSONObject>() {
+
+										@Override
+										public void onResponse(
+												JSONObject response) {
+											try {
+													if(response.getString("message").equals("success")){
+													getDashboard();
+													Toast.makeText(DoctorNextMeetingActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													dialog.dismiss();
+												}
+											} catch (JSONException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+
+									}, new Response.ErrorListener() {
+										@Override
+										public void onErrorResponse(
+												VolleyError arg0) {
+											// TODO Auto-generated
+											// method stub
+											VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+										}
+
+									});
+							AppController.getInstance().addToRequestQueue(jsonObjectReq,
+									"update to reject");
+						}
+					});
+					Button dialogClose = (Button) dialog.findViewById(R.id.doctor_dialog_close);
+					dialogClose.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							dialog.dismiss();
+						}
+					});
+					dialog.show();
+					
+				}
+				else if(dam.getStatus().equalsIgnoreCase(Constants.STATUS_CONFIRMED)){
+					final Dialog dialog = new Dialog(DoctorNextMeetingActivity.this);
+					dialog.setContentView(R.layout.doctor_dialog_after_confirm);
+					dialog.setTitle(DoctorNextMeetingActivity.this
+							.getResources().getString(R.string.message_done_cancel));
+					Button dialogCancel = (Button) dialog.findViewById(R.id.doctor_dialog_canceled);
+					dialogCancel.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							String urlReq = urlUpdate + dam.getId();
+							HashMap<String, String> updateStatus = new HashMap<String, String>();
+							updateStatus.put("status", "canceled");
+							JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
+									Method.PUT, urlReq, new JSONObject(updateStatus),
+									new Listener<JSONObject>() {
+
+										@Override
+										public void onResponse(
+												JSONObject response) {
+											try {
+													if(response.getString("message").equals("success")){
+													getDashboard();
+													Toast.makeText(DoctorNextMeetingActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													dialog.dismiss();
+												}
+											} catch (JSONException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+
+									}, new Response.ErrorListener() {
+										@Override
+										public void onErrorResponse(
+												VolleyError arg0) {
+											// TODO Auto-generated
+											// method stub
+											VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+										}
+
+									});
+							AppController.getInstance().addToRequestQueue(jsonObjectReq,
+									"update to confirm");
+						}
+					});
+					
+					Button dialogDone = (Button) dialog.findViewById(R.id.doctor_dialog_done);
+					dialogDone.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							String urlReq = urlUpdate + dam.getId();
+							HashMap<String, String> updateStatus = new HashMap<String, String>();
+							updateStatus.put("status", "done");
+							JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
+									Method.PUT, urlReq, new JSONObject(updateStatus),
+									new Listener<JSONObject>() {
+
+										@Override
+										public void onResponse(
+												JSONObject response) {
+											try {
+													if(response.getString("message").equals("success")){
+													getDashboard();
+													Toast.makeText(DoctorNextMeetingActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													dialog.dismiss();
+												}
+											} catch (JSONException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+										}
+
+									}, new Response.ErrorListener() {
+										@Override
+										public void onErrorResponse(
+												VolleyError arg0) {
+											// TODO Auto-generated
+											// method stub
+											VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+										}
+
+									});
+							AppController.getInstance().addToRequestQueue(jsonObjectReq,
+									"update to reject");
+						}
+					});
+					Button dialogClose = (Button) dialog.findViewById(R.id.doctor_dialog_miss);
+					dialogClose.setOnClickListener(new OnClickListener() {
+						
+						@Override
+						public void onClick(View v) {
+							// TODO Auto-generated method stub
+							dialog.dismiss();
+						}
+					});
+					dialog.show();
+				}
+			}
+			
+		});
+		
+		getDashboard();
     }
 
     @Override
@@ -65,7 +289,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.top_right_button:
                 finish();
-                Intent intentHome = new Intent(this, DoctorHomeActivity.class);
+                Intent intentHome = new Intent(this, DoctorNextMeetingActivity.class);
                 startActivity(intentHome);
                 return true;
             default:
@@ -74,7 +298,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
     }
     
     void getDashboard() {
-		String tag_json_getDashboard = "json_getDashboard_req";
+		String tag_json_getAllApp_req = "json_getAllApp_req";
 		String content = DoctorNextMeetingActivity.this.getResources().getString(
 				R.string.loading);
 		showProgressDialog(content, false);
@@ -99,7 +323,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 								dam.setStatus(jsonArr.getJSONObject(i)
 										.getString("status"));
 								dam.setNotes(jsonArr.getJSONObject(i)
-										.getString("notes"));
+										.getString("preDescription"));
 								dam.setId(jsonArr.getJSONObject(i).getInt("id"));
 								listDoctorAppointmentModels.add(dam);
 							} catch (JSONException e) {
@@ -127,7 +351,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 					}
 				});
 		AppController.getInstance().addToRequestQueue(jsonArrayRequest,
-				tag_json_getDashboard);
+				tag_json_getAllApp_req);
 	}
     
     class DoctorAppViewAdapter extends ArrayAdapter<DoctorAppointmentModel> {

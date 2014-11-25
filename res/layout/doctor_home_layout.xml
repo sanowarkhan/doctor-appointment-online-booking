@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:background="@drawable/button_selector"
-            android:text="@string/meeting_not_approved" />
+            android:text="@string/meeting_not_approved" 
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/tv_indicator"
@@ -26,7 +27,8 @@
             android:layout_alignBaseline="@+id/btn_not_approved"
             android:layout_alignParentRight="true"
             android:background="@color/Red_FireBrick"
-            android:text="1" />
+            android:text="1"
+            android:visibility="gone"  />
     </RelativeLayout>
 
     <Button
