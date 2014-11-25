@@ -55,7 +55,10 @@ public class GcmIntentService extends IntentService {
 //                    }
 //                }
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
-                sendNotification(extras.getString("message"));
+                if(extras.getString("username").equals(MainActivity.username)){
+                	sendNotification(extras.getString("message"));
+                }
+                
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
