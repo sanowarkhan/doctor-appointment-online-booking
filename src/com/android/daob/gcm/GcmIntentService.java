@@ -1,6 +1,7 @@
 package com.android.daob.gcm;
 
 import com.android.daob.activity.MainActivity;
+import com.android.daob.activity.PatientAppointmentDetailActivity;
 import com.android.doctor_appointment_online_booking.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
@@ -8,6 +9,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -75,12 +77,22 @@ public class GcmIntentService extends IntentService {
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, MainActivity.class), 0);
+        
+        Intent resultIntent = new Intent(this, PatientAppointmentDetailActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(PatientAppointmentDetailActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        // Gets a PendingIntent containing the entire back stack
+        PendingIntent resultPendingIntent =
+                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
         .setSmallIcon(R.drawable.ic_action_go_to_today)
         .setContentTitle("DAOB")
         .setStyle(new NotificationCompat.BigTextStyle()
         .bigText(msg))
+        .setVibrate(new long[] { 1000, 1000, 1000})
         .setContentText(msg);
 
         mBuilder.setContentIntent(contentIntent);

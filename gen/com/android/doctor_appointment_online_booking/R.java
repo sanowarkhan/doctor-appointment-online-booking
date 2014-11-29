@@ -761,16 +761,17 @@ containing a value of this type.
         public static final int doctor_update_status_dialog=0x7f030006;
         public static final int login_layout=0x7f030007;
         public static final int notification_layout=0x7f030008;
-        public static final int patient_booking_step1_layout=0x7f030009;
-        public static final int patient_booking_step2_layout=0x7f03000a;
-        public static final int patient_calendar_layout=0x7f03000b;
-        public static final int patient_home_layout=0x7f03000c;
-        public static final int patient_meeting_item_layout=0x7f03000d;
-        public static final int patient_search_doctor_items_result_layout=0x7f03000e;
-        public static final int patient_search_layout=0x7f03000f;
-        public static final int patient_view_doctor_details_layout=0x7f030010;
-        public static final int patient_view_doctor_free_time_item_layout=0x7f030011;
-        public static final int patient_view_doctor_free_time_layout=0x7f030012;
+        public static final int patient_appointment_detail_layout=0x7f030009;
+        public static final int patient_booking_step1_layout=0x7f03000a;
+        public static final int patient_booking_step2_layout=0x7f03000b;
+        public static final int patient_calendar_layout=0x7f03000c;
+        public static final int patient_home_layout=0x7f03000d;
+        public static final int patient_meeting_item_layout=0x7f03000e;
+        public static final int patient_search_doctor_items_result_layout=0x7f03000f;
+        public static final int patient_search_layout=0x7f030010;
+        public static final int patient_view_doctor_details_layout=0x7f030011;
+        public static final int patient_view_doctor_free_time_item_layout=0x7f030012;
+        public static final int patient_view_doctor_free_time_layout=0x7f030013;
     }
     public static final class menu {
         public static final int top_right_menu=0x7f0a0000;
