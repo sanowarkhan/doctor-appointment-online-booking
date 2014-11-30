@@ -1,11 +1,14 @@
 package com.android.daob.gcm;
 
+import java.lang.reflect.Array;
+
 import com.android.daob.activity.MainActivity;
 import com.android.daob.activity.PatientAppointmentDetailActivity;
 import com.android.doctor_appointment_online_booking.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 
+import android.R.array;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -28,7 +31,7 @@ public class GcmIntentService extends IntentService {
     public static int NOTIFICATION_ID = 1;
     private NotificationManager mNotificationManager;
     NotificationCompat.Builder builder;
-
+    public int appointmentId;
     public GcmIntentService() {
         super("GcmIntentService");
     }
@@ -58,9 +61,10 @@ public class GcmIntentService extends IntentService {
 //                }
                 Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
                 if(extras.getString("username").equals(MainActivity.username)){
+                	appointmentId = Integer.parseInt(extras.getString("id"));
                 	sendNotification(extras.getString("message"));
                 }
-                
+                Log.i(TAG, "id: " + appointmentId);
                 Log.i(TAG, "Received: " + extras.toString());
             }
         }
@@ -75,16 +79,20 @@ public class GcmIntentService extends IntentService {
         mNotificationManager = (NotificationManager)
                 this.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, MainActivity.class), 0);
+//        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+//                new Intent(this, MainActivity.class), 0);
         
-        Intent resultIntent = new Intent(this, PatientAppointmentDetailActivity.class);
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        stackBuilder.addParentStack(PatientAppointmentDetailActivity.class);
-        stackBuilder.addNextIntent(resultIntent);
-        // Gets a PendingIntent containing the entire back stack
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+//        Intent resultIntent = new Intent(this, PatientAppointmentDetailActivity.class);
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+//        stackBuilder.addParentStack(PatientAppointmentDetailActivity.class);
+//        stackBuilder.addNextIntent(resultIntent);
+//        // Gets a PendingIntent containing the entire back stack
+//        PendingIntent resultPendingIntent =
+//                stackBuilder.getPendingIntent(NOTIFICATION_ID, PendingIntent.FLAG_UPDATE_CURRENT);
+        
+        Bundle bun = new Bundle();
+        bun.putInt("appointmentId", appointmentId);
+        Log.i(TAG, "id: " + appointmentId);
         
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
@@ -95,9 +103,15 @@ public class GcmIntentService extends IntentService {
         .setVibrate(new long[] { 1000, 1000, 1000})
         .setContentText(msg);
 
-        mBuilder.setContentIntent(contentIntent);
+        mBuilder.setContentIntent(getPendingIntent(bun, NOTIFICATION_ID));
         mBuilder.setAutoCancel(true);
         mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
         NOTIFICATION_ID++;
+    }
+    
+    private PendingIntent getPendingIntent(Bundle bundle, int rc) { 
+    	Intent notificationIntent = new Intent(this, PatientAppointmentDetailActivity.class);
+    	notificationIntent.putExtras(bundle);
+    	return PendingIntent.getActivity(this, rc, notificationIntent, 0);
     }
 }

@@ -1,5 +1,4 @@
 <resources>
-
     <string name="app_name">DAOB</string>
     <string name="hint_uname">Tên đăng nhập</string>
     <string name="hint_pwd">Mật khẩu</string>

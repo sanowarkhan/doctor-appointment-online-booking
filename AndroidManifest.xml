@@ -129,8 +129,18 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
+        
         <activity
             android:name="com.android.daob.activity.PatientBookingStep2Activity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/booking"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        
+        <activity
+            android:name="com.android.daob.activity.PatientAppointmentDetailActivity"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/booking"
             android:launchMode="singleTop"
