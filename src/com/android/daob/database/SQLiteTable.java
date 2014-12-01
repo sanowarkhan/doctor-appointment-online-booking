@@ -1,7 +1,6 @@
 
 package com.android.daob.database;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 

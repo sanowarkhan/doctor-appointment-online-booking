@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -59,10 +60,10 @@ public class PatientHomeActivity extends BaseActivity {
 		setContentView(R.layout.patient_home_layout);
 		lvMeeting = (ListView) findViewById(R.id.lvMeeting);
 		tvNoResult = (TextView) findViewById(R.id.tv_no_result_patient_meeting);
-		lvMeeting.setOnItemClickListener(new OnItemClickListener() {
+		lvMeeting.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				final UserMeetingModel um = (UserMeetingModel) parent
 						.getItemAtPosition(position);
@@ -133,6 +134,90 @@ public class PatientHomeActivity extends BaseActivity {
 							});
 					alertDialog.show();
 				}
+				return true;
+			}
+			
+		});
+		lvMeeting.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				final UserMeetingModel um = (UserMeetingModel) parent
+						.getItemAtPosition(position);
+				Intent i = new Intent(PatientHomeActivity.this, PatientAppointmentDetailActivity.class);
+				Bundle bun = new Bundle();
+		        bun.putInt("appointmentId", um.getId());
+				i.putExtras(bun);
+				startActivity(i);
+			
+//				if (um.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
+//					final AlertDialog alertDialog = new AlertDialog.Builder(
+//							PatientHomeActivity.this).create();
+//
+//					alertDialog.setMessage(PatientHomeActivity.this
+//							.getResources().getString(
+//									R.string.message_cancel_booking));
+//					alertDialog.setButton(PatientHomeActivity.this
+//							.getResources().getString(R.string.btn_cancel),
+//							new OnClickListener() {
+//
+//								@Override
+//								public void onClick(DialogInterface dialog,
+//										int which) {
+//									// huy cuoc hen
+//									alertDialog.dismiss();
+//								}
+//							});
+//
+//					alertDialog.setButton2(
+//							PatientHomeActivity.this.getResources().getString(
+//									R.string.btn_cancel_booking),
+//							new OnClickListener() {
+//
+//								@Override
+//								public void onClick(DialogInterface dialog,
+//										int which) {
+//									String urlUpdate = cancelApp + um.getId();
+//									JsonObjectRequest jsonObbjectReq = new JsonObjectRequest(
+//											Method.PUT, urlUpdate, null,
+//											new Listener<JSONObject>() {
+//
+//												@Override
+//												public void onResponse(
+//														JSONObject response) {
+//													// TODO Auto-generated
+//													// method stub
+//													try {
+//														if(response.getString("message").equals("upcoming")){
+//															Toast.makeText(PatientHomeActivity.this, "Cuộc hẹn sắp bắt đầu, không được hủy", Toast.LENGTH_SHORT).show();
+//														} else if(response.getString("message").equals("success")){
+//															getDashboard();
+//															Toast.makeText(PatientHomeActivity.this, "Hủy hẹn thành công", Toast.LENGTH_SHORT).show();
+//														}
+//													} catch (JSONException e) {
+//														// TODO Auto-generated catch block
+//														e.printStackTrace();
+//													}
+//												}
+//
+//											}, new Response.ErrorListener() {
+//												@Override
+//												public void onErrorResponse(
+//														VolleyError arg0) {
+//													// TODO Auto-generated
+//													// method stub
+//													VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+//												}
+//
+//											});
+//									AppController.getInstance().addToRequestQueue(jsonObbjectReq,
+//											"update to canceled");
+//								}
+//								
+//							});
+//					alertDialog.show();
+//				}
 			}
 		});
 	}

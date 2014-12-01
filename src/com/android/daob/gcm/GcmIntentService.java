@@ -1,14 +1,11 @@
 package com.android.daob.gcm;
 
-import java.lang.reflect.Array;
-
 import com.android.daob.activity.MainActivity;
 import com.android.daob.activity.PatientAppointmentDetailActivity;
 import com.android.doctor_appointment_online_booking.R;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 
-import android.R.array;
 import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
