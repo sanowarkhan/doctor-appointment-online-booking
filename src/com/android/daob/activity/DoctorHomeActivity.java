@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -71,10 +72,10 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 		btnMeetingNotApproved.setOnClickListener(this);
 		btnNextMeeting = (Button) findViewById(R.id.btn_next_meeting);
 		btnNextMeeting.setOnClickListener(this);
-		lvMeeting.setOnItemClickListener(new OnItemClickListener() {
+		lvMeeting.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				final DoctorAppointmentModel dam = (DoctorAppointmentModel) parent
 						.getItemAtPosition(position);
@@ -281,6 +282,22 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 					});
 					dialog.show();
 				}
+				return true;
+			}
+			
+		});
+		lvMeeting.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				final DoctorAppointmentModel dam = (DoctorAppointmentModel) parent
+						.getItemAtPosition(position);
+				Intent i = new Intent(DoctorHomeActivity.this, DoctorAppointmentDetailActivity.class);
+				Bundle bun = new Bundle();
+		        bun.putInt("appointmentId", dam.getId());
+				i.putExtras(bun);
+				startActivity(i);
 			}
 			
 		});

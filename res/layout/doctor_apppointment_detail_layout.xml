@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@drawable/background">
     
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +17,16 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="86dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/patient" />
+                android:text="@string/patient"
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/tv_doctor_app_patient"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="8pt" />
         </LinearLayout>
 
         <LinearLayout
@@ -33,14 +36,16 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="86dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/date" />
+                android:text="@string/date" 
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/tv_doctor_app_date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" 
+                android:textSize="8pt" />
         </LinearLayout>
 
         <LinearLayout
@@ -50,14 +55,16 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="86dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/hour" />
+                android:text="@string/hour"
+                android:textSize="8pt"  />
 
             <TextView
                 android:id="@+id/tv_doctor_app_start_time"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" 
+                android:textSize="8pt" />
         </LinearLayout>
 
         <LinearLayout
@@ -67,14 +74,16 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/place" />
+                android:text="@string/place"
+                android:textSize="8pt"  />
 
             <TextView
                 android:id="@+id/tv_doctor_app_location"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="8pt"  />
         </LinearLayout>
 
         <LinearLayout
@@ -84,14 +93,16 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/status" />
+                android:text="@string/status" 
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/tv_doctor_app_status"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" 
+                android:textSize="8pt" />
         </LinearLayout>
 
         <LinearLayout
@@ -101,14 +112,16 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="70dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/notes" />
+                android:text="@string/notes" 
+                android:textSize="8pt" />
 
             <TextView
                 android:id="@+id/tv_doctor_app_note"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content" 
+                android:textSize="8pt" />
         </LinearLayout>
 
         <Button

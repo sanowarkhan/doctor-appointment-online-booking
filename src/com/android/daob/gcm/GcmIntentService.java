@@ -1,5 +1,6 @@
 package com.android.daob.gcm;
 
+import com.android.daob.activity.DoctorAppointmentDetailActivity;
 import com.android.daob.activity.MainActivity;
 import com.android.daob.activity.PatientAppointmentDetailActivity;
 import com.android.doctor_appointment_online_booking.R;
@@ -27,7 +28,8 @@ public class GcmIntentService extends IntentService {
 	public static int NOTIFICATION_ID = 1;
 	private NotificationManager mNotificationManager;
 	NotificationCompat.Builder builder;
-	public int appointmentId;
+	private int appointmentId;
+	private String role;
 
 	public GcmIntentService() {
 		super("GcmIntentService");
@@ -64,6 +66,7 @@ public class GcmIntentService extends IntentService {
 				Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
 				if (extras.getString("username").equals(MainActivity.username)) {
 					appointmentId = Integer.parseInt(extras.getString("id"));
+					role = extras.getString("role");
 					sendNotification(extras.getString("message"));
 				}
 				Log.i(TAG, "id: " + appointmentId);
@@ -105,15 +108,22 @@ public class GcmIntentService extends IntentService {
 				.setVibrate(new long[] { 1000, 1000, 1000 })
 				.setContentText(msg);
 
-		mBuilder.setContentIntent(getPendingIntent(bun, NOTIFICATION_ID));
+		mBuilder.setContentIntent(getPendingIntent(bun, NOTIFICATION_ID, role));
 		mBuilder.setAutoCancel(true);
 		mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
 		NOTIFICATION_ID++;
 	}
 
-	private PendingIntent getPendingIntent(Bundle bundle, int rc) {
-		Intent notificationIntent = new Intent(this,
-				PatientAppointmentDetailActivity.class);
+	private PendingIntent getPendingIntent(Bundle bundle, int rc, String role) {
+		Intent notificationIntent = new Intent();
+		if (role.equals("patient")) {
+			notificationIntent = new Intent(this,
+					PatientAppointmentDetailActivity.class);
+		} else {
+			notificationIntent = new Intent(this,
+					DoctorAppointmentDetailActivity.class);
+		}
+
 		notificationIntent.putExtras(bundle);
 		return PendingIntent
 				.getActivity(this, rc, notificationIntent,
