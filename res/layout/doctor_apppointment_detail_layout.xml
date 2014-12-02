@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,10 +18,10 @@
             <TextView
                 android:layout_width="86dp"
                 android:layout_height="wrap_content"
-                android:text="@string/doctor" />
+                android:text="@string/patient" />
 
             <TextView
-                android:id="@+id/tv_patient_app_doctor"
+                android:id="@+id/tv_doctor_app_patient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -38,7 +38,7 @@
                 android:text="@string/date" />
 
             <TextView
-                android:id="@+id/tv_patient_app_date"
+                android:id="@+id/tv_doctor_app_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -55,7 +55,7 @@
                 android:text="@string/hour" />
 
             <TextView
-                android:id="@+id/tv_patient_app_start_time"
+                android:id="@+id/tv_doctor_app_start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -67,12 +67,12 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="86dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/place" />
 
             <TextView
-                android:id="@+id/tv_patient_app_location"
+                android:id="@+id/tv_doctor_app_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -84,12 +84,12 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="86dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/status" />
 
             <TextView
-                android:id="@+id/tv_patient_app_status"
+                android:id="@+id/tv_doctor_app_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
@@ -101,23 +101,44 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="86dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="@string/notes" />
 
             <TextView
-                android:id="@+id/tv_patient_app_note"
+                android:id="@+id/tv_doctor_app_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_finish_booking"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_confirm_app"
+            android:layout_width="151dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/standar_margin"
             android:background="@drawable/button_selector"
-            android:text="@string/finish_booking" />
+            android:text="@string/confirm_app" />
+        
+        <Button
+            android:id="@+id/btn_reject_app"
+            android:layout_width="151dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/standar_margin"
+            android:background="@drawable/button_selector"
+            android:text="@string/reject_app" />
+        
+        <Button
+            android:id="@+id/btn_cancel_app"
+            android:layout_width="151dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/standar_margin"
+            android:background="@drawable/button_selector"
+            android:text="@string/cancled_app" />
+
     </LinearLayout>
+    
 
 </LinearLayout>

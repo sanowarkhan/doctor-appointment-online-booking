@@ -3,16 +3,16 @@ package com.android.daob.utils;
 
 public interface Constants {
     // heroku
-	// public String URL = "https://doctor-app-booking-online.herokuapp.com/api/";
+//	 public String URL = "https://doctor-app-booking-online.herokuapp.com/api/";
     
 	// home
-     public String URL = "http://192.168.1.48:1337/api/";
+//     public String URL = "http://192.168.1.48:1337/api/";
     
 	// phone
 //     public String URL = "http://192.168.43.103:1337/api/";
 	// public String URL = "http://192.168.1.102:1337/api/";
 	// com
-//     public String URL = "http://10.88.136.103:1337/api/";
+     public String URL = "http://10.88.136.104:1337/api/";
 
     public String ROLE_DOCTOR = "doctor";
 
