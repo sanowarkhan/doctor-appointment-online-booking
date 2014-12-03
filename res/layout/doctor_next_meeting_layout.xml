@@ -19,7 +19,9 @@
     <ListView
         android:id="@+id/lv_next_meeting"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:divider="@color/black"
+        android:dividerHeight="2dp" >
     </ListView>
 
 </LinearLayout>

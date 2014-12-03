@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 
 //	public static String patientId;
 
-	private String url = Constants.URL;
+	private String url = Constants.URL + "receiveUserRegId";
 
 	public static final String EXTRA_MESSAGE = "message";
 	public static final String PROPERTY_REG_ID = "registration_id";

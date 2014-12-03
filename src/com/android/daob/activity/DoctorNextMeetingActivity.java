@@ -32,6 +32,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -59,10 +60,10 @@ public class DoctorNextMeetingActivity extends BaseActivity {
     }
     void init() {
     	lvMeeting = (ListView) findViewById(R.id.lv_next_meeting);
-    	lvMeeting.setOnItemClickListener(new OnItemClickListener() {
+    	lvMeeting.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				final DoctorAppointmentModel dam = (DoctorAppointmentModel) parent
 						.getItemAtPosition(position);
@@ -269,6 +270,23 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 					});
 					dialog.show();
 				}
+				return true;
+			}
+    		
+    	});
+    	
+    	lvMeeting.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				final DoctorAppointmentModel dam = (DoctorAppointmentModel) parent
+						.getItemAtPosition(position);
+				Intent i = new Intent(DoctorNextMeetingActivity.this, DoctorAppointmentDetailActivity.class);
+				Bundle bun = new Bundle();
+		        bun.putInt("appointmentId", dam.getId());
+				i.putExtras(bun);
+				startActivity(i);
 			}
 			
 		});
@@ -322,8 +340,8 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 										.getString("startTime"));
 								dam.setStatus(jsonArr.getJSONObject(i)
 										.getString("status"));
-								dam.setNotes(jsonArr.getJSONObject(i)
-										.getString("preDescription"));
+//								dam.setNotes(jsonArr.getJSONObject(i)
+//										.getString("preDescription"));
 								dam.setId(jsonArr.getJSONObject(i).getInt("id"));
 								listDoctorAppointmentModels.add(dam);
 							} catch (JSONException e) {

@@ -27,6 +27,7 @@
 	<string name="start_time">Giờ rảnh:</string>
 	<string name="start_space"> -  </string>
 	<string name="white_space">       </string>
+	<string name="update_success">Cập nhật thành công</string>
 	<string name="place">Nơi khám:</string>
 	<string name="date">Ngày khám:</string>
 	<string name="hour">Giờ khám:</string>
@@ -43,6 +44,7 @@
 	<string name="btn_view_schedule">Xem lịch</string>
 	<string name="no_result">Không có dữ liệu.</string>
 	<string name="booking">Đặt lịch</string>
+	<string name="appointment_info">Thông tin cuộc hẹn</string>
 	<string name="finish_booking">Hoàn tất đặt lịch</string>
 	<string name="confirm_app">Xác nhận</string>
 	<string name="reject_app">Từ chối</string>

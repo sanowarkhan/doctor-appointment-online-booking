@@ -106,10 +106,10 @@ public class PatientHomeActivity extends BaseActivity {
 													// method stub
 													try {
 														if(response.getString("message").equals("upcoming")){
-															Toast.makeText(PatientHomeActivity.this, "Cuộc hẹn sắp bắt đầu, không được hủy", Toast.LENGTH_SHORT).show();
+															Toast.makeText(PatientHomeActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
 														} else if(response.getString("message").equals("success")){
 															getDashboard();
-															Toast.makeText(PatientHomeActivity.this, "Hủy hẹn thành công", Toast.LENGTH_SHORT).show();
+															Toast.makeText(PatientHomeActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
 														}
 													} catch (JSONException e) {
 														// TODO Auto-generated catch block

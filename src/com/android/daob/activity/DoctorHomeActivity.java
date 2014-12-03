@@ -103,7 +103,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 											try {
 													if(response.getString("message").equals("success")){
 													getDashboard();
-													Toast.makeText(DoctorHomeActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													Toast.makeText(DoctorHomeActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
 													dialog.dismiss();
 												}
 											} catch (JSONException e) {
@@ -146,7 +146,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 											try {
 													if(response.getString("message").equals("success")){
 													getDashboard();
-													Toast.makeText(DoctorHomeActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													Toast.makeText(DoctorHomeActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
 													dialog.dismiss();
 												}
 											} catch (JSONException e) {
@@ -205,7 +205,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 											try {
 													if(response.getString("message").equals("success")){
 													getDashboard();
-													Toast.makeText(DoctorHomeActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													Toast.makeText(DoctorHomeActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
 													dialog.dismiss();
 												}
 											} catch (JSONException e) {
@@ -248,7 +248,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 											try {
 													if(response.getString("message").equals("success")){
 													getDashboard();
-													Toast.makeText(DoctorHomeActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													Toast.makeText(DoctorHomeActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
 													dialog.dismiss();
 												}
 											} catch (JSONException e) {

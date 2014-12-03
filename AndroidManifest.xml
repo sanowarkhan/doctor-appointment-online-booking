@@ -142,7 +142,7 @@
         <activity
             android:name="com.android.daob.activity.PatientAppointmentDetailActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:label="@string/booking"
+            android:label="@string/appointment_info"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" >
@@ -151,7 +151,7 @@
         <activity
             android:name="com.android.daob.activity.DoctorAppointmentDetailActivity"
             android:configChanges="keyboardHidden|orientation"
-            android:label="@string/booking"
+            android:label="@string/appointment_info"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize" >

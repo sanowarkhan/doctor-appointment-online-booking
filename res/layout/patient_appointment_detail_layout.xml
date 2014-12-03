@@ -113,12 +113,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btn_finish_booking"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_patient_detail_cancel_app"
+            android:layout_width="151dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/standar_margin"
             android:background="@drawable/button_selector"
-            android:text="@string/finish_booking" />
+            android:text="@string/cancled_app"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>
