@@ -6,11 +6,18 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +41,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 	String urlUpdate = Constants.URL + "doctorUpdateAppointments/";
 
 	TextView tvPatientName, tvDate, tvTime, tvLocation, tvStatus, tvNote;
-	Button btnConfirm, btnReject, btnCancel, btnDone;
+	Button btnConfirm, btnReject, btnCancel, btnMissed;
 
 	int appId = 0;
 
@@ -51,164 +58,106 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 		btnConfirm.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String urlReq = urlUpdate + appId;
-				HashMap<String, String> updateStatus = new HashMap<String, String>();
-				updateStatus.put("status", "confirmed");
-				JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
-						Method.PUT, urlReq, new JSONObject(updateStatus),
-						new Listener<JSONObject>() {
-
-							@Override
-							public void onResponse(JSONObject response) {
-								try {
-									if (response.getString("message").equals(
-											"success")) {
-										getAppoimentInfo();
-										Toast.makeText(
-												DoctorAppointmentDetailActivity.this,
-												"Cập nhật thành công",
-												Toast.LENGTH_SHORT).show();
-									}
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(VolleyError arg0) {
-								// TODO Auto-generated
-								// method stub
-								VolleyLog.e(TAG, "Error: " + arg0.getMessage());
-							}
-
-						});
-				AppController.getInstance().addToRequestQueue(jsonObjectReq,
-						"update to confirm");
+				requestServer("confirmed", tvStatus);
+				btnConfirm.setVisibility(View.GONE);
+				btnReject.setVisibility(View.GONE);
+				btnCancel.setVisibility(View.VISIBLE);
 			}
 		});
 		btnReject = (Button) findViewById(R.id.btn_reject_app);
 		btnReject.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String urlReq = urlUpdate + appId;
-				HashMap<String, String> updateStatus = new HashMap<String, String>();
-				updateStatus.put("status", "rejected");
-				JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
-						Method.PUT, urlReq, new JSONObject(updateStatus),
-						new Listener<JSONObject>() {
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						DoctorAppointmentDetailActivity.this);
+				builder.setTitle(getApplicationContext().getResources()
+						.getString(R.string.reason_rejected));
 
+				final EditText input = new EditText(
+						DoctorAppointmentDetailActivity.this);
+				input.setInputType(InputType.TYPE_CLASS_TEXT);
+				builder.setView(input);
+
+				builder.setPositiveButton("Thoát",
+						new DialogInterface.OnClickListener() {
 							@Override
-							public void onResponse(
-									JSONObject response) {
-								try {
-										if(response.getString("message").equals("success")){
-											tvStatus.setText(getApplicationContext()
-													.getResources().getString(
-															R.string.status_rejected));
-										Toast.makeText(DoctorAppointmentDetailActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
-									}
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.cancel();
 							}
-
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(
-									VolleyError arg0) {
-								// TODO Auto-generated
-								// method stub
-								VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
-							}
-
 						});
-				AppController.getInstance().addToRequestQueue(jsonObjectReq,
-						"update to reject");
+				builder.setNegativeButton("Từ chối",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+								imm.hideSoftInputFromWindow(
+										input.getWindowToken(), 0);
+								requestServer("rejected", tvStatus);
+								Toast.makeText(
+										DoctorAppointmentDetailActivity.this,
+										input.getText().toString(),
+										Toast.LENGTH_SHORT).show();
+							}
+						});
+
+				builder.show();
+				btnConfirm.setVisibility(View.GONE);
+				btnReject.setVisibility(View.GONE);
+				tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+						.getResources().getColor(R.color.Brown_BurlyWood));
 			}
 		});
 		btnCancel = (Button) findViewById(R.id.btn_cancel_app);
 		btnCancel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String urlReq = urlUpdate + appId;
-				HashMap<String, String> updateStatus = new HashMap<String, String>();
-				updateStatus.put("status", "canceled");
-				JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
-						Method.PUT, urlReq, new JSONObject(updateStatus),
-						new Listener<JSONObject>() {
 
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						DoctorAppointmentDetailActivity.this);
+				builder.setTitle(getApplicationContext().getResources()
+						.getString(R.string.reason_canceled));
+
+				final EditText input = new EditText(
+						DoctorAppointmentDetailActivity.this);
+				input.setInputType(InputType.TYPE_CLASS_TEXT);
+				builder.setView(input);
+
+				builder.setPositiveButton("Thoát",
+						new DialogInterface.OnClickListener() {
 							@Override
-							public void onResponse(
-									JSONObject response) {
-								try {
-										if(response.getString("message").equals("success")){
-											tvStatus.setText(getApplicationContext()
-													.getResources().getString(
-															R.string.status_canceled));
-										Toast.makeText(DoctorAppointmentDetailActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
-									}
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.cancel();
 							}
-
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(
-									VolleyError arg0) {
-								// TODO Auto-generated
-								// method stub
-								VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
-							}
-
 						});
-				AppController.getInstance().addToRequestQueue(jsonObjectReq,
-						"update to confirm");
+				builder.setNegativeButton("Hủy hẹn",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+								imm.hideSoftInputFromWindow(
+										input.getWindowToken(), 0);
+								requestServer("canceled", tvStatus);
+								Toast.makeText(
+										DoctorAppointmentDetailActivity.this,
+										input.getText().toString(),
+										Toast.LENGTH_SHORT).show();
+							}
+						});
+
+				builder.show();
+				btnCancel.setVisibility(View.GONE);
 			}
 		});
-		btnDone = (Button) findViewById(R.id.btn_done_app);
-		btnDone.setOnClickListener(new OnClickListener() {
+		btnMissed = (Button) findViewById(R.id.btn_miss_app);
+		btnMissed.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String urlReq = urlUpdate + appId;
-				HashMap<String, String> updateStatus = new HashMap<String, String>();
-				updateStatus.put("status", "done");
-				JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
-						Method.PUT, urlReq, new JSONObject(updateStatus),
-						new Listener<JSONObject>() {
-
-							@Override
-							public void onResponse(
-									JSONObject response) {
-								try {
-										if(response.getString("message").equals("success")){
-											tvStatus.setText(getApplicationContext()
-													.getResources().getString(
-															R.string.status_done));
-										Toast.makeText(DoctorAppointmentDetailActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
-									}
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							}
-
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(
-									VolleyError arg0) {
-								// TODO Auto-generated
-								// method stub
-								VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
-							}
-
-						});
-				AppController.getInstance().addToRequestQueue(jsonObjectReq,
-						"update to confirm");
+				requestServer("missed", tvStatus);
+				btnMissed.setVisibility(View.GONE);
 			}
 		});
 		init(getIntent().getExtras());
@@ -217,6 +166,60 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 
 	void init(Bundle bun) {
 		appId = bun.getInt("appointmentId");
+	}
+
+	void requestServer(final String status, TextView tv) {
+		String urlReq = urlUpdate + appId;
+		HashMap<String, String> updateStatus = new HashMap<String, String>();
+		updateStatus.put("status", status);
+		JsonObjectRequest jsonObjectReq = new JsonObjectRequest(Method.PUT,
+				urlReq, new JSONObject(updateStatus),
+				new Listener<JSONObject>() {
+
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							if (response.getString("message").equals("success")) {
+								if (status.equalsIgnoreCase("missed")) {
+									tvStatus.setText(getApplicationContext()
+											.getResources().getString(
+													R.string.status_missed));
+								} else if (status.equals("confirmed")) {
+									tvStatus.setText(getApplicationContext()
+											.getResources().getString(
+													R.string.status_confirmed));
+								} else if (status.equals("canceled")) {
+									tvStatus.setText(getApplicationContext()
+											.getResources().getString(
+													R.string.status_canceled));
+								} else if (status.equals("rejected")) {
+									tvStatus.setText(getApplicationContext()
+											.getResources().getString(
+													R.string.status_rejected));
+								}
+								Toast.makeText(
+										DoctorAppointmentDetailActivity.this,
+										getResources().getString(
+												R.string.update_success),
+										Toast.LENGTH_SHORT).show();
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
+				}, new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError arg0) {
+						// TODO Auto-generated
+						// method stub
+						VolleyLog.e(TAG, "Error: " + arg0.getMessage());
+					}
+
+				});
+		AppController.getInstance().addToRequestQueue(jsonObjectReq,
+				"updateAppointment");
 	}
 
 	void getAppoimentInfo() {
@@ -235,11 +238,11 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 							tvPatientName.setText(jsonArr.getJSONObject(0)
 									.getString("patientName"));
 							tvDate.setText(jsonArr.getJSONObject(0).getString(
-									"location"));
-							tvTime.setText(jsonArr.getJSONObject(0).getString(
 									"date"));
+							tvTime.setText(jsonArr.getJSONObject(0).getString(
+									"startTime"));
 							tvLocation.setText(jsonArr.getJSONObject(0)
-									.getString("startTime"));
+									.getString("location"));
 							tvStatus.setText(jsonArr.getJSONObject(0)
 									.getString("status"));
 							String status = jsonArr.getJSONObject(0).getString(
@@ -250,8 +253,8 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 												R.string.status_new));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
 										.getResources().getColor(R.color.red));
-								btnCancel.setVisibility(View.GONE);
-								btnDone.setVisibility(View.GONE);
+								btnReject.setVisibility(View.VISIBLE);
+								btnConfirm.setVisibility(View.VISIBLE);
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_CONFIRMED)) {
 								tvStatus.setText(getApplicationContext()
@@ -259,8 +262,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 												R.string.status_confirmed));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
 										.getResources().getColor(R.color.blue));
-								btnReject.setVisibility(View.GONE);
-								btnConfirm.setVisibility(View.GONE);
+								btnCancel.setVisibility(View.VISIBLE);
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_DONE)) {
 								tvStatus.setText(getApplicationContext()
@@ -268,10 +270,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 												R.string.status_done));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
 										.getResources().getColor(R.color.black));
-								btnCancel.setVisibility(View.GONE);
-								btnDone.setVisibility(View.GONE);
-								btnReject.setVisibility(View.GONE);
-								btnConfirm.setVisibility(View.GONE);
+								btnMissed.setVisibility(View.VISIBLE);
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_CANCELED)) {
 								tvStatus.setText(getApplicationContext()
@@ -279,10 +278,6 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 												R.string.status_canceled));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
 										.getResources().getColor(R.color.aqua));
-								btnCancel.setVisibility(View.GONE);
-								btnDone.setVisibility(View.GONE);
-								btnReject.setVisibility(View.GONE);
-								btnConfirm.setVisibility(View.GONE);
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_REJECTED)) {
 								tvStatus.setText(getApplicationContext()
@@ -291,10 +286,14 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
 										.getResources().getColor(
 												R.color.Brown_BurlyWood));
-								btnCancel.setVisibility(View.GONE);
-								btnDone.setVisibility(View.GONE);
-								btnReject.setVisibility(View.GONE);
-								btnConfirm.setVisibility(View.GONE);
+							} else if (status
+									.equalsIgnoreCase(Constants.STATUS_MISSED)) {
+								tvStatus.setText(getApplicationContext()
+										.getResources().getString(
+												R.string.status_missed));
+								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+										.getResources().getColor(
+												R.color.Chartreuse));
 							}
 
 							tvNote.setText(jsonArr.getJSONObject(0).getString(

@@ -58,6 +58,13 @@ public class DoctorNextMeetingActivity extends BaseActivity {
         setContentView(R.layout.doctor_next_meeting_layout);
         init();
     }
+    
+    @Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		getDashboard();
+	}
     void init() {
     	lvMeeting = (ListView) findViewById(R.id.lv_next_meeting);
     	lvMeeting.setOnItemLongClickListener(new OnItemLongClickListener() {

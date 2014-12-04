@@ -20,13 +20,13 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/patient"
-                android:textSize="8pt" />
+                android:textSize="10pt" />
 
             <TextView
                 android:id="@+id/tv_doctor_app_patient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="8pt" />
+                android:textSize="10pt" />
         </LinearLayout>
 
         <LinearLayout
@@ -39,13 +39,13 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/date" 
-                android:textSize="8pt" />
+                android:textSize="10pt" />
 
             <TextView
                 android:id="@+id/tv_doctor_app_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" 
-                android:textSize="8pt" />
+                android:textSize="10pt" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,13 +58,13 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/hour"
-                android:textSize="8pt"  />
+                android:textSize="10pt"  />
 
             <TextView
                 android:id="@+id/tv_doctor_app_start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" 
-                android:textSize="8pt" />
+                android:textSize="10pt" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,13 +77,13 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/place"
-                android:textSize="8pt"  />
+                android:textSize="10pt"  />
 
             <TextView
                 android:id="@+id/tv_doctor_app_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="8pt"  />
+                android:textSize="10pt"  />
         </LinearLayout>
 
         <LinearLayout
@@ -96,13 +96,13 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/status" 
-                android:textSize="8pt" />
+                android:textSize="10pt" />
 
             <TextView
                 android:id="@+id/tv_doctor_app_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" 
-                android:textSize="8pt" />
+                android:textSize="10pt" />
         </LinearLayout>
 
         <LinearLayout
@@ -115,13 +115,13 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/notes" 
-                android:textSize="8pt" />
+                android:textSize="10pt" />
 
             <TextView
                 android:id="@+id/tv_doctor_app_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" 
-                android:textSize="8pt" />
+                android:textSize="10pt" />
         </LinearLayout>
 
         <Button
@@ -131,7 +131,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/standar_margin"
             android:background="@drawable/button_selector"
-            android:text="@string/confirm_app" />
+            android:text="@string/confirm_app" 
+            android:visibility="gone"/>
         
         <Button
             android:id="@+id/btn_reject_app"
@@ -140,7 +141,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/standar_margin"
             android:background="@drawable/button_selector"
-            android:text="@string/reject_app" />
+            android:text="@string/reject_app"
+            android:visibility="gone" />
         
         <Button
             android:id="@+id/btn_cancel_app"
@@ -149,16 +151,18 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/standar_margin"
             android:background="@drawable/button_selector"
-            android:text="@string/cancled_app" />
+            android:text="@string/cancled_app"
+            android:visibility="gone" />
         
         <Button
-            android:id="@+id/btn_done_app"
+            android:id="@+id/btn_miss_app"
             android:layout_width="151dp"
             android:layout_height="34dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/standar_margin"
             android:background="@drawable/button_selector"
-            android:text="@string/done_app" />
+            android:text="@string/miss_app"
+            android:visibility="gone" />
 
     </LinearLayout>
     

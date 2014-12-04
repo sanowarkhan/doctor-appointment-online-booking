@@ -9,6 +9,8 @@
 	<string name="login_fail">Tài khoản hoặc mật khẩu không đúng. Xin vui lòng thử lại.</string>
 	<string name="uname_empty">Tên tài khoản không được để trống.</string>
 	<string name="pwd_empty">Mật khẩu không được để trống.</string>
+	<string name="reason_canceled">Hãy để lại lời nhắn vì sao bạn hủy cuộc hẹn này.</string>
+	<string name="reason_rejected">Hãy để lại lời nhắn vì sao bạn từ chối cuộc hẹn này.</string>
 	<string name="home">Trang chủ</string>
 	<string name="search_doctor">Tìm bác sĩ</string>
 	<string name="hospital">Bệnh viện / Phòng khám:</string>
@@ -37,6 +39,7 @@
 	<string name="status_new">Mới</string>
 	<string name="status_confirmed">Đã xác nhận</string>
 	<string name="status_done">Đã khám</string>
+	<string name="status_missed">Không đến</string>
 	<string name="status_canceled">Hủy</string>
 	<string name="status_rejected">Từ chối</string>
 	<string name="all">Tất cả</string>
@@ -48,6 +51,7 @@
 	<string name="finish_booking">Hoàn tất đặt lịch</string>
 	<string name="confirm_app">Xác nhận</string>
 	<string name="reject_app">Từ chối</string>
+	<string name="done_app">Đã khám</string>
 	<string name="booking_for">Bạn đặt lịch khám cho ai</string>
 	<string name="for_me">Cho tôi</string>
 	<string name="for_other">Đặt hộ người khác</string>
@@ -55,7 +59,7 @@
 	<string name="booking_email">Nhập email để nhận mã xác nhận</string>
 	<string name="confirm_key">Nhập mã xác nhận</string>
 	<string name="cancled_app">Hủy hẹn</string>
-	<string name="done_app">Đã khám</string>
+	<string name="miss_app">Bệnh nhân không đến</string>
 	<string name="phone">Số điện thoại</string>
 	<string name="patient_phone">Số điện thoại:</string>
 	<string name="address">Địa chỉ:</string>
