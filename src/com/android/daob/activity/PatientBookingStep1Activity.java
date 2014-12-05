@@ -239,7 +239,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 		bookingParams.put("location", location);
 		bookingParams.put("notes", note);
 		bookingParams.put("doctor", doctorId);
-//		bookingParams.put("creator", MainActivity.patientId);
+		bookingParams.put("creator", MainActivity.patientId);
 		if (isDelegated) {
 			JSONObject delPatient = new JSONObject();
 			delPatient.put("name", deName);

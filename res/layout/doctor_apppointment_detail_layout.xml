@@ -17,7 +17,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/patient"
                 android:textSize="10pt" />
@@ -36,7 +36,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/date" 
                 android:textSize="10pt" />
@@ -55,7 +55,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/hour"
                 android:textSize="10pt"  />
@@ -74,7 +74,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/place"
                 android:textSize="10pt"  />
@@ -93,7 +93,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/status" 
                 android:textSize="10pt" />
@@ -112,7 +112,7 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:text="@string/notes" 
                 android:textSize="10pt" />

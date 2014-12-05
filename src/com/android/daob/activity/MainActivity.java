@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 
 	public static String role;
 
-//	public static String patientId;
+	public static String patientId;
 
 	private String url = Constants.URL + "receiveUserRegId";
 
@@ -80,13 +80,13 @@ public class MainActivity extends Activity {
 		username = user.get(SessionManager.KEY_NAME);
 		role = user.get(SessionManager.KEY_ROLE);
 		
-//		if (role.isEmpty()) {
-//			return;
-//		} else if (role.equals("patient")) {
-//			patientId = user.get(SessionManager.KEY_ROLEID);
-//		} else if (role.equals("doctor")){ 
-//			patientId = user.get(SessionManager.KEY_ROLEID);
-//		}
+		if (role.isEmpty()) {
+			return;
+		} else if (role.equals("patient")) {
+			patientId = user.get(SessionManager.KEY_ROLEID);
+		} else if (role.equals("doctor")){ 
+			patientId = user.get(SessionManager.KEY_ROLEID);
+		}
 
 		String role = user.get(SessionManager.KEY_ROLE);
 		if (role != null) {

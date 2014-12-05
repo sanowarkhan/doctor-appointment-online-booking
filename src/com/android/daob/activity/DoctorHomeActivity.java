@@ -341,6 +341,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		startActivity(intent);
 	}
+	
+	
 
 	void getDashboard() {
 		String tag_json_getDashboard = "json_getDashboard_req";

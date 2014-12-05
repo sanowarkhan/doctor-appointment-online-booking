@@ -111,11 +111,11 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 							tvDoctorName.setText(jsonArr.getJSONObject(0)
 									.getString("doctorName"));
 							tvDate.setText(jsonArr.getJSONObject(0).getString(
-									"location"));
-							tvTime.setText(jsonArr.getJSONObject(0).getString(
 									"date"));
+							tvTime.setText(jsonArr.getJSONObject(0).getString(
+									"startTime"));
 							tvLocation.setText(jsonArr.getJSONObject(0)
-									.getString("startTime"));
+									.getString("location"));
 							String status = jsonArr.getJSONObject(0).getString(
 									"status");
 							if (status.equalsIgnoreCase(Constants.STATUS_NEW)) {
