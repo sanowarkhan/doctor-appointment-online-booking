@@ -102,7 +102,7 @@ public class GcmIntentService extends IntentService {
 		Log.i(TAG, "id: " + appointmentId);
 
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(
-				this).setSmallIcon(R.drawable.ic_action_go_to_today)
+				this).setSmallIcon(R.drawable.ic_launcher)
 				.setContentTitle("DAOB")
 				.setStyle(new NotificationCompat.BigTextStyle().bigText(msg))
 				.setVibrate(new long[] { 1000, 1000, 1000 })

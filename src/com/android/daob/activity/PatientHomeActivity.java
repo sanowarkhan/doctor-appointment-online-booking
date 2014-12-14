@@ -149,6 +149,7 @@ public class PatientHomeActivity extends BaseActivity {
 				Bundle bun = new Bundle();
 		        bun.putInt("appointmentId", um.getId());
 				i.putExtras(bun);
+				VolleyLog.e(TAG, "sendBun: " , bun);
 				startActivity(i);
 			}
 		});

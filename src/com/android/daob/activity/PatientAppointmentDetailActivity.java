@@ -174,4 +174,5 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 		AppController.getInstance().addToRequestQueue(jsonArrayRequest,
 				tag_json_getAppInfo);
 	}
+
 }

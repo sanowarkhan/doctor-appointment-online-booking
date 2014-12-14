@@ -77,7 +77,9 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 				input.setInputType(InputType.TYPE_CLASS_TEXT);
 				builder.setView(input);
 
-				builder.setPositiveButton("Thoát",
+				builder.setPositiveButton(getApplicationContext()
+						.getResources().getString(
+								R.string.btn_cancel),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
@@ -85,7 +87,9 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 								dialog.cancel();
 							}
 						});
-				builder.setNegativeButton("Từ chối",
+				builder.setNegativeButton(getApplicationContext()
+						.getResources().getString(
+								R.string.status_rejected),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
@@ -94,6 +98,10 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 								imm.hideSoftInputFromWindow(
 										input.getWindowToken(), 0);
 								requestServer("rejected", tvStatus);
+								btnConfirm.setVisibility(View.GONE);
+								btnReject.setVisibility(View.GONE);
+								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+										.getResources().getColor(R.color.Brown_BurlyWood));
 								Toast.makeText(
 										DoctorAppointmentDetailActivity.this,
 										input.getText().toString(),
@@ -101,11 +109,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 							}
 						});
 
-				builder.show();
-				btnConfirm.setVisibility(View.GONE);
-				btnReject.setVisibility(View.GONE);
-				tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
-						.getResources().getColor(R.color.Brown_BurlyWood));
+				builder.show();				
 			}
 		});
 		btnCancel = (Button) findViewById(R.id.btn_cancel_app);
@@ -123,7 +127,9 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 				input.setInputType(InputType.TYPE_CLASS_TEXT);
 				builder.setView(input);
 
-				builder.setPositiveButton("Thoát",
+				builder.setPositiveButton(getApplicationContext()
+						.getResources().getString(
+								R.string.btn_cancel),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
@@ -131,7 +137,9 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 								dialog.cancel();
 							}
 						});
-				builder.setNegativeButton("Hủy hẹn",
+				builder.setNegativeButton(getApplicationContext()
+						.getResources().getString(
+								R.string.status_canceled),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
@@ -140,6 +148,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 								imm.hideSoftInputFromWindow(
 										input.getWindowToken(), 0);
 								requestServer("canceled", tvStatus);
+								btnCancel.setVisibility(View.GONE);
 								Toast.makeText(
 										DoctorAppointmentDetailActivity.this,
 										input.getText().toString(),
@@ -148,7 +157,6 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 						});
 
 				builder.show();
-				btnCancel.setVisibility(View.GONE);
 			}
 		});
 		btnMissed = (Button) findViewById(R.id.btn_miss_app);

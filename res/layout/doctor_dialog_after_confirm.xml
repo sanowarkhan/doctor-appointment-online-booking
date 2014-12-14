@@ -8,20 +8,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/standar_margin"
         android:orientation="horizontal" >
-        
-         <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/message_confirm_reject"
-            android:textColor="#FFF" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/standar_margin"
-        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/doctor_dialog_canceled"
