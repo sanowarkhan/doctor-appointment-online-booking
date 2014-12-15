@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
-encoding//src/com/android/daob/activity/PatientBookingStep1Activity.java=UTF-8
-encoding//src/com/android/daob/activity/PatientBookingStep2Activity.java=UTF-8
+encoding//src/com/android/daob/activity/DoctorAppointmentDetailActivity.java=UTF-8
+encoding//src/com/android/daob/activity/DoctorHomeActivity.java=UTF-8
+encoding//src/com/android/daob/activity/DoctorNextMeetingActivity.java=UTF-8
+encoding//src/com/android/daob/activity/PatientHomeActivity.java=UTF-8
+encoding//src/com/android/daob/activity/PatientSearchDoctorActivity.java=UTF-8
+encoding/<project>=UTF-8

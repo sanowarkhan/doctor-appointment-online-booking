@@ -314,7 +314,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
         switch (item.getItemId()) {
             case R.id.top_right_button:
                 finish();
-                Intent intentHome = new Intent(this, DoctorNextMeetingActivity.class);
+                Intent intentHome = new Intent(this, DoctorHomeActivity.class);
                 startActivity(intentHome);
                 return true;
             default:

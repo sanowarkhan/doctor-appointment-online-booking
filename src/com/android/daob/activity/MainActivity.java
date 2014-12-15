@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.json.JSONObject;
 
 import com.android.daob.application.AppController;
+import com.android.daob.gcm.GcmBroadcastReceiver;
 import com.android.daob.utils.Constants;
 import com.android.daob.utils.SessionManager;
 import com.android.volley.Response;

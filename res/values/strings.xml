@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">DAOB</string>
+    <string name="next_appointment">Các cuộc hẹn sắp tới</string>
     <string name="hint_uname">Tên đăng nhập</string>
     <string name="hint_pwd">Mật khẩu</string>
 	<string name="login">Đăng nhập</string>
@@ -10,6 +11,7 @@
 	<string name="uname_empty">Tên tài khoản không được để trống.</string>
 	<string name="pwd_empty">Mật khẩu không được để trống.</string>
 	<string name="reason_canceled">Hãy để lại lời nhắn vì sao bạn hủy cuộc hẹn này.</string>
+	<string name="create_busy_time">Bạn có muốn đánh dấu bận vào khoảng thời gian này?</string>
 	<string name="reason_rejected">Hãy để lại lời nhắn vì sao bạn từ chối cuộc hẹn này.</string>
 	<string name="home">Trang chủ</string>
 	<string name="search_doctor">Tìm bác sĩ</string>
@@ -36,6 +38,7 @@
 	<string name="status">Trạng thái:</string>
 	<string name="notes">Ghi chú:</string>
 	<string name="loading">Đang tải dữ liệu...</string>
+	<string name="processing">Đang xử lý...</string>
 	<string name="status_new">Mới</string>
 	<string name="status_confirmed">Đã xác nhận</string>
 	<string name="status_done">Đã khám</string>
@@ -73,4 +76,6 @@
 	<string name="message_done_cancel">Xác nhận hoặc từ chối</string>
 	<string name="btn_cancel_booking">Hủy</string>
 	<string name="btn_cancel">Thoát</string>
+	<string name="btn_yes">Có</string>
+	<string name="btn_no">Không</string>
 </resources>
