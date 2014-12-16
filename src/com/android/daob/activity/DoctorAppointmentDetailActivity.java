@@ -39,6 +39,8 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 
 	String urlUpdate = Constants.URL + "doctorUpdateAppointments/";
 
+	String urlMarkBusy = Constants.URL + "markBusyTime";
+
 	TextView tvPatientName, tvDate, tvTime, tvLocation, tvStatus, tvNote;
 	Button btnConfirm, btnReject, btnCancel, btnMissed;
 
@@ -58,6 +60,10 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				requestServer("confirmed", "", tvStatus);
+				tvStatus.setText(getApplicationContext().getResources()
+						.getString(R.string.status_confirmed));
+				tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+						.getResources().getColor(R.color.app_confirmed));
 				btnConfirm.setVisibility(View.GONE);
 				btnReject.setVisibility(View.GONE);
 				btnCancel.setVisibility(View.VISIBLE);
@@ -78,8 +84,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 				builder.setView(input);
 
 				builder.setPositiveButton(getApplicationContext()
-						.getResources().getString(
-								R.string.btn_cancel),
+						.getResources().getString(R.string.btn_cancel),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
@@ -88,8 +93,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 							}
 						});
 				builder.setNegativeButton(getApplicationContext()
-						.getResources().getString(
-								R.string.status_rejected),
+						.getResources().getString(R.string.reject_app),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
@@ -99,49 +103,54 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										input.getWindowToken(), 0);
 								String message = input.getText().toString();
 								requestServer("rejected", message, tvStatus);
-								
+
 								AlertDialog.Builder builder1 = new AlertDialog.Builder(
 										DoctorAppointmentDetailActivity.this);
-								builder1.setTitle(getApplicationContext().getResources()
-										.getString(R.string.create_busy_time));
-
-								builder1.setPositiveButton(getApplicationContext()
+								builder1.setTitle(getApplicationContext()
 										.getResources().getString(
-												R.string.btn_no),
+												R.string.create_busy_time));
+
+								builder1.setPositiveButton(
+										getApplicationContext().getResources()
+												.getString(R.string.btn_no),
 										new DialogInterface.OnClickListener() {
 											@Override
-											public void onClick(DialogInterface dialog,
+											public void onClick(
+													DialogInterface dialog,
 													int which) {
 												dialog.cancel();
 											}
 										});
-								builder1.setNegativeButton(getApplicationContext()
-										.getResources().getString(
-												R.string.btn_yes),
+								builder1.setNegativeButton(
+										getApplicationContext().getResources()
+												.getString(R.string.btn_yes),
 										new DialogInterface.OnClickListener() {
 											@Override
-											public void onClick(DialogInterface dialog,
+											public void onClick(
+													DialogInterface dialog,
 													int which) {
-												
+												markBusyTime();
 											}
 										});
 
 								builder1.show();
-								
+
 								btnConfirm.setVisibility(View.GONE);
 								btnReject.setVisibility(View.GONE);
+								tvStatus.setText(getApplicationContext().getResources()
+										.getString(R.string.status_rejected));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
-										.getResources().getColor(R.color.Brown_BurlyWood));
+										.getResources().getColor(R.color.app_rejected));
 								Toast.makeText(
 										DoctorAppointmentDetailActivity.this,
-										input.getText().toString(),
+										getResources().getString(
+												R.string.update_success),
 										Toast.LENGTH_SHORT).show();
 							}
 						});
 
 				builder.show();
-				
-				
+
 			}
 		});
 		btnCancel = (Button) findViewById(R.id.btn_cancel_app);
@@ -160,8 +169,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 				builder.setView(input);
 
 				builder.setPositiveButton(getApplicationContext()
-						.getResources().getString(
-								R.string.btn_cancel),
+						.getResources().getString(R.string.btn_cancel),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
@@ -170,13 +178,12 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 							}
 						});
 				builder.setNegativeButton(getApplicationContext()
-						.getResources().getString(
-								R.string.status_canceled),
+						.getResources().getString(R.string.cancled_app),
 						new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								
+
 								InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 								imm.hideSoftInputFromWindow(
 										input.getWindowToken(), 0);
@@ -184,42 +191,47 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 								requestServer("canceled", message, tvStatus);
 								AlertDialog.Builder builder1 = new AlertDialog.Builder(
 										DoctorAppointmentDetailActivity.this);
-								builder1.setTitle(getApplicationContext().getResources()
-										.getString(R.string.create_busy_time));
-
-								builder1.setPositiveButton(getApplicationContext()
+								builder1.setTitle(getApplicationContext()
 										.getResources().getString(
-												R.string.btn_no),
+												R.string.create_busy_time));
+
+								builder1.setPositiveButton(
+										getApplicationContext().getResources()
+												.getString(R.string.btn_no),
 										new DialogInterface.OnClickListener() {
 											@Override
-											public void onClick(DialogInterface dialog,
+											public void onClick(
+													DialogInterface dialog,
 													int which) {
 												dialog.cancel();
 											}
 										});
-								builder1.setNegativeButton(getApplicationContext()
-										.getResources().getString(
-												R.string.btn_yes),
+								builder1.setNegativeButton(
+										getApplicationContext().getResources()
+												.getString(R.string.btn_yes),
 										new DialogInterface.OnClickListener() {
 											@Override
-											public void onClick(DialogInterface dialog,
+											public void onClick(
+													DialogInterface dialog,
 													int which) {
-												
+												markBusyTime();
 											}
 										});
 
 								builder1.show();
+								tvStatus.setText(getApplicationContext().getResources()
+										.getString(R.string.status_canceled));
+								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+										.getResources().getColor(R.color.app_canceled));
 								btnCancel.setVisibility(View.GONE);
 								Toast.makeText(
 										DoctorAppointmentDetailActivity.this,
-										input.getText().toString(),
+										getResources().getString(
+												R.string.update_success),
 										Toast.LENGTH_SHORT).show();
 							}
 						});
-
 				builder.show();
-				
-				
 			}
 		});
 		btnMissed = (Button) findViewById(R.id.btn_miss_app);
@@ -227,6 +239,10 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				requestServer("missed", "", tvStatus);
+				tvStatus.setText(getApplicationContext().getResources()
+						.getString(R.string.status_missed));
+				tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+						.getResources().getColor(R.color.app_missed));
 				btnMissed.setVisibility(View.GONE);
 			}
 		});
@@ -238,13 +254,57 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 		appId = bun.getInt("appointmentId");
 	}
 
+	void markBusyTime() {
+		HashMap<String, String> markBusy = new HashMap<String, String>();
+		markBusy.put("appointmentId", "" + appId);
+		String content = DoctorAppointmentDetailActivity.this.getResources()
+				.getString(R.string.processing);
+		showProgressDialog(content, false);
+		JsonObjectRequest jsonObjectReq = new JsonObjectRequest(Method.POST,
+				urlMarkBusy, new JSONObject(markBusy),
+				new Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject arg0) {
+						// TODO Auto-generated method stub
+						try {
+							if (arg0.getString("message").equals("success")) {
+								Toast.makeText(
+										DoctorAppointmentDetailActivity.this,
+										"Đã cài đặt bận cho khoảng thời gian này",
+										Toast.LENGTH_SHORT).show();
+							} else {
+								Toast.makeText(
+										DoctorAppointmentDetailActivity.this,
+										"Cài đặt không thành công",
+										Toast.LENGTH_SHORT).show();
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						closeProgressDialog();
+					}
+
+				}, new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError arg0) {
+						// TODO Auto-generated
+						// method stub
+						VolleyLog.e(TAG, "Error: " + arg0.getMessage());
+					}
+
+				});
+		AppController.getInstance().addToRequestQueue(jsonObjectReq,
+				"markBusyTime");
+	}
+
 	void requestServer(final String status, String message, TextView tv) {
 		String urlReq = urlUpdate + appId;
 		HashMap<String, String> updateStatus = new HashMap<String, String>();
 		updateStatus.put("status", status);
 		updateStatus.put("message", message);
 		String content = DoctorAppointmentDetailActivity.this.getResources()
-				.getString(R.string.loading);
+				.getString(R.string.processing);
 		showProgressDialog(content, false);
 		JsonObjectRequest jsonObjectReq = new JsonObjectRequest(Method.PUT,
 				urlReq, new JSONObject(updateStatus),
@@ -254,25 +314,36 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 					public void onResponse(JSONObject response) {
 						try {
 							if (response.getString("message").equals("success")) {
-								if (status.equalsIgnoreCase("missed")) {
+								if (status.equals("missed")) {
 									tvStatus.setText(getApplicationContext()
 											.getResources().getString(
 													R.string.status_missed));
+									tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+											.getResources().getColor(
+													R.color.app_missed));
 								} else if (status.equals("confirmed")) {
 									tvStatus.setText(getApplicationContext()
 											.getResources().getString(
 													R.string.status_confirmed));
+									tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+											.getResources().getColor(
+													R.color.app_confirmed));
 								} else if (status.equals("canceled")) {
 									tvStatus.setText(getApplicationContext()
 											.getResources().getString(
 													R.string.status_canceled));
+									tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+											.getResources().getColor(
+													R.color.app_canceled));
 								} else if (status.equals("rejected")) {
 									tvStatus.setText(getApplicationContext()
 											.getResources().getString(
 													R.string.status_rejected));
+									tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
+											.getResources().getColor(
+													R.color.app_rejected));
 								}
-								
-								
+
 								Toast.makeText(
 										DoctorAppointmentDetailActivity.this,
 										getResources().getString(
@@ -283,7 +354,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										DoctorAppointmentDetailActivity.this,
 										"Cuộc hẹn đã được cập nhật trạng thái này từ trước",
 										Toast.LENGTH_SHORT).show();
-									}
+							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -334,7 +405,8 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										.getResources().getString(
 												R.string.status_new));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
-										.getResources().getColor(R.color.red));
+										.getResources().getColor(
+												R.color.app_new));
 								btnReject.setVisibility(View.VISIBLE);
 								btnConfirm.setVisibility(View.VISIBLE);
 							} else if (status
@@ -343,7 +415,8 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										.getResources().getString(
 												R.string.status_confirmed));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
-										.getResources().getColor(R.color.blue));
+										.getResources().getColor(
+												R.color.app_confirmed));
 								btnCancel.setVisibility(View.VISIBLE);
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_DONE)) {
@@ -351,7 +424,8 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										.getResources().getString(
 												R.string.status_done));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
-										.getResources().getColor(R.color.black));
+										.getResources().getColor(
+												R.color.app_done));
 								btnMissed.setVisibility(View.VISIBLE);
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_CANCELED)) {
@@ -359,7 +433,8 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										.getResources().getString(
 												R.string.status_canceled));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
-										.getResources().getColor(R.color.aqua));
+										.getResources().getColor(
+												R.color.app_canceled));
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_REJECTED)) {
 								tvStatus.setText(getApplicationContext()
@@ -367,7 +442,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 												R.string.status_rejected));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
 										.getResources().getColor(
-												R.color.Brown_BurlyWood));
+												R.color.app_rejected));
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_MISSED)) {
 								tvStatus.setText(getApplicationContext()
@@ -375,7 +450,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 												R.string.status_missed));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
 										.getResources().getColor(
-												R.color.Chartreuse));
+												R.color.app_missed));
 							}
 
 							tvNote.setText(jsonArr.getJSONObject(0).getString(

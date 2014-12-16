@@ -1,4 +1,3 @@
-
 package com.android.daob.activity;
 
 import java.util.ArrayList;
@@ -42,46 +41,50 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class DoctorNextMeetingActivity extends BaseActivity {
 	public static String TAG = DoctorNextMeetingActivity.class.getSimpleName();
-    String url = Constants.URL + "doctorAllAppointments/" + MainActivity.username;
-    String urlUpdate = Constants.URL +"doctorUpdateAppointments/";
+	String url = Constants.URL + "doctorAllAppointments/"
+			+ MainActivity.username;
+	String urlUpdate = Constants.URL + "doctorUpdateAppointments/";
 
 	ListView lvMeeting;
 
 	ArrayAdapter<DoctorAppointmentModel> listDoctorAppointmentAdapter;
 
 	ArrayList<DoctorAppointmentModel> listDoctorAppointmentModels = new ArrayList<DoctorAppointmentModel>();
-	
-	
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {        
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.doctor_next_meeting_layout);
-        init();
-    }
-    
-    @Override
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.doctor_next_meeting_layout);
+		init();
+	}
+
+	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		getDashboard();
 	}
-    void init() {
-    	lvMeeting = (ListView) findViewById(R.id.lv_next_meeting);
-    	lvMeeting.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+	void init() {
+		lvMeeting = (ListView) findViewById(R.id.lv_next_meeting);
+		lvMeeting.setOnItemLongClickListener(new OnItemLongClickListener() {
 
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				final DoctorAppointmentModel dam = (DoctorAppointmentModel) parent
 						.getItemAtPosition(position);
-				if(dam.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)){
-					final Dialog dialog = new Dialog(DoctorNextMeetingActivity.this);
+				if (dam.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
+					final Dialog dialog = new Dialog(
+							DoctorNextMeetingActivity.this);
 					dialog.setContentView(R.layout.doctor_update_status_dialog);
 					dialog.setTitle(DoctorNextMeetingActivity.this
-							.getResources().getString(R.string.message_confirm_reject));
-					Button dialogConfrim = (Button) dialog.findViewById(R.id.doctor_dialog_confirm);
+							.getResources().getString(
+									R.string.message_confirm_reject));
+					Button dialogConfrim = (Button) dialog
+							.findViewById(R.id.doctor_dialog_confirm);
 					dialogConfrim.setOnClickListener(new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -89,20 +92,28 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 							HashMap<String, String> updateStatus = new HashMap<String, String>();
 							updateStatus.put("status", "confirmed");
 							JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
-									Method.PUT, urlReq, new JSONObject(updateStatus),
+									Method.PUT, urlReq, new JSONObject(
+											updateStatus),
 									new Listener<JSONObject>() {
 
 										@Override
 										public void onResponse(
 												JSONObject response) {
 											try {
-													if(response.getString("message").equals("success")){
+												if (response.getString(
+														"message").equals(
+														"success")) {
 													getDashboard();
-													Toast.makeText(DoctorNextMeetingActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													Toast.makeText(
+															DoctorNextMeetingActivity.this,
+															"Cập nhật thành công",
+															Toast.LENGTH_SHORT)
+															.show();
 													dialog.dismiss();
 												}
 											} catch (JSONException e) {
-												// TODO Auto-generated catch block
+												// TODO Auto-generated catch
+												// block
 												e.printStackTrace();
 											}
 										}
@@ -113,18 +124,22 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 												VolleyError arg0) {
 											// TODO Auto-generated
 											// method stub
-											VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+											VolleyLog.e(
+													TAG,
+													"Error: "
+															+ arg0.getMessage());
 										}
 
 									});
-							AppController.getInstance().addToRequestQueue(jsonObjectReq,
-									"update to confirm");
+							AppController.getInstance().addToRequestQueue(
+									jsonObjectReq, "update to confirm");
 						}
 					});
-					
-					Button dialogReject = (Button) dialog.findViewById(R.id.doctor_dialog_reject);
+
+					Button dialogReject = (Button) dialog
+							.findViewById(R.id.doctor_dialog_reject);
 					dialogReject.setOnClickListener(new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -132,20 +147,28 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 							HashMap<String, String> updateStatus = new HashMap<String, String>();
 							updateStatus.put("status", "rejected");
 							JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
-									Method.PUT, urlReq, new JSONObject(updateStatus),
+									Method.PUT, urlReq, new JSONObject(
+											updateStatus),
 									new Listener<JSONObject>() {
 
 										@Override
 										public void onResponse(
 												JSONObject response) {
 											try {
-													if(response.getString("message").equals("success")){
+												if (response.getString(
+														"message").equals(
+														"success")) {
 													getDashboard();
-													Toast.makeText(DoctorNextMeetingActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													Toast.makeText(
+															DoctorNextMeetingActivity.this,
+															"Cập nhật thành công",
+															Toast.LENGTH_SHORT)
+															.show();
 													dialog.dismiss();
 												}
 											} catch (JSONException e) {
-												// TODO Auto-generated catch block
+												// TODO Auto-generated catch
+												// block
 												e.printStackTrace();
 											}
 										}
@@ -156,17 +179,21 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 												VolleyError arg0) {
 											// TODO Auto-generated
 											// method stub
-											VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+											VolleyLog.e(
+													TAG,
+													"Error: "
+															+ arg0.getMessage());
 										}
 
 									});
-							AppController.getInstance().addToRequestQueue(jsonObjectReq,
-									"update to reject");
+							AppController.getInstance().addToRequestQueue(
+									jsonObjectReq, "update to reject");
 						}
 					});
-					Button dialogClose = (Button) dialog.findViewById(R.id.doctor_dialog_close);
+					Button dialogClose = (Button) dialog
+							.findViewById(R.id.doctor_dialog_close);
 					dialogClose.setOnClickListener(new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -174,16 +201,19 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 						}
 					});
 					dialog.show();
-					
-				}
-				else if(dam.getStatus().equalsIgnoreCase(Constants.STATUS_CONFIRMED)){
-					final Dialog dialog = new Dialog(DoctorNextMeetingActivity.this);
+
+				} else if (dam.getStatus().equalsIgnoreCase(
+						Constants.STATUS_CONFIRMED)) {
+					final Dialog dialog = new Dialog(
+							DoctorNextMeetingActivity.this);
 					dialog.setContentView(R.layout.doctor_dialog_after_confirm);
 					dialog.setTitle(DoctorNextMeetingActivity.this
-							.getResources().getString(R.string.message_done_cancel));
-					Button dialogCancel = (Button) dialog.findViewById(R.id.doctor_dialog_canceled);
+							.getResources().getString(
+									R.string.message_done_cancel));
+					Button dialogCancel = (Button) dialog
+							.findViewById(R.id.doctor_dialog_canceled);
 					dialogCancel.setOnClickListener(new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -191,20 +221,28 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 							HashMap<String, String> updateStatus = new HashMap<String, String>();
 							updateStatus.put("status", "canceled");
 							JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
-									Method.PUT, urlReq, new JSONObject(updateStatus),
+									Method.PUT, urlReq, new JSONObject(
+											updateStatus),
 									new Listener<JSONObject>() {
 
 										@Override
 										public void onResponse(
 												JSONObject response) {
 											try {
-													if(response.getString("message").equals("success")){
+												if (response.getString(
+														"message").equals(
+														"success")) {
 													getDashboard();
-													Toast.makeText(DoctorNextMeetingActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													Toast.makeText(
+															DoctorNextMeetingActivity.this,
+															"Cập nhật thành công",
+															Toast.LENGTH_SHORT)
+															.show();
 													dialog.dismiss();
 												}
 											} catch (JSONException e) {
-												// TODO Auto-generated catch block
+												// TODO Auto-generated catch
+												// block
 												e.printStackTrace();
 											}
 										}
@@ -215,18 +253,22 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 												VolleyError arg0) {
 											// TODO Auto-generated
 											// method stub
-											VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+											VolleyLog.e(
+													TAG,
+													"Error: "
+															+ arg0.getMessage());
 										}
 
 									});
-							AppController.getInstance().addToRequestQueue(jsonObjectReq,
-									"update to confirm");
+							AppController.getInstance().addToRequestQueue(
+									jsonObjectReq, "update to confirm");
 						}
 					});
-					
-					Button dialogDone = (Button) dialog.findViewById(R.id.doctor_dialog_done);
+
+					Button dialogDone = (Button) dialog
+							.findViewById(R.id.doctor_dialog_done);
 					dialogDone.setOnClickListener(new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -234,20 +276,28 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 							HashMap<String, String> updateStatus = new HashMap<String, String>();
 							updateStatus.put("status", "done");
 							JsonObjectRequest jsonObjectReq = new JsonObjectRequest(
-									Method.PUT, urlReq, new JSONObject(updateStatus),
+									Method.PUT, urlReq, new JSONObject(
+											updateStatus),
 									new Listener<JSONObject>() {
 
 										@Override
 										public void onResponse(
 												JSONObject response) {
 											try {
-													if(response.getString("message").equals("success")){
+												if (response.getString(
+														"message").equals(
+														"success")) {
 													getDashboard();
-													Toast.makeText(DoctorNextMeetingActivity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+													Toast.makeText(
+															DoctorNextMeetingActivity.this,
+															"Cập nhật thành công",
+															Toast.LENGTH_SHORT)
+															.show();
 													dialog.dismiss();
 												}
 											} catch (JSONException e) {
-												// TODO Auto-generated catch block
+												// TODO Auto-generated catch
+												// block
 												e.printStackTrace();
 											}
 										}
@@ -258,17 +308,21 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 												VolleyError arg0) {
 											// TODO Auto-generated
 											// method stub
-											VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+											VolleyLog.e(
+													TAG,
+													"Error: "
+															+ arg0.getMessage());
 										}
 
 									});
-							AppController.getInstance().addToRequestQueue(jsonObjectReq,
-									"update to reject");
+							AppController.getInstance().addToRequestQueue(
+									jsonObjectReq, "update to reject");
 						}
 					});
-					Button dialogClose = (Button) dialog.findViewById(R.id.doctor_dialog_miss);
+					Button dialogClose = (Button) dialog
+							.findViewById(R.id.doctor_dialog_miss);
 					dialogClose.setOnClickListener(new OnClickListener() {
-						
+
 						@Override
 						public void onClick(View v) {
 							// TODO Auto-generated method stub
@@ -279,53 +333,56 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 				}
 				return true;
 			}
-    		
-    	});
-    	
-    	lvMeeting.setOnItemClickListener(new OnItemClickListener() {
+
+		});
+
+		lvMeeting.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				final DoctorAppointmentModel dam = (DoctorAppointmentModel) parent
 						.getItemAtPosition(position);
-				Intent i = new Intent(DoctorNextMeetingActivity.this, DoctorAppointmentDetailActivity.class);
+				Intent i = new Intent(DoctorNextMeetingActivity.this,
+						DoctorAppointmentDetailActivity.class);
 				Bundle bun = new Bundle();
-		        bun.putInt("appointmentId", dam.getId());
+				bun.putInt("appointmentId", dam.getId());
 				i.putExtras(bun);
 				startActivity(i);
 			}
-			
+
 		});
-		
+
 		getDashboard();
-    }
+	}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.top_right_menu, menu);
-        menu.getItem(0).setTitle(getResources().getString(R.string.home));
-        menu.getItem(0).setIcon(this.getResources().getDrawable(R.drawable.ic_action_go_to_today));
-        return super.onCreateOptionsMenu(menu);
-    }
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.top_right_menu, menu);
+		menu.getItem(0).setTitle(getResources().getString(R.string.home));
+		menu.getItem(0).setIcon(
+				this.getResources().getDrawable(
+						R.drawable.ic_action_go_to_today));
+		return super.onCreateOptionsMenu(menu);
+	}
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.top_right_button:
-                finish();
-                Intent intentHome = new Intent(this, DoctorHomeActivity.class);
-                startActivity(intentHome);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-    
-    void getDashboard() {
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.top_right_button:
+			finish();
+			Intent intentHome = new Intent(this, DoctorHomeActivity.class);
+			startActivity(intentHome);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	void getDashboard() {
 		String tag_json_getAllApp_req = "json_getAllApp_req";
-		String content = DoctorNextMeetingActivity.this.getResources().getString(
-				R.string.loading);
+		String content = DoctorNextMeetingActivity.this.getResources()
+				.getString(R.string.loading);
 		showProgressDialog(content, false);
 
 		JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(url,
@@ -347,8 +404,14 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 										.getString("startTime"));
 								dam.setStatus(jsonArr.getJSONObject(i)
 										.getString("status"));
-//								dam.setNotes(jsonArr.getJSONObject(i)
-//										.getString("preDescription"));
+								if (jsonArr.getJSONObject(i)
+										.getString("preDescription").isEmpty()) {
+									dam.setNotes("không có");	
+								}
+								else {
+									dam.setNotes(jsonArr.getJSONObject(i)
+											.getString("preDescription"));
+								}
 								dam.setId(jsonArr.getJSONObject(i).getInt("id"));
 								listDoctorAppointmentModels.add(dam);
 							} catch (JSONException e) {
@@ -378,8 +441,8 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 		AppController.getInstance().addToRequestQueue(jsonArrayRequest,
 				tag_json_getAllApp_req);
 	}
-    
-    class DoctorAppViewAdapter extends ArrayAdapter<DoctorAppointmentModel> {
+
+	class DoctorAppViewAdapter extends ArrayAdapter<DoctorAppointmentModel> {
 		ViewHolder holder;
 
 		ArrayList<DoctorAppointmentModel> listData;
@@ -399,9 +462,9 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 			if (convertView == null) {
 				LayoutInflater inflater = (LayoutInflater) getContext()
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				convertView = inflater
-						.inflate(R.layout.doctor_all_appoinment_items_layout,
-								parent, false);
+				convertView = inflater.inflate(
+						R.layout.doctor_all_appoinment_items_layout, parent,
+						false);
 				holder = new ViewHolder();
 				holder.tvPatientName = (TextView) convertView
 						.findViewById(R.id.tv_all_patient_name);
@@ -413,8 +476,8 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 						.findViewById(R.id.tv_all_start_time);
 				holder.tvStatus = (TextView) convertView
 						.findViewById(R.id.tv_all_appointment_status);
-				holder.tvNotes = (TextView) convertView
-						.findViewById(R.id.tv_all_appointment_notes);
+//				holder.tvNotes = (TextView) convertView
+//						.findViewById(R.id.tv_all_appointment_notes);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -426,25 +489,42 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 			holder.tvDate.setText(dam.getDate());
 			holder.tvStartTime.setText(dam.getStartTime());
 			holder.tvStatus.setText(dam.getStatus());
-			holder.tvNotes.setText(dam.getNotes());
+//			holder.tvNotes.setText(dam.getNotes());
 
 			if (dam.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.status_new));
+				holder.tvStatus.setText(DoctorNextMeetingActivity.this
+						.getResources().getString(R.string.status_new));
+				holder.tvStatus.setTextColor(DoctorNextMeetingActivity.this
+						.getResources().getColor(R.color.app_new));
 			} else if (dam.getStatus().equalsIgnoreCase(
 					Constants.STATUS_CONFIRMED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.status_confirmed));
+				holder.tvStatus.setText(DoctorNextMeetingActivity.this
+						.getResources().getString(R.string.status_confirmed));
+				holder.tvStatus.setTextColor(DoctorNextMeetingActivity.this
+						.getResources().getColor(R.color.app_confirmed));
 			} else if (dam.getStatus().equalsIgnoreCase(Constants.STATUS_DONE)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.status_done));
+				holder.tvStatus.setText(DoctorNextMeetingActivity.this
+						.getResources().getString(R.string.status_done));
+				holder.tvStatus.setTextColor(DoctorNextMeetingActivity.this
+						.getResources().getColor(R.color.app_done));
 			} else if (dam.getStatus().equalsIgnoreCase(
 					Constants.STATUS_CANCELED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.status_canceled));
-			} else {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.reject_app));
+				holder.tvStatus.setText(DoctorNextMeetingActivity.this
+						.getResources().getString(R.string.status_canceled));
+				holder.tvStatus.setTextColor(DoctorNextMeetingActivity.this
+						.getResources().getColor(R.color.app_canceled));
+			} else if (dam.getStatus().equalsIgnoreCase(
+					Constants.STATUS_REJECTED)) {
+				holder.tvStatus.setText(DoctorNextMeetingActivity.this
+						.getResources().getString(R.string.status_rejected));
+				holder.tvStatus.setTextColor(DoctorNextMeetingActivity.this
+						.getResources().getColor(R.color.app_rejected));
+			} else if (dam.getStatus()
+					.equalsIgnoreCase(Constants.STATUS_MISSED)) {
+				holder.tvStatus.setText(DoctorNextMeetingActivity.this
+						.getResources().getString(R.string.status_missed));
+				holder.tvStatus.setTextColor(DoctorNextMeetingActivity.this
+						.getResources().getColor(R.color.app_missed));
 			}
 
 			return convertView;
@@ -462,7 +542,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 
 		TextView tvStatus;
 
-		TextView tvNotes;
+//		TextView tvNotes;
 
 	}
 

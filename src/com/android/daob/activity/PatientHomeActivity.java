@@ -1,6 +1,7 @@
 package com.android.daob.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,19 +10,21 @@ import org.json.JSONObject;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,36 +70,45 @@ public class PatientHomeActivity extends BaseActivity {
 					int position, long id) {
 				final UserMeetingModel um = (UserMeetingModel) parent
 						.getItemAtPosition(position);
-				if (um.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
-					final AlertDialog alertDialog = new AlertDialog.Builder(
-							PatientHomeActivity.this).create();
+				if (um.getStatus().equalsIgnoreCase(Constants.STATUS_NEW) ||
+						um.getStatus().equalsIgnoreCase(Constants.STATUS_CONFIRMED)) {
+					AlertDialog.Builder builder1 = new AlertDialog.Builder(
+							PatientHomeActivity.this);
+					final EditText input = new EditText(
+							PatientHomeActivity.this);
+					input.setInputType(InputType.TYPE_CLASS_TEXT);
+					builder1.setView(input);
+					builder1.setTitle(getApplicationContext().getResources()
+							.getString(R.string.reason_canceled));
 
-					alertDialog.setMessage(PatientHomeActivity.this
-							.getResources().getString(
-									R.string.message_cancel_booking));
-					alertDialog.setButton(PatientHomeActivity.this
+					builder1.setPositiveButton(getApplicationContext()
 							.getResources().getString(R.string.btn_cancel),
-							new OnClickListener() {
-
+							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int which) {
-									// huy cuoc hen
-									alertDialog.dismiss();
+									dialog.cancel();
 								}
 							});
-
-					alertDialog.setButton2(
-							PatientHomeActivity.this.getResources().getString(
-									R.string.btn_cancel_booking),
-							new OnClickListener() {
-
+					builder1.setNegativeButton(getApplicationContext()
+							.getResources().getString(R.string.cancled_app),
+							new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog,
 										int which) {
-									String urlUpdate = cancelApp + um.getId();
+									String urlUpdate  = cancelApp + um.getId();
+									InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+									imm.hideSoftInputFromWindow(
+											input.getWindowToken(), 0);
+									HashMap<String, String> updateStatus = new HashMap<String, String>();
+									updateStatus.put("status", "canceled");
+									updateStatus.put("message", input.getText().toString());
+									String content = PatientHomeActivity.this
+											.getResources().getString(
+													R.string.processing);
+									showProgressDialog(content, false);
 									JsonObjectRequest jsonObbjectReq = new JsonObjectRequest(
-											Method.PUT, urlUpdate, null,
+											Method.PUT, urlUpdate, new JSONObject(updateStatus),
 											new Listener<JSONObject>() {
 
 												@Override
@@ -105,16 +117,30 @@ public class PatientHomeActivity extends BaseActivity {
 													// TODO Auto-generated
 													// method stub
 													try {
-														if(response.getString("message").equals("upcoming")){
-															Toast.makeText(PatientHomeActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
-														} else if(response.getString("message").equals("success")){
+														if (response.getString(
+																"message").equals(
+																"success")) {
 															getDashboard();
-															Toast.makeText(PatientHomeActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
+															Toast.makeText(
+																	PatientHomeActivity.this,
+																	getResources()
+																			.getString(
+																					R.string.update_success),
+																	Toast.LENGTH_SHORT)
+																	.show();
+														} else {
+															Toast.makeText(
+																	PatientHomeActivity.this,
+																	"Cuộc hẹn đã được cập nhật trước đó",
+																	Toast.LENGTH_SHORT)
+																	.show();
 														}
 													} catch (JSONException e) {
-														// TODO Auto-generated catch block
+														// TODO Auto-generated catch
+														// block
 														e.printStackTrace();
 													}
+													closeProgressDialog();
 												}
 
 											}, new Response.ErrorListener() {
@@ -123,16 +149,17 @@ public class PatientHomeActivity extends BaseActivity {
 														VolleyError arg0) {
 													// TODO Auto-generated
 													// method stub
-													VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
+													VolleyLog.e(TAG, "Error: "
+															+ arg0.getMessage());
 												}
 
 											});
-									AppController.getInstance().addToRequestQueue(jsonObbjectReq,
-											"update to canceled");
+									AppController.getInstance().addToRequestQueue(
+											jsonObbjectReq, "update to canceled");
 								}
-								
 							});
-					alertDialog.show();
+
+					builder1.show();
 				}
 				return true;
 			}
@@ -299,23 +326,39 @@ public class PatientHomeActivity extends BaseActivity {
 			holder.tvHour.setText(umm.getHour());
 
 			if (umm.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(PatientHomeActivity.this.getResources()
 						.getString(R.string.status_new));
+				holder.tvStatus.setTextColor(PatientHomeActivity.this
+						.getResources().getColor(R.color.app_new));
 			} else if (umm.getStatus().equalsIgnoreCase(
 					Constants.STATUS_CONFIRMED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(PatientHomeActivity.this.getResources()
 						.getString(R.string.status_confirmed));
+				holder.tvStatus.setTextColor(PatientHomeActivity.this
+						.getResources().getColor(R.color.app_confirmed));
 			} else if (umm.getStatus().equalsIgnoreCase(Constants.STATUS_DONE)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(PatientHomeActivity.this.getResources()
 						.getString(R.string.status_done));
+				holder.tvStatus.setTextColor(PatientHomeActivity.this
+						.getResources().getColor(R.color.app_done));
 			} else if (umm.getStatus().equalsIgnoreCase(
 					Constants.STATUS_CANCELED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(PatientHomeActivity.this.getResources()
 						.getString(R.string.status_canceled));
+				holder.tvStatus.setTextColor(PatientHomeActivity.this
+						.getResources().getColor(R.color.app_canceled));
 			} else if (umm.getStatus().equalsIgnoreCase(
 					Constants.STATUS_REJECTED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(PatientHomeActivity.this.getResources()
 						.getString(R.string.status_rejected));
+				holder.tvStatus.setTextColor(PatientHomeActivity.this
+						.getResources().getColor(R.color.app_rejected));
+			} else if (umm.getStatus()
+					.equalsIgnoreCase(Constants.STATUS_MISSED)) {
+				holder.tvStatus.setText(PatientHomeActivity.this.getResources()
+						.getString(R.string.status_missed));
+				holder.tvStatus.setTextColor(PatientHomeActivity.this
+						.getResources().getColor(R.color.app_missed));
 			}
 
 			return convertView;

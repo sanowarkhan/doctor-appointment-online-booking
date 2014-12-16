@@ -26,7 +26,8 @@
                 android:id="@+id/tv_doctor_app_patient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10pt" />
+                android:textSize="10pt" 
+                android:textColor="@color/Red"/>
         </LinearLayout>
 
         <LinearLayout

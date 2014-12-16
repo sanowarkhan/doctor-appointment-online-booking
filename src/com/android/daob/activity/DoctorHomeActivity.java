@@ -47,6 +47,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
     String urlUpdate = Constants.URL +"doctorUpdateAppointments/";
 
 	ListView lvMeeting;
+	TextView listEmpty;
 
 	ArrayAdapter<DoctorAppointmentModel> listDoctorAppointmentAdapter;
 
@@ -68,6 +69,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 	
 	void init() {
 		lvMeeting = (ListView) findViewById(R.id.lv_meeting_today);
+//		listEmpty = (TextView) findViewById(R.id.lv_empty);
+//		lvMeeting.setEmptyView(listEmpty);
 		btnMeetingNotApproved = (Button) findViewById(R.id.btn_not_approved);
 		btnMeetingNotApproved.setOnClickListener(this);
 		btnNextMeeting = (Button) findViewById(R.id.btn_next_meeting);
@@ -369,8 +372,14 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 										.getString("startTime"));
 								dam.setStatus(jsonArr.getJSONObject(i)
 										.getString("status"));
-								dam.setNotes(jsonArr.getJSONObject(i)
-										.getString("preDescription"));
+								if (jsonArr.getJSONObject(i)
+										.getString("preDescription").isEmpty()) {
+									dam.setNotes("không có");	
+								}
+								else {
+									dam.setNotes(jsonArr.getJSONObject(i)
+											.getString("preDescription"));
+								}
 								dam.setId(jsonArr.getJSONObject(i).getInt("id"));
 								listDoctorAppointmentModels.add(dam);
 							} catch (JSONException e) {
@@ -435,8 +444,8 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 						.findViewById(R.id.tv_start_time);
 				holder.tvStatus = (TextView) convertView
 						.findViewById(R.id.tv_appointment_status);
-				holder.tvNotes = (TextView) convertView
-						.findViewById(R.id.tv_appointment_notes);
+//				holder.tvNotes = (TextView) convertView
+//						.findViewById(R.id.tv_appointment_notes);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
@@ -448,25 +457,42 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 			holder.tvDate.setText(dam.getDate());
 			holder.tvStartTime.setText(dam.getStartTime());
 			holder.tvStatus.setText(dam.getStatus());
-			holder.tvNotes.setText(dam.getNotes());
+//			holder.tvNotes.setText(dam.getNotes());
 
 			if (dam.getStatus().equalsIgnoreCase(Constants.STATUS_NEW)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(DoctorHomeActivity.this.getResources()
 						.getString(R.string.status_new));
+				holder.tvStatus.setTextColor(DoctorHomeActivity.this
+						.getResources().getColor(R.color.app_new));
 			} else if (dam.getStatus().equalsIgnoreCase(
 					Constants.STATUS_CONFIRMED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(DoctorHomeActivity.this.getResources()
 						.getString(R.string.status_confirmed));
+				holder.tvStatus.setTextColor(DoctorHomeActivity.this
+						.getResources().getColor(R.color.app_confirmed));
 			} else if (dam.getStatus().equalsIgnoreCase(Constants.STATUS_DONE)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(DoctorHomeActivity.this.getResources()
 						.getString(R.string.status_done));
+				holder.tvStatus.setTextColor(DoctorHomeActivity.this
+						.getResources().getColor(R.color.app_done));
 			} else if (dam.getStatus().equalsIgnoreCase(
 					Constants.STATUS_CANCELED)) {
-				holder.tvStatus.setText(getApplicationContext().getResources()
+				holder.tvStatus.setText(DoctorHomeActivity.this.getResources()
 						.getString(R.string.status_canceled));
-			} else {
-				holder.tvStatus.setText(getApplicationContext().getResources()
-						.getString(R.string.reject_app));
+				holder.tvStatus.setTextColor(DoctorHomeActivity.this
+						.getResources().getColor(R.color.app_canceled));
+			} else if (dam.getStatus().equalsIgnoreCase(
+					Constants.STATUS_REJECTED)){
+				holder.tvStatus.setText(DoctorHomeActivity.this.getResources()
+						.getString(R.string.status_rejected));
+				holder.tvStatus.setTextColor(DoctorHomeActivity.this
+						.getResources().getColor(R.color.app_rejected));
+			} else if (dam.getStatus().equalsIgnoreCase(
+					Constants.STATUS_MISSED)){
+				holder.tvStatus.setText(DoctorHomeActivity.this.getResources()
+						.getString(R.string.status_missed));
+				holder.tvStatus.setTextColor(DoctorHomeActivity.this
+						.getResources().getColor(R.color.app_missed));
 			}
 
 			return convertView;
@@ -484,7 +510,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 
 		TextView tvStatus;
 
-		TextView tvNotes;
+//		TextView tvNotes;
 
 	}
 }

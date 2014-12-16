@@ -1,14 +1,22 @@
 package com.android.daob.activity;
 
+import java.util.HashMap;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,43 +56,106 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 		btnCancel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String urlUpdate = cancelApp + appId;
-				JsonObjectRequest jsonObbjectReq = new JsonObjectRequest(
-						Method.PUT, urlUpdate, null,
-						new Listener<JSONObject>() {
+				final String urlUpdate = cancelApp + appId;
+				AlertDialog.Builder builder1 = new AlertDialog.Builder(
+						PatientAppointmentDetailActivity.this);
+				final EditText input = new EditText(
+						PatientAppointmentDetailActivity.this);
+				input.setInputType(InputType.TYPE_CLASS_TEXT);
+				builder1.setView(input);
+				builder1.setTitle(getApplicationContext().getResources()
+						.getString(R.string.reason_canceled));
 
+				builder1.setPositiveButton(getApplicationContext()
+						.getResources().getString(R.string.btn_cancel),
+						new DialogInterface.OnClickListener() {
 							@Override
-							public void onResponse(
-									JSONObject response) {
-								// TODO Auto-generated
-								// method stub
-								try {
-									if(response.getString("message").equals("upcoming")){
-										Toast.makeText(PatientAppointmentDetailActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
-									} else if(response.getString("message").equals("success")){
-										tvStatus.setText(getApplicationContext()
-												.getResources().getString(
-														R.string.status_canceled));
-										Toast.makeText(PatientAppointmentDetailActivity.this, getResources().getString(R.string.update_success), Toast.LENGTH_SHORT).show();
-									}
-								} catch (JSONException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
+							public void onClick(DialogInterface dialog,
+									int which) {
+								dialog.cancel();
 							}
-
-						}, new Response.ErrorListener() {
-							@Override
-							public void onErrorResponse(
-									VolleyError arg0) {
-								// TODO Auto-generated
-								// method stub
-								VolleyLog.e(TAG, "Error: " + arg0.getMessage());	
-							}
-
 						});
-				AppController.getInstance().addToRequestQueue(jsonObbjectReq,
-						"update to canceled");
+				builder1.setNegativeButton(getApplicationContext()
+						.getResources().getString(R.string.cancled_app),
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+								imm.hideSoftInputFromWindow(
+										input.getWindowToken(), 0);
+								HashMap<String, String> updateStatus = new HashMap<String, String>();
+								updateStatus.put("status", "canceled");
+								updateStatus.put("message", input.getText()
+										.toString());
+								String content = PatientAppointmentDetailActivity.this
+										.getResources().getString(
+												R.string.processing);
+								showProgressDialog(content, false);
+								JsonObjectRequest jsonObbjectReq = new JsonObjectRequest(
+										Method.PUT, urlUpdate, new JSONObject(
+												updateStatus),
+										new Listener<JSONObject>() {
+
+											@Override
+											public void onResponse(
+													JSONObject response) {
+												// TODO Auto-generated
+												// method stub
+												try {
+													if (response.getString(
+															"message").equals(
+															"success")) {
+														tvStatus.setText(getApplicationContext()
+																.getResources()
+																.getString(
+																		R.string.status_canceled));
+														tvStatus.setTextColor(getApplicationContext()
+																.getResources()
+																.getColor(
+																		R.color.app_canceled));
+														btnCancel
+																.setVisibility(View.GONE);
+														Toast.makeText(
+																PatientAppointmentDetailActivity.this,
+																getResources()
+																		.getString(
+																				R.string.update_success),
+																Toast.LENGTH_SHORT)
+																.show();
+													} else {
+														Toast.makeText(
+																PatientAppointmentDetailActivity.this,
+																"Cuộc hẹn đã được cập nhật trước đó",
+																Toast.LENGTH_SHORT)
+																.show();
+													}
+												} catch (JSONException e) {
+													// TODO Auto-generated catch
+													// block
+													e.printStackTrace();
+												}
+												closeProgressDialog();
+											}
+
+										}, new Response.ErrorListener() {
+											@Override
+											public void onErrorResponse(
+													VolleyError arg0) {
+												// TODO Auto-generated
+												// method stub
+												VolleyLog.e(TAG, "Error: "
+														+ arg0.getMessage());
+											}
+
+										});
+								AppController.getInstance().addToRequestQueue(
+										jsonObbjectReq, "update to canceled");
+							}
+						});
+
+				builder1.show();
+
 			}
 		});
 		init(getIntent().getExtras());
@@ -123,7 +194,8 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 										.getResources().getString(
 												R.string.status_new));
 								tvStatus.setTextColor(PatientAppointmentDetailActivity.this
-										.getResources().getColor(R.color.red));
+										.getResources().getColor(
+												R.color.app_new));
 								btnCancel.setVisibility(View.VISIBLE);
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_CONFIRMED)) {
@@ -131,7 +203,8 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 										.getResources().getString(
 												R.string.status_confirmed));
 								tvStatus.setTextColor(PatientAppointmentDetailActivity.this
-										.getResources().getColor(R.color.blue));
+										.getResources().getColor(
+												R.color.app_confirmed));
 								btnCancel.setVisibility(View.VISIBLE);
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_DONE)) {
@@ -139,14 +212,16 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 										.getResources().getString(
 												R.string.status_done));
 								tvStatus.setTextColor(PatientAppointmentDetailActivity.this
-										.getResources().getColor(R.color.black));
+										.getResources().getColor(
+												R.color.app_done));
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_CANCELED)) {
 								tvStatus.setText(getApplicationContext()
 										.getResources().getString(
 												R.string.status_canceled));
 								tvStatus.setTextColor(PatientAppointmentDetailActivity.this
-										.getResources().getColor(R.color.aqua));
+										.getResources().getColor(
+												R.color.app_canceled));
 							} else if (status
 									.equalsIgnoreCase(Constants.STATUS_REJECTED)) {
 								tvStatus.setText(getApplicationContext()
@@ -154,7 +229,15 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 												R.string.status_rejected));
 								tvStatus.setTextColor(PatientAppointmentDetailActivity.this
 										.getResources().getColor(
-												R.color.Brown_BurlyWood));
+												R.color.app_rejected));
+							} else if (status
+									.equalsIgnoreCase(Constants.STATUS_MISSED)) {
+								tvStatus.setText(getApplicationContext()
+										.getResources().getString(
+												R.string.status_missed));
+								tvStatus.setTextColor(PatientAppointmentDetailActivity.this
+										.getResources().getColor(
+												R.color.app_missed));
 							}
 							tvNote.setText(jsonArr.getJSONObject(0).getString(
 									"note"));
