@@ -11,6 +11,7 @@ import com.android.daob.application.AppController;
 import com.android.daob.utils.SessionManager;
 import com.android.doctor_appointment_online_booking.R;
 
+
 public class BaseActivity extends Activity {
 
     SessionManager sessionManager;

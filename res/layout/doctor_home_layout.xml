@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:background="@drawable/button_selector"
-            android:text="@string/meeting_not_approved" 
+            android:text="@string/meeting_not_approved"
             android:visibility="gone" />
 
         <Button
@@ -29,7 +29,7 @@
             android:layout_alignParentRight="true"
             android:background="@color/Red_FireBrick"
             android:text="1"
-            android:visibility="gone"  />
+            android:visibility="gone" />
     </RelativeLayout>
 
     <Button
@@ -47,7 +47,7 @@
         android:layout_height="1dp"
         android:layout_above="@+id/btn_next_meeting"
         android:background="@color/black" />
-    
+
     <ListView
         android:id="@+id/lv_meeting_today"
         android:layout_width="match_parent"
@@ -55,11 +55,22 @@
         android:layout_above="@+id/lineBottom"
         android:layout_below="@+id/lineTop"
         android:divider="@color/black"
-        android:dividerHeight="2dp"  >
-        
+        android:dividerHeight="2dp" >
     </ListView>
-    
-	
+
+    <TextView
+        android:id="@+id/tv_empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lineBottom"
+        android:layout_below="@+id/lineTop"
+        android:gravity="center"
+        android:text="@string/lv_empty"
+        android:textSize="8pt"
+        android:textStyle="bold"
+        android:visibility="gone" >
+    </TextView>
+
     <TextView
         android:id="@+id/tv_meeting_today"
         android:layout_width="wrap_content"
@@ -75,5 +86,5 @@
         android:layout_height="2dp"
         android:layout_below="@+id/tv_meeting_today"
         android:background="@color/black" />
-	
+
 </RelativeLayout>

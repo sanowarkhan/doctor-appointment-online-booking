@@ -22,7 +22,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@color/black"
-        android:dividerHeight="2dp" >
+        android:dividerHeight="2dp" 
+        >
     </ListView>
+    
+    <TextView
+        android:id="@+id/tv_empty_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/lv_empty"
+        android:textSize="8pt"
+        android:textStyle="bold"
+        android:visibility="gone" >
+    </TextView>
+    
 
 </LinearLayout>

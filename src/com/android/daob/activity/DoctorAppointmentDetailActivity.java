@@ -452,9 +452,13 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										.getResources().getColor(
 												R.color.app_missed));
 							}
-
-							tvNote.setText(jsonArr.getJSONObject(0).getString(
-									"preDescription"));
+							if (jsonArr.getJSONObject(0)
+									.getString("preDescription").isEmpty()) {
+								tvNote.setText("không có");
+							} else {
+								tvNote.setText(jsonArr.getJSONObject(0)
+										.getString("preDescription"));
+							}
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}

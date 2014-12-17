@@ -57,6 +57,7 @@
 	<string name="reject_app">Từ chối</string>
 	<string name="done_app">Đã khám</string>
 	<string name="booking_for">Bạn đặt lịch khám cho ai</string>
+	<string name="mark_as_missed">Đánh dấu bệnh nhân không đến</string>
 	<string name="for_me">Cho tôi</string>
 	<string name="for_other">Đặt hộ người khác</string>
 	<string name="booking_description">Miêu tả bệnh gửi bác sĩ</string>
