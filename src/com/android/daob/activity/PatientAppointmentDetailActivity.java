@@ -39,7 +39,8 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 
 	String cancelApp = Constants.URL + "patientCancelAppointment/";
 
-	TextView tvDoctorName, tvDate, tvTime, tvLocation, tvStatus, tvNote;
+	TextView tvDoctorName, tvDate, tvTime, tvLocation, tvStatus, tvNote,
+			tvPreNote;
 	Button btnCancel;
 	int appId = 0;
 
@@ -52,6 +53,7 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 		tvLocation = (TextView) findViewById(R.id.tv_patient_app_location);
 		tvStatus = (TextView) findViewById(R.id.tv_patient_app_status);
 		tvNote = (TextView) findViewById(R.id.tv_patient_app_note);
+		tvPreNote = (TextView) findViewById(R.id.tv_patient_app_preDesc);
 		btnCancel = (Button) findViewById(R.id.btn_patient_detail_cancel_app);
 		btnCancel.setOnClickListener(new OnClickListener() {
 			@Override
@@ -239,11 +241,24 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 										.getResources().getColor(
 												R.color.app_missed));
 							}
-							if (jsonArr.getJSONObject(0)
-									.getString("preDescription").isEmpty()) {
+							if (jsonArr.getJSONObject(0).getString("note")
+									.isEmpty()
+									|| jsonArr.getJSONObject(0)
+											.getString("note")
+											.equals("undefined")) {
 								tvNote.setText("không có");
 							} else {
 								tvNote.setText(jsonArr.getJSONObject(0)
+										.getString("note"));
+							}
+							if (jsonArr.getJSONObject(0)
+									.getString("preDescription").isEmpty()
+									|| jsonArr.getJSONObject(0)
+											.getString("preDescription")
+											.equals("undefined")) {
+								tvPreNote.setText("không có");
+							} else {
+								tvPreNote.setText(jsonArr.getJSONObject(0)
 										.getString("preDescription"));
 							}
 						} catch (JSONException e) {
