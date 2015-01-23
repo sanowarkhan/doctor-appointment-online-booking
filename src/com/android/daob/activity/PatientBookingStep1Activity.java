@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -41,6 +42,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 	public static String TAG = PatientBookingStep1Activity.class
 			.getSimpleName();
 
+	private ProgressBar loginProgressBar;
 	private String url = Constants.URL + "processStep1";
 
 	RadioButton rbForMe, rbForOther, rbMale, rbFemale;
@@ -84,6 +86,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 		// DoctorModel doctor = (DoctorModel)
 		// bun.getSerializable(Constants.DATA_KEY);
 		// doctorId = doctor.getDoctorId();
+		loginProgressBar = (ProgressBar) findViewById(R.id.booking_step1_progress);
 		rbForMe = (RadioButton) findViewById(R.id.rb_for_me);
 		rbForOther = (RadioButton) findViewById(R.id.rb_for_other);
 		rbMale = (RadioButton) findViewById(R.id.rb_male);
@@ -170,6 +173,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.btn_booking:
+		    loginProgressBar.setVisibility(View.VISIBLE);
 			String email = txtEmail.getText().toString().trim();
 			HashMap<String, String> bookingParams = new HashMap<String, String>();
 			bookingParams.put("email", email);
@@ -196,18 +200,20 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 								location = tvLocation.getText().toString();
 								Intent i = new Intent(context,
 										PatientBookingStep2Activity.class);
+								Log.i("aa", " " + response.getInt("confirmKey"));
 								i.putExtra(Constants.CONFIRM_KEY, response.getInt("confirmKey"));
 								context.startActivity(i);
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-
+							loginProgressBar.setVisibility(View.GONE);
 						}
 					}, new Response.ErrorListener() {
 						@Override
 						public void onErrorResponse(VolleyError error) {
 							VolleyLog.e(TAG, "Error: " + error.getMessage());
+							loginProgressBar.setVisibility(View.GONE);
 						}
 					}) {
 

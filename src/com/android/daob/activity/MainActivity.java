@@ -6,20 +6,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.json.JSONObject;
 
-import com.android.daob.application.AppController;
-import com.android.daob.gcm.GcmBroadcastReceiver;
-import com.android.daob.utils.Constants;
-import com.android.daob.utils.SessionManager;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.Request.Method;
-import com.android.volley.Response.Listener;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +16,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.android.daob.application.AppController;
+import com.android.daob.utils.Constants;
+import com.android.daob.utils.SessionManager;
+import com.android.volley.Request.Method;
+import com.android.volley.Response;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 public class MainActivity extends Activity {
 

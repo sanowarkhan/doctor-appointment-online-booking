@@ -3,210 +3,226 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/rlBookingStep1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:gravity="center"
+        android:visibility="visible" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standar_margin"
-            android:text="@string/booking_for" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <RadioButton
-                android:id="@+id/rb_for_me"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/for_me" />
-
-            <RadioButton
-                android:id="@+id/rb_for_other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/for_other" />
-        </RadioGroup>
-        
-		<View
-	        android:layout_width="match_parent"
-	        android:layout_height="1dp"
-	        android:background="@color/black" />
-		
-        <LinearLayout
-            android:id="@+id/ll_booking_for_other"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone" >
-
-            <EditText
-                android:id="@+id/ed_booking_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standar_margin"
-                android:hint="@string/booking_name" />
-
-            <EditText
-                android:id="@+id/ed_booking_old"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/standar_margin"
-                android:hint="@string/booking_old" />
+                android:text="@string/booking_for" />
 
             <RadioGroup
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/standar_margin"
-                android:orientation="horizontal" >
+                android:orientation="vertical" >
 
                 <RadioButton
-                    android:id="@+id/rb_male"
+                    android:id="@+id/rb_for_me"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/standar_margin"
                     android:checked="true"
                     android:onClick="onRadioButtonClicked"
-                    android:text="@string/male" />
+                    android:text="@string/for_me" />
 
                 <RadioButton
-                    android:id="@+id/rb_female"
+                    android:id="@+id/rb_for_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:onClick="onRadioButtonClicked"
-                    android:text="@string/female" />
+                    android:text="@string/for_other" />
             </RadioGroup>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/ll_booking_for_other"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <EditText
+                    android:id="@+id/ed_booking_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standar_margin"
+                    android:hint="@string/booking_name" />
+
+                <EditText
+                    android:id="@+id/ed_booking_old"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standar_margin"
+                    android:hint="@string/booking_old" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/standar_margin"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/rb_male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/standar_margin"
+                        android:checked="true"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="@string/male" />
+
+                    <RadioButton
+                        android:id="@+id/rb_female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onRadioButtonClicked"
+                        android:text="@string/female" />
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/ed_booking_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standar_margin"
+                    android:hint="@string/phone"
+                    android:inputType="phone" />
+
+                <EditText
+                    android:id="@+id/ed_booking_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standar_margin"
+                    android:hint="@string/address"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
+
             <EditText
-                android:id="@+id/ed_booking_phone"
+                android:id="@+id/edDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standar_margin"
-                android:hint="@string/phone"
-                android:inputType="phone" />
-            
+                android:ems="10"
+                android:gravity="top"
+                android:hint="@string/booking_description"
+                android:inputType="textMultiLine" >
+            </EditText>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standar_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/doctor" />
+
+                <TextView
+                    android:id="@+id/tv_doctor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standar_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/date" />
+
+                <TextView
+                    android:id="@+id/tv_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="6dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/start_space" />
+
+                <TextView
+                    android:id="@+id/tv_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="6dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/white_space" />
+
+                <TextView
+                    android:id="@+id/tv_booking_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standar_margin"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/place" />
+
+                <TextView
+                    android:id="@+id/tv_location_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
             <EditText
-                android:id="@+id/ed_booking_address"
+                android:id="@+id/tbEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/standar_margin"
-                android:hint="@string/address"
-                android:inputType="text" />
-            
+                android:ems="10"
+                android:gravity="top"
+                android:hint="@string/booking_email"
+                android:inputType="textEmailAddress" >
+            </EditText>
+
+            <Button
+                android:id="@+id/btn_booking"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standar_margin"
+                android:background="@drawable/button_selector"
+                android:text="@string/booking" />
         </LinearLayout>
-        
-		<View
-	        android:layout_width="match_parent"
-	        android:layout_height="1dp"
-	        android:background="@color/black" />
-		
-        <EditText
-            android:id="@+id/edDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standar_margin"
-            android:ems="10"
-            android:gravity="top"
-            android:hint="@string/booking_description"
-            android:inputType="textMultiLine" >
-        </EditText>
-        
-        <LinearLayout
+
+        <ProgressBar
+            android:id="@+id/booking_step1_progress"
+            style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standar_margin"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="@string/doctor" />
-
-            <TextView
-                android:id="@+id/tv_doctor_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standar_margin"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="@string/date" />
-
-            <TextView
-                android:id="@+id/tv_start_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            
-            <TextView
-            android:layout_width="6dp"
-            android:layout_height="wrap_content"
-            android:text="@string/start_space" />
-            
-            <TextView
-                android:id="@+id/tv_end_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            
-            <TextView
-            android:layout_width="6dp"
-            android:layout_height="wrap_content"
-            android:text="@string/white_space" />
-            
-            <TextView
-                android:id="@+id/tv_booking_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standar_margin"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="70dp"
-                android:layout_height="wrap_content"
-                android:text="@string/place" />
-
-            <TextView
-                android:id="@+id/tv_location_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/tbEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standar_margin"
-            android:ems="10"
-            android:gravity="top"
-            android:hint="@string/booking_email"
-            android:inputType="textEmailAddress" >
-        </EditText>
-        
-        <Button
-            android:id="@+id/btn_booking"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/standar_margin"
-            android:background="@drawable/button_selector"
-            android:text="@string/booking" />
-    </LinearLayout>
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </ScrollView>
