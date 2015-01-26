@@ -174,7 +174,7 @@ public class PatientHomeActivity extends BaseActivity {
 						.getItemAtPosition(position);
 				Intent i = new Intent(PatientHomeActivity.this, PatientAppointmentDetailActivity.class);
 				Bundle bun = new Bundle();
-		        bun.putInt("appointmentId", um.getId());
+		        bun.putString("appointmentId", um.getId());
 				i.putExtras(bun);
 				VolleyLog.e(TAG, "sendBun: " , bun);
 				startActivity(i);
@@ -249,7 +249,7 @@ public class PatientHomeActivity extends BaseActivity {
 										"startTime"));
 								umm.setStatus(jsonArr.getJSONObject(i)
 										.getString("status"));
-								umm.setId(jsonArr.getJSONObject(i).getInt("id"));
+								umm.setId(jsonArr.getJSONObject(i).getString("id"));
 								listUserMeetingModels.add(umm);
 							} catch (JSONException e) {
 								e.printStackTrace();

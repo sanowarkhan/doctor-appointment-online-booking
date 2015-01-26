@@ -44,7 +44,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 	TextView tvPatientName, tvDate, tvTime, tvLocation, tvStatus, tvNote;
 	Button btnConfirm, btnReject, btnCancel, btnMissed;
 
-	int appId = 0;
+	String appId = "";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -251,7 +251,7 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 	}
 
 	void init(Bundle bun) {
-		appId = bun.getInt("appointmentId");
+		appId = bun.getString("appointmentId");
 	}
 
 	void markBusyTime() {

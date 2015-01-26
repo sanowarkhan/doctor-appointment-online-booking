@@ -2,17 +2,17 @@
 package com.android.daob.model;
 
 public class WorkingPlaceModel {
-    private int workingPlaceId;
+    private String workingPlaceId;
 
     private String workingPlaceName;
 
     private String address;
 
-    public int getWorkingPlaceId() {
+    public String getWorkingPlaceId() {
         return workingPlaceId;
     }
 
-    public void setWorkingPlaceId(int workingPlaceId) {
+    public void setWorkingPlaceId(String workingPlaceId) {
         this.workingPlaceId = workingPlaceId;
     }
 

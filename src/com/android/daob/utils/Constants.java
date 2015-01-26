@@ -1,61 +1,61 @@
-
 package com.android.daob.utils;
 
 public interface Constants {
-    // heroku
-//	 public String URL = "https://doctor-app-booking-online.herokuapp.com/api/";
-    
+	// heroku
+	// public String URL =
+	// "https://doctor-app-booking-online.herokuapp.com/api/";
+
 	// home
-//     public String URL = "http://192.168.1.48:1337/api/";
-    
+	public String URL = "http://192.168.1.48:1337/api/";
+
 	// phone
-//     public String URL = "http://192.168.43.103:1337/api/";
-//	 public String URL = "http://192.168.1.101:1337/api/";
+	// public String URL = "http://192.168.43.103:1337/api/";
+	// public String URL = "http://192.168.1.101:1337/api/";
 	// com
-     public String URL = "http://10.88.136.67:1337/api/";
+	// public String URL = "http://10.88.136.91:1337/api/";
 
-    public String ROLE_DOCTOR = "doctor";
+	public String ROLE_DOCTOR = "doctor";
 
-    public String ROLE_PATIENT = "patient";
+	public String ROLE_PATIENT = "patient";
 
-    public String STATUS_NEW = "new";
-    
-    public String STATUS_REJECTED = "rejected";
+	public String STATUS_NEW = "new";
 
-    public String STATUS_CONFIRMED = "confirmed";
+	public String STATUS_REJECTED = "rejected";
 
-    public String STATUS_DONE = "done";
+	public String STATUS_CONFIRMED = "confirmed";
 
-    public String STATUS_CANCELED = "canceled";
-    
-    public String STATUS_MISSED = "missed";
+	public String STATUS_DONE = "done";
 
-    // doctor table
-    public String DOCTOR_TABLE = "Doctor";
+	public String STATUS_CANCELED = "canceled";
 
-    public String DESCRIPTION = "Desctiption";
+	public String STATUS_MISSED = "missed";
 
-    public String EDUCATION = "Education";
+	// doctor table
+	public String DOCTOR_TABLE = "Doctor";
 
-    public String WORKING_PLACE = "WorkingPlace";
+	public String DESCRIPTION = "Description";
 
-    public String DOCTOR_SPECIALTY = "Specialty";
+	public String EDUCATION = "Education";
 
-    // hospital table
-    public String HOSPITAL_TABLE = "WorkingPlace";
+	public String WORKING_PLACE = "WorkingPlace";
 
-    public String ID = "Id";
+	public String DOCTOR_SPECIALTY = "Specialty";
 
-    public String NAME = "Name";
+	// hospital table
+	public String HOSPITAL_TABLE = "WorkingPlace";
 
-    public String ADDRESS = "Address";
+	public String ID = "Id";
 
-    // Specialty table
-    public String SPECIALTY_TABLE = "Specialty";
+	public String NAME = "Name";
 
-    public String DATA_KEY = "data_key";
-    
-    public String DATA_KEY1 = "data_key_booking";
+	public String ADDRESS = "Address";
+
+	// Specialty table
+	public String SPECIALTY_TABLE = "Specialty";
+
+	public String DATA_KEY = "data_key";
+
+	public String DATA_KEY1 = "data_key_booking";
 
 	public String CONFIRM_KEY = "confirm_key";
 }

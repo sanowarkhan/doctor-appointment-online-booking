@@ -46,7 +46,7 @@ public class SQLiteTable {
     
     DoctorModel initDoctorModelFromCursor(Cursor c){
     	DoctorModel doc = new DoctorModel();
-    	doc.setDoctorId(c.getInt(c.getColumnIndex(Constants.ID)));
+    	doc.setDoctorId(c.getString(c.getColumnIndex(Constants.ID)));
     	doc.setDoctorName(c.getString(c.getColumnIndex(Constants.NAME)));
     	doc.setDescription(c.getString(c.getColumnIndex(Constants.DESCRIPTION)));
     	doc.setEducation(c.getString(c.getColumnIndex(Constants.EDUCATION)));
@@ -56,7 +56,7 @@ public class SQLiteTable {
 
     WorkingPlaceModel initWorkingPlaceFromCursor(Cursor c) {
         WorkingPlaceModel wp = new WorkingPlaceModel();
-        wp.setWorkingPlaceId(c.getInt(c.getColumnIndex(Constants.ID)));
+        wp.setWorkingPlaceId(c.getString(c.getColumnIndex(Constants.ID)));
         wp.setWorkingPlaceName(c.getString(c.getColumnIndex(Constants.NAME)));
         wp.setAddress(c.getString(c.getColumnIndex(Constants.ADDRESS)));
         return wp;
@@ -64,27 +64,27 @@ public class SQLiteTable {
 
     SpecialtyModel initSpecialtyFromCursor(Cursor c) {
         SpecialtyModel spec = new SpecialtyModel();
-        spec.setSpecialtyId(c.getInt(c.getColumnIndex(Constants.ID)));
+        spec.setSpecialtyId(c.getString(c.getColumnIndex(Constants.ID)));
         spec.setSpecialtyName(c.getString(c.getColumnIndex(Constants.NAME)));
         return spec;
     }
     
     //search doctor
-    public ArrayList<DoctorModel> searchDoctor(int specialtyId, int workingPlaceId, String name){
+    public ArrayList<DoctorModel> searchDoctor(String specialtyId, String workingPlaceId, String name){
     	ArrayList<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
     	try{
     		String sql = "";
-    		if(specialtyId == 0 && workingPlaceId == 0 && !name.isEmpty()){
+    		if(specialtyId.equals("") && workingPlaceId.equals("") && !name.isEmpty()){
     			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Name like '%" + name + "%'";
-    		} else if(specialtyId == 0 && workingPlaceId != 0){
+    		} else if(specialtyId.equals("") && !workingPlaceId.equals("")){
     			sql = "Select * from " + Constants.DOCTOR_TABLE + " where WorkingPlace like '%" + workingPlaceId +";%'"
         				+ " and Name like '%" + name + "%'";
-    		} else if(workingPlaceId == 0 && specialtyId != 0){
-    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty=" + specialtyId 
+    		} else if(workingPlaceId.equals("") && !specialtyId.equals("")){
+    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty like '%" + specialtyId + "%'"
         				+ " and Name like '%" + name + "%'";
-    		} else if(specialtyId != 0 && workingPlaceId != 0){
-    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty="
-        				+ specialtyId + " and WorkingPlace like '%" + workingPlaceId +";%'"
+    		} else if(specialtyId.equals("") && !workingPlaceId.equals("")){
+    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty like '%"
+        				+ specialtyId + "'%" + " and WorkingPlace like '%" + workingPlaceId +";%'"
         				+ " and Name like '%" + name + "%'";
     		} else{
     			sql = "Select * from " + Constants.DOCTOR_TABLE;

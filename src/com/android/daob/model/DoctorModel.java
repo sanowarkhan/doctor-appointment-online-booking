@@ -7,17 +7,17 @@ public class DoctorModel implements Serializable{
      * 
      */
     private static final long serialVersionUID = 1L;
-    private int doctorId;
+    private String doctorId;
 	private String doctorName;
 	private String doctorWorkingPlace;
 	private String description;
 	private String education;
-	private int specialty;
+	private String specialty;
 	
-	public int getDoctorId() {
+	public String getDoctorId() {
 		return doctorId;
 	}
-	public void setDoctorId(int doctorId) {
+	public void setDoctorId(String doctorId) {
 		this.doctorId = doctorId;
 	}
 	public String getDoctorName() {
@@ -44,10 +44,10 @@ public class DoctorModel implements Serializable{
 	public void setEducation(String education) {
 		this.education = education;
 	}
-	public int getSpecialty() {
+	public String getSpecialty() {
 		return specialty;
 	}
-	public void setSpecialty(int specialty) {
+	public void setSpecialty(String specialty) {
 		this.specialty = specialty;
 	}
 	

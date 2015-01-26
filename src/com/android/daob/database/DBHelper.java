@@ -11,7 +11,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     private static int DATABASE_VERSION = 1;
 
-    private static String DATABASE_NAME = "DAOB";
+    private static String DATABASE_NAME = "DAOB_MONGO";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -20,15 +20,15 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("Create table " + Constants.HOSPITAL_TABLE + " (" + Constants.ID
-                + " integer primary key, " + Constants.NAME + " text, " + Constants.ADDRESS + " text)");
+                + " text primary key, " + Constants.NAME + " text, " + Constants.ADDRESS + " text)");
         db.execSQL("Create table " + Constants.SPECIALTY_TABLE + " (" + Constants.ID
-                + " integer primary key, " + Constants.NAME + " text)");
+                + " text primary key, " + Constants.NAME + " text)");
         db.execSQL("Create table " + Constants.DOCTOR_TABLE + " (" + Constants.ID
-                + " integer primary key, " + Constants.NAME + " text, "
+                + " text primary key, " + Constants.NAME + " text, "
                 + Constants.DESCRIPTION + " text, "
                 + Constants.DOCTOR_SPECIALTY + " text, "
                 + Constants.EDUCATION + " text, "
-                + Constants.WORKING_PLACE + " interger)");
+                + Constants.WORKING_PLACE + " text)");
     }
 
     @Override

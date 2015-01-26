@@ -59,7 +59,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 
 	boolean gender = false;
 
-	int doctorId = 0;
+	String doctorId = "";
 
 	Context context;
 	
@@ -236,7 +236,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 		String note = txtNotes.getText().toString().trim();
 		String location = tvLocation.getText().toString().trim();
 		String meetingDate = tvBookDate.getText().toString().trim();
-		int doctorId = PatientSearchDoctorActivity.doctorId;
+		String doctorId = PatientSearchDoctorActivity.doctorId;
 
 		bookingParams.put("startTime", startTime);
 		bookingParams.put("endTime", endTime);

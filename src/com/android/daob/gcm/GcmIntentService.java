@@ -27,7 +27,7 @@ public class GcmIntentService extends IntentService {
 	public static int NOTIFICATION_ID = 1;
 	private NotificationManager mNotificationManager;
 	NotificationCompat.Builder builder;
-	private int appointmentId;
+	private String appointmentId;
 	private String role;
 
 	public GcmIntentService() {
@@ -64,7 +64,7 @@ public class GcmIntentService extends IntentService {
 				// }
 				Log.i(TAG, "Completed work @ " + SystemClock.elapsedRealtime());
 				if (extras.getString("username").equals(MainActivity.username)) {
-					appointmentId = Integer.parseInt(extras.getString("id"));
+					appointmentId = extras.getString("id");
 					role = extras.getString("role");
 					sendNotification(extras.getString("message"));
 				}
@@ -97,7 +97,7 @@ public class GcmIntentService extends IntentService {
 		// PendingIntent.FLAG_UPDATE_CURRENT);
 
 		Bundle bun = new Bundle();
-		bun.putInt("appointmentId", appointmentId);
+		bun.putString("appointmentId", appointmentId);
 		Log.i(TAG, "id: " + appointmentId);
 
 		NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(

@@ -14,9 +14,9 @@ public class PatientBookingModel implements Serializable{
     private String preDescription;
     private String location;
     private String notes;
-    private int doctor;
+    private String doctor;
     private String email;
-    private int patientId;
+    private String patientId;
     private String delPatName;
     private String delPatAge;
     private String delPatGender;
@@ -66,10 +66,10 @@ public class PatientBookingModel implements Serializable{
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	public int getDoctor() {
+	public String getDoctor() {
 		return doctor;
 	}
-	public void setDoctor(int doctor) {
+	public void setDoctor(String doctor) {
 		this.doctor = doctor;
 	}
 	public String getEmail() {
@@ -78,10 +78,10 @@ public class PatientBookingModel implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getPatientId() {
+	public String getPatientId() {
 		return patientId;
 	}
-	public void setPatientId(int patientId) {
+	public void setPatientId(String patientId) {
 		this.patientId = patientId;
 	}
 	public String getDelPatName() {

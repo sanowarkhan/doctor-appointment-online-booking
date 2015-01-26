@@ -54,7 +54,7 @@ public class PatientCalendarActivity extends BaseActivity {
 
     String urlGetFreeTime = Constants.URL + "doctorFreeTime?";
 
-    int doctorId = 0;
+    String doctorId = "";
 
     ArrayList<Object> listDoctorFreeTimeModel = new ArrayList<Object>();
 
@@ -200,7 +200,7 @@ public class PatientCalendarActivity extends BaseActivity {
                                 dft.setLocation(jsonArr.getJSONObject(i).getString("location"));
                                 dft.setStartTime(jsonArr.getJSONObject(i).getString("startTime"));
                                 dft.setEndTime(jsonArr.getJSONObject(i).getString("endTime"));
-                                dft.setDoctorId(jsonArr.getJSONObject(i).getInt("doctor"));
+                                dft.setDoctorId(jsonArr.getJSONObject(i).getString("doctor"));
                                 dft.setMeetingDate(jsonArr.getJSONObject(i).getString("meetingDate"));
                                 listDoctorFreeTimeModel.add(dft);
                             } catch (JSONException e) {

@@ -2,15 +2,15 @@
 package com.android.daob.model;
 
 public class SpecialtyModel {
-    private int specialtyId;
+    private String specialtyId;
 
     private String specialtyName;
 
-    public int getSpecialtyId() {
+    public String getSpecialtyId() {
         return specialtyId;
     }
 
-    public void setSpecialtyId(int specialtyId) {
+    public void setSpecialtyId(String specialtyId) {
         this.specialtyId = specialtyId;
     }
 

@@ -319,7 +319,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 				Intent i = new Intent(DoctorNextMeetingActivity.this,
 						DoctorAppointmentDetailActivity.class);
 				Bundle bun = new Bundle();
-				bun.putInt("appointmentId", dam.getId());
+				bun.putString("appointmentId", dam.getId());
 				i.putExtras(bun);
 				startActivity(i);
 			}
@@ -384,7 +384,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 								// dam.setNotes(jsonArr.getJSONObject(i)
 								// .getString("preDescription"));
 								// }
-								dam.setId(jsonArr.getJSONObject(i).getInt("id"));
+								dam.setId(jsonArr.getJSONObject(i).getString("id"));
 								listDoctorAppointmentModels.add(dam);
 							} catch (JSONException e) {
 								e.printStackTrace();
@@ -414,7 +414,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 				tag_json_getAllApp_req);
 	}
 
-	void markBusyTime(int id) {
+	void markBusyTime(String id) {
 		HashMap<String, String> markBusy = new HashMap<String, String>();
 		markBusy.put("appointmentId", "" + id);
 		String content = DoctorNextMeetingActivity.this.getResources()
@@ -457,7 +457,7 @@ public class DoctorNextMeetingActivity extends BaseActivity {
 				"markBusyTime");
 	}
 
-	void requestUpdate(String status, String message, int id) {
+	void requestUpdate(String status, String message, String id) {
 		String urlReq = urlUpdate + id;
 		HashMap<String, String> updateStatus = new HashMap<String, String>();
 		updateStatus.put("status", status);

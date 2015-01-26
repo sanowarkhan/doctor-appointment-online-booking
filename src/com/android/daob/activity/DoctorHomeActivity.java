@@ -320,7 +320,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 				Intent i = new Intent(DoctorHomeActivity.this,
 						DoctorAppointmentDetailActivity.class);
 				Bundle bun = new Bundle();
-				bun.putInt("appointmentId", dam.getId());
+				bun.putString("appointmentId", dam.getId());
 				i.putExtras(bun);
 				startActivity(i);
 			}
@@ -367,7 +367,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 		startActivity(intent);
 	}
 
-	void markBusyTime(int id) {
+	void markBusyTime(String id) {
 		HashMap<String, String> markBusy = new HashMap<String, String>();
 		markBusy.put("appointmentId", "" + id);
 		String content = DoctorHomeActivity.this.getResources().getString(
@@ -410,7 +410,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 				"markBusyTime");
 	}
 
-	void requestUpdate(String status, String message, int id) {
+	void requestUpdate(String status, String message, String id) {
 		String urlReq = urlUpdate + id;
 		HashMap<String, String> updateStatus = new HashMap<String, String>();
 		updateStatus.put("status", status);
@@ -494,7 +494,7 @@ public class DoctorHomeActivity extends BaseActivity implements OnClickListener 
 //									dam.setNotes(jsonArr.getJSONObject(i)
 //											.getString("preDescription"));
 //								}
-								dam.setId(jsonArr.getJSONObject(i).getInt("id"));
+								dam.setId(jsonArr.getJSONObject(i).getString("id"));
 								listDoctorAppointmentModels.add(dam);
 							} catch (JSONException e) {
 								e.printStackTrace();

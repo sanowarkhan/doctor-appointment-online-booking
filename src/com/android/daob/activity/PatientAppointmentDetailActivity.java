@@ -42,7 +42,7 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 	TextView tvDoctorName, tvDate, tvTime, tvLocation, tvStatus, tvNote,
 			tvPreNote;
 	Button btnCancel;
-	int appId = 0;
+	String appId = "";
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -165,7 +165,7 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 	}
 
 	void init(Bundle bun) {
-		appId = bun.getInt("appointmentId");
+		appId = bun.getString("appointmentId");
 	}
 
 	void getAppoimentInfo() {

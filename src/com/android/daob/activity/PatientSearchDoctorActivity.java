@@ -65,7 +65,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
 
     ArrayList<DoctorModel> listDoctors = new ArrayList<DoctorModel>();
     
-    public static int doctorId = 0;
+    public static String doctorId = "";
     
     public static String doctorName;
 
@@ -76,9 +76,9 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
         init();
     }
 
-    int workingPlaceId = 0;
+    String workingPlaceId = "";
 
-    int specialtyId = 0;
+    String specialtyId = "";
 
     void init() {
         lvDoctor = (ListView) findViewById(R.id.lv_doctor_search_result);
@@ -108,7 +108,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
                     WorkingPlaceModel wp = (WorkingPlaceModel) parent.getItemAtPosition(position);
                     workingPlaceId = wp.getWorkingPlaceId();
                 } else {
-                    workingPlaceId = 0;
+                    workingPlaceId = "";
                 }
             }
 
@@ -127,7 +127,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
                     SpecialtyModel wp = (SpecialtyModel) parent.getItemAtPosition(position);
                     specialtyId = wp.getSpecialtyId();
                 } else {
-                    specialtyId = 0;
+                    specialtyId = "";
                 }
             }
 
@@ -239,11 +239,11 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
                             arrDoc = arr.getJSONObject(2).getJSONArray("doctor");
                             for (int i = 0; i < arrDoc.length(); i++) {
                                 DoctorModel doc = new DoctorModel();
-                                doc.setDoctorId(arrDoc.getJSONObject(i).getInt("id"));
+                                doc.setDoctorId(arrDoc.getJSONObject(i).getString("id"));
                                 doc.setDoctorName(arrDoc.getJSONObject(i).getString("name"));
                                 doc.setDescription(arrDoc.getJSONObject(i).getString("description"));
                                 doc.setEducation(arrDoc.getJSONObject(i).getString("education"));
-                                doc.setSpecialty(arrDoc.getJSONObject(i).getInt("specialty"));
+                                doc.setSpecialty(arrDoc.getJSONObject(i).getString("specialty"));
                                 doc.setDoctorWorkingPlace(arrDoc.getJSONObject(i).getString(
                                         "workingPlace"));
                                 sqLiteTable.insertDoctor(doc);
@@ -253,7 +253,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
                             arrWp = arr.getJSONObject(0).getJSONArray("workingPlace");
                             for (int j = 0; j < arrWp.length(); j++) {
                                 WorkingPlaceModel wp = new WorkingPlaceModel();
-                                wp.setWorkingPlaceId(arrWp.getJSONObject(j).getInt("id"));
+                                wp.setWorkingPlaceId(arrWp.getJSONObject(j).getString("id"));
                                 wp.setWorkingPlaceName(arrWp.getJSONObject(j).getString("name"));
                                 wp.setAddress(arrWp.getJSONObject(j).getString("address"));
                                 sqLiteTable.insertWorkingPlace(wp);
@@ -263,7 +263,7 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
                             arrSpec = arr.getJSONObject(1).getJSONArray("specialty");
                             for (int k = 0; k < arrSpec.length(); k++) {
                                 SpecialtyModel spec = new SpecialtyModel();
-                                spec.setSpecialtyId(arrSpec.getJSONObject(k).getInt("id"));
+                                spec.setSpecialtyId(arrSpec.getJSONObject(k).getString("id"));
                                 spec.setSpecialtyName(arrSpec.getJSONObject(k).getString("name"));
                                 sqLiteTable.insertSpecialty(spec);
                                 listSpecialtyModels.add(spec);
@@ -302,12 +302,12 @@ public class PatientSearchDoctorActivity extends BaseActivity implements OnClick
 
     void fillDataToSpinner() {
         WorkingPlaceModel wp = new WorkingPlaceModel();
-        wp.setWorkingPlaceId(0);
+        wp.setWorkingPlaceId("");
         wp.setWorkingPlaceName(getResources().getString(R.string.all));
         listWorkingPlaceModels.add(0, wp);
 
         SpecialtyModel spec = new SpecialtyModel();
-        spec.setSpecialtyId(0);
+        spec.setSpecialtyId("");
         spec.setSpecialtyName(getResources().getString(R.string.all));
         listSpecialtyModels.add(0, spec);
 
