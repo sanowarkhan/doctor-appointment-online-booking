@@ -241,25 +241,29 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 										.getResources().getColor(
 												R.color.app_missed));
 							}
-							if (jsonArr.getJSONObject(0).getString("note")
-									.isEmpty()
-									|| jsonArr.getJSONObject(0)
-											.getString("note")
-											.equals("undefined")) {
-								tvNote.setText("không có");
+							if (jsonArr.getJSONObject(0).has("note")) {
+								if(!jsonArr.getJSONObject(0).isNull("note")){
+									tvNote.setText(jsonArr.getJSONObject(0)
+											.getString("note"));
+								} else {
+									tvNote.setText("Không có");
+								}
 							} else {
-								tvNote.setText(jsonArr.getJSONObject(0)
-										.getString("note"));
+								tvNote.setText("Không có");
 							}
-							if (jsonArr.getJSONObject(0)
-									.getString("preDescription").isEmpty()
-									|| jsonArr.getJSONObject(0)
-											.getString("preDescription")
-											.equals("undefined")) {
-								tvPreNote.setText("không có");
+							if (jsonArr.getJSONObject(0).has("preDescription")) {
+								if (jsonArr.getJSONObject(0).isNull(
+										"preDescription")
+										|| jsonArr.getJSONObject(0)
+												.getString("preDescription")
+												.equals("undefined")) {
+									tvPreNote.setText("Không có");
+								} else {
+									tvPreNote.setText(jsonArr.getJSONObject(0)
+											.getString("preDescription"));
+								}
 							} else {
-								tvPreNote.setText(jsonArr.getJSONObject(0)
-										.getString("preDescription"));
+								tvPreNote.setText("Không có");
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();
@@ -277,5 +281,4 @@ public class PatientAppointmentDetailActivity extends BaseActivity {
 		AppController.getInstance().addToRequestQueue(jsonArrayRequest,
 				tag_json_getAppInfo);
 	}
-
 }

@@ -1,14 +1,16 @@
-
 package com.android.daob.activity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,332 +36,453 @@ import com.android.daob.model.WorkingPlaceModel;
 import com.android.daob.utils.Constants;
 import com.android.doctor_appointment_online_booking.R;
 import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
-public class PatientSearchDoctorActivity extends BaseActivity implements OnClickListener {
+public class PatientSearchDoctorActivity extends BaseActivity implements
+		OnClickListener {
 
-    public static String TAG = PatientSearchDoctorActivity.class.getSimpleName();
+	public static String TAG = PatientSearchDoctorActivity.class
+			.getSimpleName();
 
-    String urlGetListWorkingAndSpecialty = Constants.URL + "getListDoctorWorkingSpecialty";
+	String urlGetListWorkingAndSpecialty = Constants.URL
+			+ "getListDoctorWorkingSpecialty";
 
-    String urlSearch = Constants.URL + "";
+	String urlCheckDoctor = Constants.URL + "checkAvailableDoctor";
 
-    Button btnSearch;
+	String urlSearch = Constants.URL + "";
 
-    EditText doctorNameTxt;
+	Button btnSearch;
 
-    ListView lvDoctor;
+	EditText doctorNameTxt;
 
-    Spinner spinnerWorkingPlace, spinnerSpecialty;
+	ListView lvDoctor;
 
-    List<WorkingPlaceModel> listWorkingPlaceModels = new ArrayList<WorkingPlaceModel>();
+	Spinner spinnerWorkingPlace, spinnerSpecialty;
 
-    List<SpecialtyModel> listSpecialtyModels = new ArrayList<SpecialtyModel>();
+	List<WorkingPlaceModel> listWorkingPlaceModels = new ArrayList<WorkingPlaceModel>();
 
-    List<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
+	List<SpecialtyModel> listSpecialtyModels = new ArrayList<SpecialtyModel>();
 
-    ArrayAdapter<DoctorModel> listDoctorResultAdapter;
+	List<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
 
-    ArrayList<DoctorModel> listDoctors = new ArrayList<DoctorModel>();
-    
-    public static String doctorId = "";
-    
-    public static String doctorName;
+	ArrayAdapter<DoctorModel> listDoctorResultAdapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.patient_search_layout);
-        init();
-    }
+	ArrayList<DoctorModel> listDoctors = new ArrayList<DoctorModel>();
 
-    String workingPlaceId = "";
+	public static String doctorId = "";
 
-    String specialtyId = "";
+	public static String doctorName;
 
-    void init() {
-        lvDoctor = (ListView) findViewById(R.id.lv_doctor_search_result);
-        // lvDoctor.setOnItemClickListener((OnItemClickListener) this);
-        lvDoctor.setOnItemClickListener(new OnItemClickListener() {
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.patient_search_layout);
+		init();
+	}
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DoctorModel doctor = (DoctorModel) parent.getItemAtPosition(position);
-                doctorId = doctor.getDoctorId();
-                doctorName = doctor.getDoctorName();
-                Bundle bun = new Bundle();
-                bun.putSerializable(Constants.DATA_KEY, doctor);
-                Intent intent = new Intent(PatientSearchDoctorActivity.this,
-                        PatientCalendarActivity.class);
-                intent.putExtras(bun);
-                startActivity(intent);
+	String workingPlaceId = "";
 
-            }
-        });
-        spinnerWorkingPlace = (Spinner) findViewById(R.id.ddl_hospital);
-        spinnerWorkingPlace.setOnItemSelectedListener(new OnItemSelectedListener() {
+	String specialtyId = "";
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) {
-                    WorkingPlaceModel wp = (WorkingPlaceModel) parent.getItemAtPosition(position);
-                    workingPlaceId = wp.getWorkingPlaceId();
-                } else {
-                    workingPlaceId = "";
-                }
-            }
+	void init() {
+		lvDoctor = (ListView) findViewById(R.id.lv_doctor_search_result);
+		// lvDoctor.setOnItemClickListener((OnItemClickListener) this);
+		lvDoctor.setOnItemClickListener(new OnItemClickListener() {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // nothing to do
-            }
-        });
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				DoctorModel doctor = (DoctorModel) parent
+						.getItemAtPosition(position);
+				doctorId = doctor.getDoctorId();
+				doctorName = doctor.getDoctorName();
+				Bundle bun = new Bundle();
+				bun.putSerializable(Constants.DATA_KEY, doctor);
+				Intent intent = new Intent(PatientSearchDoctorActivity.this,
+						PatientCalendarActivity.class);
+				intent.putExtras(bun);
+				startActivity(intent);
 
-        spinnerSpecialty = (Spinner) findViewById(R.id.ddl_speciality);
-        spinnerSpecialty.setOnItemSelectedListener(new OnItemSelectedListener() {
+			}
+		});
+		spinnerWorkingPlace = (Spinner) findViewById(R.id.ddl_hospital);
+		spinnerWorkingPlace
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0) {
-                    SpecialtyModel wp = (SpecialtyModel) parent.getItemAtPosition(position);
-                    specialtyId = wp.getSpecialtyId();
-                } else {
-                    specialtyId = "";
-                }
-            }
+					@Override
+					public void onItemSelected(AdapterView<?> parent,
+							View view, int position, long id) {
+						if (position != 0) {
+							WorkingPlaceModel wp = (WorkingPlaceModel) parent
+									.getItemAtPosition(position);
+							workingPlaceId = wp.getWorkingPlaceId();
+						} else {
+							workingPlaceId = "";
+						}
+					}
 
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-                // TODO Auto-generated method stub
+					@Override
+					public void onNothingSelected(AdapterView<?> parent) {
+						// nothing to do
+					}
+				});
 
-            }
+		spinnerSpecialty = (Spinner) findViewById(R.id.ddl_speciality);
+		spinnerSpecialty
+				.setOnItemSelectedListener(new OnItemSelectedListener() {
 
-        });
-        doctorNameTxt = (EditText) findViewById(R.id.tv_search_doctor);
-        btnSearch = (Button) findViewById(R.id.btn_search_doctor);
-        btnSearch.setOnClickListener(this);
-        if (!checkHasData()) {
-            getWorkingAndSpecialtyFromServer();
-        } else {
-            getWorkingAndSpecialtyFromDB();
-        }
-    }
+					@Override
+					public void onItemSelected(AdapterView<?> parent,
+							View view, int position, long id) {
+						if (position != 0) {
+							SpecialtyModel wp = (SpecialtyModel) parent
+									.getItemAtPosition(position);
+							specialtyId = wp.getSpecialtyId();
+						} else {
+							specialtyId = "";
+						}
+					}
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.top_right_menu, menu);
-        menu.getItem(0).setTitle(getResources().getString(R.string.home));
-        menu.getItem(0).setIcon(this.getResources().getDrawable(R.drawable.ic_action_go_to_today));
-        return super.onCreateOptionsMenu(menu);
-    }
+					@Override
+					public void onNothingSelected(AdapterView<?> arg0) {
+						// TODO Auto-generated method stub
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.top_right_button:
-                finish();
-                Intent intentHome = new Intent(this, PatientHomeActivity.class);
-                startActivity(intentHome);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+					}
 
-    @Override
-    public void onClick(View v) {
-        // Intent intentDetail = new Intent(PatientSearchDoctorActivity.this,
-        // PatientViewDoctorDetailActivity.class);
-        // startActivity(intentDetail);
-        // listDoctorModels.clear();
-        SQLiteTable sqLiteTable = new SQLiteTable(PatientSearchDoctorActivity.this);
+				});
+		doctorNameTxt = (EditText) findViewById(R.id.tv_search_doctor);
+		btnSearch = (Button) findViewById(R.id.btn_search_doctor);
+		btnSearch.setOnClickListener(this);
+		if (!checkHasData()) {
+			getWorkingAndSpecialtyFromServer();
+		} else {
+			updateListDoctor();
+			getWorkingAndSpecialtyFromDB();
+		}
+	}
 
-        sqLiteTable.open();
-        listDoctors = sqLiteTable.searchDoctor(specialtyId, workingPlaceId, doctorNameTxt.getText()
-                .toString());
-        listDoctorResultAdapter = new DoctorResultViewAdapter(listDoctors);
-        lvDoctor.setAdapter(listDoctorResultAdapter);
-        listDoctorResultAdapter.notifyDataSetChanged();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(btnSearch.getWindowToken(), 0);
-        // Intent intent = new Intent(this,
-        // PatientViewDoctorFreeTimeActivity.class);
-        // startActivity(intent);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.top_right_menu, menu);
+		menu.getItem(0).setTitle(getResources().getString(R.string.home));
+		menu.getItem(0).setIcon(
+				this.getResources().getDrawable(
+						R.drawable.ic_action_go_to_today));
+		return super.onCreateOptionsMenu(menu);
+	}
 
-    }
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.top_right_button:
+			finish();
+			Intent intentHome = new Intent(this, PatientHomeActivity.class);
+			startActivity(intentHome);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
 
-    private boolean checkHasData() {
-        boolean hasData = false;
-        long countSpe = 0;
-        long countWP = 0;
-        long countDoc = 0;
+	@Override
+	public void onClick(View v) {
+		// Intent intentDetail = new Intent(PatientSearchDoctorActivity.this,
+		// PatientViewDoctorDetailActivity.class);
+		// startActivity(intentDetail);
+		// listDoctorModels.clear();
+		SQLiteTable sqLiteTable = new SQLiteTable(
+				PatientSearchDoctorActivity.this);
 
-        SQLiteTable sqLiteTable = new SQLiteTable(PatientSearchDoctorActivity.this);
+		sqLiteTable.open();
+		listDoctors = sqLiteTable.searchDoctor(specialtyId, workingPlaceId,
+				doctorNameTxt.getText().toString());
+		listDoctorResultAdapter = new DoctorResultViewAdapter(listDoctors);
+		lvDoctor.setAdapter(listDoctorResultAdapter);
+		listDoctorResultAdapter.notifyDataSetChanged();
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(btnSearch.getWindowToken(), 0);
+		// Intent intent = new Intent(this,
+		// PatientViewDoctorFreeTimeActivity.class);
+		// startActivity(intent);
 
-        sqLiteTable.open();
-        countSpe = sqLiteTable.getCountSpecialty();
-        countWP = sqLiteTable.getCountWorkingPlace();
-        countDoc = sqLiteTable.getCountDoctor();
+	}
 
-        if (countSpe > 0 && countWP > 0 && countDoc > 0) {
-            hasData = true;
-        }
+	private boolean checkHasData() {
+		boolean hasData = false;
+		long countSpe = 0;
+		long countWP = 0;
+		long countDoc = 0;
 
-        sqLiteTable.close();
+		SQLiteTable sqLiteTable = new SQLiteTable(
+				PatientSearchDoctorActivity.this);
 
-        return hasData;
-    }
+		sqLiteTable.open();
+		countSpe = sqLiteTable.getCountSpecialty();
+		countWP = sqLiteTable.getCountWorkingPlace();
+		countDoc = sqLiteTable.getCountDoctor();
 
-    void getWorkingAndSpecialtyFromServer() {
-        String tag_json_getDashboard = "json_getWorkingAndSpecialty_req";
-        String content = PatientSearchDoctorActivity.this.getResources()
-                .getString(R.string.loading);
-        showProgressDialog(content, false);
-        listWorkingPlaceModels.clear();
-        listSpecialtyModels.clear();
-        listDoctorModels.clear();
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(urlGetListWorkingAndSpecialty,
-                new Listener<JSONArray>() {
+		if (countSpe > 0 && countWP > 0 && countDoc > 0) {
+			hasData = true;
+		}
 
-                    @Override
-                    public void onResponse(JSONArray arr) {
-                        SQLiteTable sqLiteTable = new SQLiteTable(PatientSearchDoctorActivity.this);
+		sqLiteTable.close();
 
-                        sqLiteTable.open();
-                        sqLiteTable.deleteSpecialty();
-                        sqLiteTable.deleteWorkingPlace();
+		return hasData;
+	}
 
-                        JSONArray arrWp = new JSONArray();
-                        JSONArray arrSpec = new JSONArray();
-                        JSONArray arrDoc = new JSONArray();
-                        try {
-                            arrDoc = arr.getJSONObject(2).getJSONArray("doctor");
-                            for (int i = 0; i < arrDoc.length(); i++) {
-                                DoctorModel doc = new DoctorModel();
-                                doc.setDoctorId(arrDoc.getJSONObject(i).getString("id"));
-                                doc.setDoctorName(arrDoc.getJSONObject(i).getString("name"));
-                                doc.setDescription(arrDoc.getJSONObject(i).getString("description"));
-                                doc.setEducation(arrDoc.getJSONObject(i).getString("education"));
-                                doc.setSpecialty(arrDoc.getJSONObject(i).getString("specialty"));
-                                doc.setDoctorWorkingPlace(arrDoc.getJSONObject(i).getString(
-                                        "workingPlace"));
-                                sqLiteTable.insertDoctor(doc);
-                                listDoctorModels.add(doc);
-                            }
+	void updateListDoctor() {
+		String content = PatientSearchDoctorActivity.this.getResources()
+				.getString(R.string.loading);
+		showProgressDialog(content, false);
+		JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(
+				urlCheckDoctor, null, new Listener<JSONObject>() {
 
-                            arrWp = arr.getJSONObject(0).getJSONArray("workingPlace");
-                            for (int j = 0; j < arrWp.length(); j++) {
-                                WorkingPlaceModel wp = new WorkingPlaceModel();
-                                wp.setWorkingPlaceId(arrWp.getJSONObject(j).getString("id"));
-                                wp.setWorkingPlaceName(arrWp.getJSONObject(j).getString("name"));
-                                wp.setAddress(arrWp.getJSONObject(j).getString("address"));
-                                sqLiteTable.insertWorkingPlace(wp);
-                                listWorkingPlaceModels.add(wp);
-                            }
+					@Override
+					public void onResponse(JSONObject json) {
+						SQLiteTable sqLiteTable = new SQLiteTable(
+								PatientSearchDoctorActivity.this);
+						sqLiteTable.open();
+						try {
+							List<DoctorModel> listDoctorFromDB = sqLiteTable
+									.getAllDoctor();
+							JSONArray jarrDoc = json.getJSONArray("doctors");
+							if (jarrDoc.length() > listDoctorFromDB.size()) {
+								for (int i = 0; i < jarrDoc.length(); i++) {
+									String idSV = jarrDoc.getJSONObject(i)
+											.getString("id");
+									if (!sqLiteTable.isExistedDoctor(idSV)) {
+										DoctorModel doc = new DoctorModel();
+										doc.setDoctorId(jarrDoc
+												.getJSONObject(i).getString(
+														"id"));
+										if (jarrDoc.getJSONObject(i).has(
+												"description")) {
+											doc.setDescription(jarrDoc
+													.getJSONObject(i)
+													.getString("description"));
+										} else {
+											doc.setDescription("Tot nghiep dai hoc y duoc");
+										}
+										doc.setDoctorName(jarrDoc
+												.getJSONObject(i).getString(
+														"name"));
+										doc.setDoctorWorkingPlace(jarrDoc
+												.getJSONObject(i).getString(
+														"workingPlace"));
+										doc.setEducation(jarrDoc.getJSONObject(
+												i).getString("education"));
+										doc.setSpecialty(jarrDoc.getJSONObject(
+												i).getString("specialty"));
+										sqLiteTable.addNewDoctor(doc);
+										Log.i("aa", "add new");
+									}
+								}
+							}
+							JSONArray jarrBan = json
+									.getJSONArray("bannedDoctor");
+							if (jarrBan != null && jarrBan.length() > 0) {
+								for (int i = 0; i < jarrBan.length(); i++) {
+									String id = jarrBan.getJSONObject(i)
+											.getString("id");
+									if (sqLiteTable.isExistedDoctor(id)) {
+										sqLiteTable.deleteBannedDoctor(id);
+										Log.i("aa", "deleted");
+									}
+								}
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 
-                            arrSpec = arr.getJSONObject(1).getJSONArray("specialty");
-                            for (int k = 0; k < arrSpec.length(); k++) {
-                                SpecialtyModel spec = new SpecialtyModel();
-                                spec.setSpecialtyId(arrSpec.getJSONObject(k).getString("id"));
-                                spec.setSpecialtyName(arrSpec.getJSONObject(k).getString("name"));
-                                sqLiteTable.insertSpecialty(spec);
-                                listSpecialtyModels.add(spec);
-                            }
+						sqLiteTable.close();
+						closeProgressDialog();
+					}
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+				}, new ErrorListener() {
 
-                        sqLiteTable.close();
-                        fillDataToSpinner();
-                        closeProgressDialog();
-                    }
-                }, new Response.ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError arg0) {
+						// TODO Auto-generated method stub
+						closeProgressDialog();
+					}
+				});
+		AppController.getInstance().addToRequestQueue(jsonArrayRequest, "requestcheckdoctor");
+	}
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.e(TAG, "Error: " + error.getMessage());
-                        closeProgressDialog();
-                    }
-                });
-        AppController.getInstance().addToRequestQueue(jsonArrayRequest, tag_json_getDashboard);
-    }
+	void getWorkingAndSpecialtyFromServer() {
+		String tag_json_getDashboard = "json_getWorkingAndSpecialty_req";
+		String content = PatientSearchDoctorActivity.this.getResources()
+				.getString(R.string.loading);
+		showProgressDialog(content, false);
+		listWorkingPlaceModels.clear();
+		listSpecialtyModels.clear();
+		listDoctorModels.clear();
+		JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+				urlGetListWorkingAndSpecialty, new Listener<JSONArray>() {
 
-    void getWorkingAndSpecialtyFromDB() {
-        SQLiteTable sqLiteTable = new SQLiteTable(PatientSearchDoctorActivity.this);
+					@Override
+					public void onResponse(JSONArray arr) {
+						SQLiteTable sqLiteTable = new SQLiteTable(
+								PatientSearchDoctorActivity.this);
 
-        sqLiteTable.open();
-        listWorkingPlaceModels.clear();
-        listSpecialtyModels.clear();
-        listWorkingPlaceModels = sqLiteTable.getAllWorkingPlace();
-        listSpecialtyModels = sqLiteTable.getAllSpecialty();
+						sqLiteTable.open();
+						sqLiteTable.deleteSpecialty();
+						sqLiteTable.deleteWorkingPlace();
 
-        fillDataToSpinner();
-    }
+						JSONArray arrWp = new JSONArray();
+						JSONArray arrSpec = new JSONArray();
+						JSONArray arrDoc = new JSONArray();
+						try {
+							arrDoc = arr.getJSONObject(2)
+									.getJSONArray("doctor");
+							for (int i = 0; i < arrDoc.length(); i++) {
+								DoctorModel doc = new DoctorModel();
+								doc.setDoctorId(arrDoc.getJSONObject(i)
+										.getString("id"));
+								doc.setDoctorName(arrDoc.getJSONObject(i)
+										.getString("name"));
+								doc.setDescription(arrDoc.getJSONObject(i)
+										.getString("description"));
+								doc.setEducation(arrDoc.getJSONObject(i)
+										.getString("education"));
+								doc.setSpecialty(arrDoc.getJSONObject(i)
+										.getString("specialty"));
+								doc.setDoctorWorkingPlace(arrDoc.getJSONObject(
+										i).getString("workingPlace"));
+								sqLiteTable.insertDoctor(doc);
+								listDoctorModels.add(doc);
+							}
 
-    void fillDataToSpinner() {
-        WorkingPlaceModel wp = new WorkingPlaceModel();
-        wp.setWorkingPlaceId("");
-        wp.setWorkingPlaceName(getResources().getString(R.string.all));
-        listWorkingPlaceModels.add(0, wp);
+							arrWp = arr.getJSONObject(0).getJSONArray(
+									"workingPlace");
+							for (int j = 0; j < arrWp.length(); j++) {
+								WorkingPlaceModel wp = new WorkingPlaceModel();
+								wp.setWorkingPlaceId(arrWp.getJSONObject(j)
+										.getString("id"));
+								wp.setWorkingPlaceName(arrWp.getJSONObject(j)
+										.getString("name"));
+								wp.setAddress(arrWp.getJSONObject(j).getString(
+										"address"));
+								sqLiteTable.insertWorkingPlace(wp);
+								listWorkingPlaceModels.add(wp);
+							}
 
-        SpecialtyModel spec = new SpecialtyModel();
-        spec.setSpecialtyId("");
-        spec.setSpecialtyName(getResources().getString(R.string.all));
-        listSpecialtyModels.add(0, spec);
+							arrSpec = arr.getJSONObject(1).getJSONArray(
+									"specialty");
+							for (int k = 0; k < arrSpec.length(); k++) {
+								SpecialtyModel spec = new SpecialtyModel();
+								spec.setSpecialtyId(arrSpec.getJSONObject(k)
+										.getString("id"));
+								spec.setSpecialtyName(arrSpec.getJSONObject(k)
+										.getString("name"));
+								sqLiteTable.insertSpecialty(spec);
+								listSpecialtyModels.add(spec);
+							}
 
-        ArrayAdapter<WorkingPlaceModel> wpAdapter = new ArrayAdapter<WorkingPlaceModel>(this,
-                android.R.layout.simple_spinner_item, listWorkingPlaceModels);
-        wpAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        spinnerWorkingPlace.setAdapter(wpAdapter);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 
-        ArrayAdapter<SpecialtyModel> specAdapter = new ArrayAdapter<SpecialtyModel>(this,
-                android.R.layout.simple_spinner_item, listSpecialtyModels);
-        specAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-        spinnerSpecialty.setAdapter(specAdapter);
-    }
+						sqLiteTable.close();
+						fillDataToSpinner();
+						closeProgressDialog();
+					}
+				}, new Response.ErrorListener() {
 
-    class DoctorResultViewAdapter extends ArrayAdapter<DoctorModel> {
-        ViewHolder holder;
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						VolleyLog.e(TAG, "Error: " + error.getMessage());
+						closeProgressDialog();
+					}
+				});
+		AppController.getInstance().addToRequestQueue(jsonArrayRequest,
+				tag_json_getDashboard);
+	}
 
-        ArrayList<DoctorModel> listData;
+	void getWorkingAndSpecialtyFromDB() {
+		SQLiteTable sqLiteTable = new SQLiteTable(
+				PatientSearchDoctorActivity.this);
 
-        public DoctorResultViewAdapter(ArrayList<DoctorModel> listData) {
-            super(PatientSearchDoctorActivity.this,
-                    R.layout.patient_search_doctor_items_result_layout, listData);
-            this.listData = listData;
-        }
+		sqLiteTable.open();
+		listWorkingPlaceModels.clear();
+		listSpecialtyModels.clear();
+		listWorkingPlaceModels = sqLiteTable.getAllWorkingPlace();
+		listSpecialtyModels = sqLiteTable.getAllSpecialty();
 
-        public ArrayList<DoctorModel> getListData() {
-            return listData;
-        }
+		fillDataToSpinner();
+	}
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(
-                        Context.LAYOUT_INFLATER_SERVICE);
-                convertView = inflater.inflate(R.layout.patient_search_doctor_items_result_layout,
-                        parent, false);
-                holder = new ViewHolder();
-                holder.tvDoctorName = (TextView) convertView
-                        .findViewById(R.id.tv_doctor_search_result);
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-            DoctorModel doc = listData.get(position);
+	void fillDataToSpinner() {
+		WorkingPlaceModel wp = new WorkingPlaceModel();
+		wp.setWorkingPlaceId("");
+		wp.setWorkingPlaceName(getResources().getString(R.string.all));
+		listWorkingPlaceModels.add(0, wp);
 
-            holder.tvDoctorName.setText(doc.getDoctorName());
+		SpecialtyModel spec = new SpecialtyModel();
+		spec.setSpecialtyId("");
+		spec.setSpecialtyName(getResources().getString(R.string.all));
+		listSpecialtyModels.add(0, spec);
 
-            return convertView;
-        }
-    }
+		ArrayAdapter<WorkingPlaceModel> wpAdapter = new ArrayAdapter<WorkingPlaceModel>(
+				this, android.R.layout.simple_spinner_item,
+				listWorkingPlaceModels);
+		wpAdapter
+				.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+		spinnerWorkingPlace.setAdapter(wpAdapter);
 
-    private class ViewHolder {
-        TextView tvDoctorName;
-    }
+		ArrayAdapter<SpecialtyModel> specAdapter = new ArrayAdapter<SpecialtyModel>(
+				this, android.R.layout.simple_spinner_item, listSpecialtyModels);
+		specAdapter
+				.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+		spinnerSpecialty.setAdapter(specAdapter);
+	}
+
+	class DoctorResultViewAdapter extends ArrayAdapter<DoctorModel> {
+		ViewHolder holder;
+
+		ArrayList<DoctorModel> listData;
+
+		public DoctorResultViewAdapter(ArrayList<DoctorModel> listData) {
+			super(PatientSearchDoctorActivity.this,
+					R.layout.patient_search_doctor_items_result_layout,
+					listData);
+			this.listData = listData;
+		}
+
+		public ArrayList<DoctorModel> getListData() {
+			return listData;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			if (convertView == null) {
+				LayoutInflater inflater = (LayoutInflater) getContext()
+						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				convertView = inflater.inflate(
+						R.layout.patient_search_doctor_items_result_layout,
+						parent, false);
+				holder = new ViewHolder();
+				holder.tvDoctorName = (TextView) convertView
+						.findViewById(R.id.tv_doctor_search_result);
+				convertView.setTag(holder);
+			} else {
+				holder = (ViewHolder) convertView.getTag();
+			}
+			DoctorModel doc = listData.get(position);
+
+			holder.tvDoctorName.setText(doc.getDoctorName());
+
+			return convertView;
+		}
+	}
+
+	private class ViewHolder {
+		TextView tvDoctorName;
+	}
 }

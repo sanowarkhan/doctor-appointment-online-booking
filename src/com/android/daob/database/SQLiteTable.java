@@ -1,4 +1,3 @@
-
 package com.android.daob.database;
 
 import java.util.ArrayList;
@@ -17,258 +16,294 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 public class SQLiteTable {
-    protected static final String TAG = "DataAdapter";
+	protected static final String TAG = "DataAdapter";
 
-    Context mContext;
+	Context mContext;
 
-    SQLiteDatabase mDb;
+	SQLiteDatabase mDb;
 
-    DBHelper mDbHelper;
+	DBHelper mDbHelper;
 
-    public SQLiteTable(Context context) {
-        this.mContext = context;
-        mDbHelper = new DBHelper(mContext);
-    }
+	public SQLiteTable(Context context) {
+		this.mContext = context;
+		mDbHelper = new DBHelper(mContext);
+	}
 
-    public SQLiteTable open() throws SQLException {
-        try {
-            mDb = mDbHelper.getReadableDatabase();
-        } catch (SQLException mSQLException) {
-            Log.e(TAG, "open >>" + mSQLException.toString());
-            throw mSQLException;
-        }
-        return this;
-    }
+	public SQLiteTable open() throws SQLException {
+		try {
+			mDb = mDbHelper.getReadableDatabase();
+		} catch (SQLException mSQLException) {
+			Log.e(TAG, "open >>" + mSQLException.toString());
+			throw mSQLException;
+		}
+		return this;
+	}
 
-    public void close() {
-        mDbHelper.close();
-    }
-    
-    DoctorModel initDoctorModelFromCursor(Cursor c){
-    	DoctorModel doc = new DoctorModel();
-    	doc.setDoctorId(c.getString(c.getColumnIndex(Constants.ID)));
-    	doc.setDoctorName(c.getString(c.getColumnIndex(Constants.NAME)));
-    	doc.setDescription(c.getString(c.getColumnIndex(Constants.DESCRIPTION)));
-    	doc.setEducation(c.getString(c.getColumnIndex(Constants.EDUCATION)));
-    	doc.setDoctorWorkingPlace(c.getString(c.getColumnIndex(Constants.WORKING_PLACE)));
+	public void close() {
+		mDbHelper.close();
+	}
+
+	DoctorModel initDoctorModelFromCursor(Cursor c) {
+		DoctorModel doc = new DoctorModel();
+		doc.setDoctorId(c.getString(c.getColumnIndex(Constants.ID)));
+		doc.setDoctorName(c.getString(c.getColumnIndex(Constants.NAME)));
+		doc.setDescription(c.getString(c.getColumnIndex(Constants.DESCRIPTION)));
+		doc.setEducation(c.getString(c.getColumnIndex(Constants.EDUCATION)));
+		doc.setDoctorWorkingPlace(c.getString(c
+				.getColumnIndex(Constants.WORKING_PLACE)));
 		return doc;
-    }
+	}
 
-    WorkingPlaceModel initWorkingPlaceFromCursor(Cursor c) {
-        WorkingPlaceModel wp = new WorkingPlaceModel();
-        wp.setWorkingPlaceId(c.getString(c.getColumnIndex(Constants.ID)));
-        wp.setWorkingPlaceName(c.getString(c.getColumnIndex(Constants.NAME)));
-        wp.setAddress(c.getString(c.getColumnIndex(Constants.ADDRESS)));
-        return wp;
-    }
+	WorkingPlaceModel initWorkingPlaceFromCursor(Cursor c) {
+		WorkingPlaceModel wp = new WorkingPlaceModel();
+		wp.setWorkingPlaceId(c.getString(c.getColumnIndex(Constants.ID)));
+		wp.setWorkingPlaceName(c.getString(c.getColumnIndex(Constants.NAME)));
+		wp.setAddress(c.getString(c.getColumnIndex(Constants.ADDRESS)));
+		return wp;
+	}
 
-    SpecialtyModel initSpecialtyFromCursor(Cursor c) {
-        SpecialtyModel spec = new SpecialtyModel();
-        spec.setSpecialtyId(c.getString(c.getColumnIndex(Constants.ID)));
-        spec.setSpecialtyName(c.getString(c.getColumnIndex(Constants.NAME)));
-        return spec;
-    }
-    
-    //search doctor
-    public ArrayList<DoctorModel> searchDoctor(String specialtyId, String workingPlaceId, String name){
-    	ArrayList<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
-    	try{
-    		String sql = "";
-    		if(specialtyId.equals("") && workingPlaceId.equals("") && !name.isEmpty()){
-    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Name like '%" + name + "%'";
-    		} else if(specialtyId.equals("") && !workingPlaceId.equals("")){
-    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where WorkingPlace like '%" + workingPlaceId +";%'"
-        				+ " and Name like '%" + name + "%'";
-    		} else if(workingPlaceId.equals("") && !specialtyId.equals("")){
-    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty like '%" + specialtyId + "%'"
-        				+ " and Name like '%" + name + "%'";
-    		} else if(specialtyId.equals("") && !workingPlaceId.equals("")){
-    			sql = "Select * from " + Constants.DOCTOR_TABLE + " where Specialty like '%"
-        				+ specialtyId + "'%" + " and WorkingPlace like '%" + workingPlaceId +";%'"
-        				+ " and Name like '%" + name + "%'";
-    		} else{
-    			sql = "Select * from " + Constants.DOCTOR_TABLE;
-    		}
-    		Log.i("aa", sql);
-    		Cursor mCur = mDb.rawQuery(sql, null);
-    		if(mCur != null){
-    			DoctorModel doc = new DoctorModel();
-    			
-    			while (mCur.moveToNext()) {
-   				 doc = initDoctorModelFromCursor(mCur);
-   				 listDoctorModels.add(doc);
-    			}
-    		}
-    	} catch (SQLException mSQLException){
-    		Log.e(TAG, "getTestData >>" + mSQLException.toString());
-    		throw mSQLException;
-    	}
-    	return (ArrayList<DoctorModel>) listDoctorModels;
-    }
-    
-    //get all doctor
-    public List<DoctorModel> getAllDoctor(){
-    	List<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
-    	try {
-    		String sql = "Select * from " + Constants.DOCTOR_TABLE;
-    		Cursor mCur = mDb.rawQuery(sql, null);
-    		if(mCur != null){
-    			DoctorModel doc = new DoctorModel();
-    			
-    			while (mCur.moveToNext()) {
-    				 doc = initDoctorModelFromCursor(mCur);
-    				 listDoctorModels.add(doc);
-    			}
-    		}
-    	} catch (SQLException mSQLException) {
-    		Log.e(TAG, "getTestData >>" + mSQLException.toString());
-            throw mSQLException;
-    	}
-    	return listDoctorModels;
-    }
-    
- // insert specialty to db
-    public void insertDoctor(DoctorModel doc) {
-        ContentValues values = new ContentValues();
-        values.put(Constants.ID, doc.getDoctorId());
-        values.put(Constants.NAME, doc.getDoctorName());
-        values.put(Constants.DOCTOR_SPECIALTY, doc.getSpecialty());
-        values.put(Constants.DESCRIPTION, doc.getDescription());
-        values.put(Constants.EDUCATION, doc.getEducation());
-        values.put(Constants.WORKING_PLACE, doc.getDoctorWorkingPlace());
-        mDb.insert(Constants.DOCTOR_TABLE, null, values);
-    }
+	SpecialtyModel initSpecialtyFromCursor(Cursor c) {
+		SpecialtyModel spec = new SpecialtyModel();
+		spec.setSpecialtyId(c.getString(c.getColumnIndex(Constants.ID)));
+		spec.setSpecialtyName(c.getString(c.getColumnIndex(Constants.NAME)));
+		return spec;
+	}
 
-    // delete all data
-    public void deleteDoctor() {
-        mDb.delete(Constants.DOCTOR_TABLE, null, null);
-    }
+	// search doctor
+	public ArrayList<DoctorModel> searchDoctor(String specialtyId,
+			String workingPlaceId, String name) {
+		ArrayList<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
+		Log.i("aa", "spec " + specialtyId);
+		Log.i("aa", "wor " + workingPlaceId);
+		Log.i("aa", "name " + name);
+		try {
+			String sql = "";
+			if (specialtyId.isEmpty() && workingPlaceId.isEmpty()
+					&& !name.isEmpty()) {
+				sql = "Select * from " + Constants.DOCTOR_TABLE
+						+ " where Name like '%" + name + "%'";
+			} else if (specialtyId.isEmpty() && !workingPlaceId.isEmpty()) {
+				sql = "Select * from " + Constants.DOCTOR_TABLE
+						+ " where WorkingPlace like '%" + workingPlaceId
+						+ ";%'" + " and Name like '%" + name + "%'";
+			} else if (workingPlaceId.isEmpty() && !specialtyId.isEmpty()) {
+				sql = "Select * from " + Constants.DOCTOR_TABLE
+						+ " where Specialty like '%" + specialtyId + "%'"
+						+ " and Name like '%" + name + "%'";
+			} else if (!specialtyId.isEmpty() && !workingPlaceId.isEmpty()) {
+				sql = "Select * from " + Constants.DOCTOR_TABLE
+						+ " where Specialty like '%" + specialtyId + "%'"
+						+ " and WorkingPlace like '%" + workingPlaceId + ";%'"
+						+ " and Name like '%" + name + "%'";
+			} else {
+				sql = "Select * from " + Constants.DOCTOR_TABLE;
+			}
+			Log.i("aa", sql);
+			Cursor mCur = mDb.rawQuery(sql, null);
+			if (mCur != null) {
+				DoctorModel doc = new DoctorModel();
 
-    // get all specialty
-    public List<WorkingPlaceModel> getAllWorkingPlace() {
-        List<WorkingPlaceModel> listwWorkingPlaceModels = new ArrayList<WorkingPlaceModel>();
-        try {
-            String sql = "Select * from " + Constants.HOSPITAL_TABLE;
+				while (mCur.moveToNext()) {
+					doc = initDoctorModelFromCursor(mCur);
+					listDoctorModels.add(doc);
+				}
+			}
+		} catch (SQLException mSQLException) {
+			Log.e(TAG, "getTestData >>" + mSQLException.toString());
+			throw mSQLException;
+		}
+		return (ArrayList<DoctorModel>) listDoctorModels;
+	}
 
-            Cursor mCur = mDb.rawQuery(sql, null);
-            if (mCur != null) {
-                WorkingPlaceModel wp = new WorkingPlaceModel();
+	// get all doctor
+	public List<DoctorModel> getAllDoctor() {
+		List<DoctorModel> listDoctorModels = new ArrayList<DoctorModel>();
+		try {
+			String sql = "Select * from " + Constants.DOCTOR_TABLE;
+			Cursor mCur = mDb.rawQuery(sql, null);
+			if (mCur != null) {
+				DoctorModel doc = new DoctorModel();
 
-                while (mCur.moveToNext()) {
-                    wp = initWorkingPlaceFromCursor(mCur);
-                    listwWorkingPlaceModels.add(wp);
-                }
-            }
-            return listwWorkingPlaceModels;
-        } catch (SQLException mSQLException) {
-            Log.e(TAG, "getTestData >>" + mSQLException.toString());
-            throw mSQLException;
-        }
-    }
+				while (mCur.moveToNext()) {
+					doc = initDoctorModelFromCursor(mCur);
+					listDoctorModels.add(doc);
+				}
+			}
+		} catch (SQLException mSQLException) {
+			Log.e(TAG, "getTestData >>" + mSQLException.toString());
+			throw mSQLException;
+		}
+		return listDoctorModels;
+	}
 
-    // insert specialty to db
-    public void insertWorkingPlace(WorkingPlaceModel wp) {
-        ContentValues values = new ContentValues();
-        values.put(Constants.ID, wp.getWorkingPlaceId());
-        values.put(Constants.NAME, wp.getWorkingPlaceName());
-        values.put(Constants.ADDRESS, wp.getAddress());
-        mDb.insert(Constants.HOSPITAL_TABLE, null, values);
-    }
+	// insert specialty to db
+	public void insertDoctor(DoctorModel doc) {
+		ContentValues values = new ContentValues();
+		values.put(Constants.ID, doc.getDoctorId());
+		values.put(Constants.NAME, doc.getDoctorName());
+		values.put(Constants.DOCTOR_SPECIALTY, doc.getSpecialty());
+		values.put(Constants.DESCRIPTION, doc.getDescription());
+		values.put(Constants.EDUCATION, doc.getEducation());
+		values.put(Constants.WORKING_PLACE, doc.getDoctorWorkingPlace());
+		mDb.insert(Constants.DOCTOR_TABLE, null, values);
+	}
 
-    // delete all data
-    public void deleteWorkingPlace() {
-        mDb.delete(Constants.HOSPITAL_TABLE, null, null);
-    }
+	// delete all data
+	public void deleteDoctor() {
+		mDb.delete(Constants.DOCTOR_TABLE, null, null);
+	}
 
-    // get all specialty
-    public List<SpecialtyModel> getAllSpecialty() {
-        List<SpecialtyModel> listSpecialtyModels = new ArrayList<SpecialtyModel>();
-        try {
-            String sql = "Select * from " + Constants.SPECIALTY_TABLE;
+	public void deleteBannedDoctor(String id) {
+		mDb.delete(Constants.DOCTOR_TABLE, Constants.ID + " like '%" + id
+				+ "%'", null);
+	}
 
-            Cursor mCur = mDb.rawQuery(sql, null);
-            if (mCur != null) {
-                SpecialtyModel spec = new SpecialtyModel();
+	public boolean isExistedDoctor(String id) {
+		String sql = "Select * from " + Constants.DOCTOR_TABLE + " where "
+				+ Constants.ID + " like '%" + id + "%'";
+		Cursor cursor = mDb.rawQuery(sql, null);
+		if (cursor.getCount() <= 0) {
+			return false;
+		}
+		return true;
+	}
 
-                while (mCur.moveToNext()) {
-                    spec = initSpecialtyFromCursor(mCur);
-                    listSpecialtyModels.add(spec);
-                }
-            }
-            return listSpecialtyModels;
-        } catch (SQLException mSQLException) {
-            Log.e(TAG, "getTestData >>" + mSQLException.toString());
-            throw mSQLException;
-        }
-    }
+	public void addNewDoctor(DoctorModel doc) {
+		ContentValues values = new ContentValues();
+		values.put(Constants.ID, doc.getDoctorId());
+		values.put(Constants.NAME, doc.getDoctorName());
+		values.put(Constants.DOCTOR_SPECIALTY, doc.getSpecialty());
+		values.put(Constants.DESCRIPTION, doc.getDescription());
+		values.put(Constants.EDUCATION, doc.getEducation());
+		values.put(Constants.WORKING_PLACE, doc.getDoctorWorkingPlace());
+		mDb.insert(Constants.DOCTOR_TABLE, null, values);
+	}
 
-    // insert specialty to db
-    public void insertSpecialty(SpecialtyModel spec) {
-        ContentValues values = new ContentValues();
-        values.put(Constants.ID, spec.getSpecialtyId());
-        values.put(Constants.NAME, spec.getSpecialtyName());
-        mDb.insert(Constants.SPECIALTY_TABLE, null, values);
-    }
+	// get all specialty
+	public List<WorkingPlaceModel> getAllWorkingPlace() {
+		List<WorkingPlaceModel> listwWorkingPlaceModels = new ArrayList<WorkingPlaceModel>();
+		try {
+			String sql = "Select * from " + Constants.HOSPITAL_TABLE;
 
-    // delete all data
-    public void deleteSpecialty() {
-        mDb.delete(Constants.SPECIALTY_TABLE, null, null);
-    }
-    
-    public long getCountDoctor() {
-        long count = 0;
+			Cursor mCur = mDb.rawQuery(sql, null);
+			if (mCur != null) {
+				WorkingPlaceModel wp = new WorkingPlaceModel();
 
-        try {
-            String sql = "Select count (*) from " + Constants.DOCTOR_TABLE;
+				while (mCur.moveToNext()) {
+					wp = initWorkingPlaceFromCursor(mCur);
+					listwWorkingPlaceModels.add(wp);
+				}
+			}
+			return listwWorkingPlaceModels;
+		} catch (SQLException mSQLException) {
+			Log.e(TAG, "getTestData >>" + mSQLException.toString());
+			throw mSQLException;
+		}
+	}
 
-            Cursor mCur = mDb.rawQuery(sql, null);
-            if (mCur != null) {
-                while (mCur.moveToNext()) {
-                    count = mCur.getLong(0);
-                }
-            }
-            return count;
-        } catch (SQLException mSQLException) {
-            Log.e(TAG, "getTestData >>" + mSQLException.toString());
-            throw mSQLException;
-        }
-    }
+	// insert specialty to db
+	public void insertWorkingPlace(WorkingPlaceModel wp) {
+		ContentValues values = new ContentValues();
+		values.put(Constants.ID, wp.getWorkingPlaceId());
+		values.put(Constants.NAME, wp.getWorkingPlaceName());
+		values.put(Constants.ADDRESS, wp.getAddress());
+		mDb.insert(Constants.HOSPITAL_TABLE, null, values);
+	}
 
-    public long getCountWorkingPlace() {
-        long count = 0;
+	// delete all data
+	public void deleteWorkingPlace() {
+		mDb.delete(Constants.HOSPITAL_TABLE, null, null);
+	}
 
-        try {
-            String sql = "Select count (*) from " + Constants.HOSPITAL_TABLE;
+	// get all specialty
+	public List<SpecialtyModel> getAllSpecialty() {
+		List<SpecialtyModel> listSpecialtyModels = new ArrayList<SpecialtyModel>();
+		try {
+			String sql = "Select * from " + Constants.SPECIALTY_TABLE;
 
-            Cursor mCur = mDb.rawQuery(sql, null);
-            if (mCur != null) {
-                while (mCur.moveToNext()) {
-                    count = mCur.getLong(0);
-                }
-            }
-            return count;
-        } catch (SQLException mSQLException) {
-            Log.e(TAG, "getTestData >>" + mSQLException.toString());
-            throw mSQLException;
-        }
-    }
+			Cursor mCur = mDb.rawQuery(sql, null);
+			if (mCur != null) {
+				SpecialtyModel spec = new SpecialtyModel();
 
-    public long getCountSpecialty() {
-        long count = 0;
+				while (mCur.moveToNext()) {
+					spec = initSpecialtyFromCursor(mCur);
+					listSpecialtyModels.add(spec);
+				}
+			}
+			return listSpecialtyModels;
+		} catch (SQLException mSQLException) {
+			Log.e(TAG, "getTestData >>" + mSQLException.toString());
+			throw mSQLException;
+		}
+	}
 
-        try {
-            String sql = "Select count (*) from " + Constants.SPECIALTY_TABLE;
+	// insert specialty to db
+	public void insertSpecialty(SpecialtyModel spec) {
+		ContentValues values = new ContentValues();
+		values.put(Constants.ID, spec.getSpecialtyId());
+		values.put(Constants.NAME, spec.getSpecialtyName());
+		mDb.insert(Constants.SPECIALTY_TABLE, null, values);
+	}
 
-            Cursor mCur = mDb.rawQuery(sql, null);
-            if (mCur != null) {
-                while (mCur.moveToNext()) {
-                    count = mCur.getLong(0);
-                }
-            }
-            return count;
-        } catch (SQLException mSQLException) {
-            Log.e(TAG, "getTestData >>" + mSQLException.toString());
-            throw mSQLException;
-        }
-    }
+	// delete all data
+	public void deleteSpecialty() {
+		mDb.delete(Constants.SPECIALTY_TABLE, null, null);
+	}
+
+	public long getCountDoctor() {
+		long count = 0;
+
+		try {
+			String sql = "Select count (*) from " + Constants.DOCTOR_TABLE;
+
+			Cursor mCur = mDb.rawQuery(sql, null);
+			if (mCur != null) {
+				while (mCur.moveToNext()) {
+					count = mCur.getLong(0);
+				}
+			}
+			return count;
+		} catch (SQLException mSQLException) {
+			Log.e(TAG, "getTestData >>" + mSQLException.toString());
+			throw mSQLException;
+		}
+	}
+
+	public long getCountWorkingPlace() {
+		long count = 0;
+
+		try {
+			String sql = "Select count (*) from " + Constants.HOSPITAL_TABLE;
+
+			Cursor mCur = mDb.rawQuery(sql, null);
+			if (mCur != null) {
+				while (mCur.moveToNext()) {
+					count = mCur.getLong(0);
+				}
+			}
+			return count;
+		} catch (SQLException mSQLException) {
+			Log.e(TAG, "getTestData >>" + mSQLException.toString());
+			throw mSQLException;
+		}
+	}
+
+	public long getCountSpecialty() {
+		long count = 0;
+
+		try {
+			String sql = "Select count (*) from " + Constants.SPECIALTY_TABLE;
+
+			Cursor mCur = mDb.rawQuery(sql, null);
+			if (mCur != null) {
+				while (mCur.moveToNext()) {
+					count = mCur.getLong(0);
+				}
+			}
+			return count;
+		} catch (SQLException mSQLException) {
+			Log.e(TAG, "getTestData >>" + mSQLException.toString());
+			throw mSQLException;
+		}
+	}
 }

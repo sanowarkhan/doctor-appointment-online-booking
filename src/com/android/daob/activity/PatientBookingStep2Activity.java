@@ -60,7 +60,7 @@ public class PatientBookingStep2Activity extends BaseActivity implements OnClick
 
         // tvMeetingDate.setText(pbm.getDelPatName());
         // tvLocation.setText(pbm.getLocation());
-        tvDoctorName.setText("Nguyễn Trọng Phát");
+        tvDoctorName.setText(PatientSearchDoctorActivity.doctorName);
 
     }
 

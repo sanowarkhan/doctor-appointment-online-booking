@@ -137,10 +137,12 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 
 								btnConfirm.setVisibility(View.GONE);
 								btnReject.setVisibility(View.GONE);
-								tvStatus.setText(getApplicationContext().getResources()
-										.getString(R.string.status_rejected));
+								tvStatus.setText(getApplicationContext()
+										.getResources().getString(
+												R.string.status_rejected));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
-										.getResources().getColor(R.color.app_rejected));
+										.getResources().getColor(
+												R.color.app_rejected));
 								Toast.makeText(
 										DoctorAppointmentDetailActivity.this,
 										getResources().getString(
@@ -219,10 +221,12 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										});
 
 								builder1.show();
-								tvStatus.setText(getApplicationContext().getResources()
-										.getString(R.string.status_canceled));
+								tvStatus.setText(getApplicationContext()
+										.getResources().getString(
+												R.string.status_canceled));
 								tvStatus.setTextColor(DoctorAppointmentDetailActivity.this
-										.getResources().getColor(R.color.app_canceled));
+										.getResources().getColor(
+												R.color.app_canceled));
 								btnCancel.setVisibility(View.GONE);
 								Toast.makeText(
 										DoctorAppointmentDetailActivity.this,
@@ -452,12 +456,13 @@ public class DoctorAppointmentDetailActivity extends BaseActivity {
 										.getResources().getColor(
 												R.color.app_missed));
 							}
-							if (jsonArr.getJSONObject(0)
-									.getString("preDescription").isEmpty()) {
-								tvNote.setText("không có");
-							} else {
+							if (jsonArr.getJSONObject(0).has("preDescription")
+									|| !jsonArr.getJSONObject(0).isNull(
+											"preDescription")) {
 								tvNote.setText(jsonArr.getJSONObject(0)
 										.getString("preDescription"));
+							} else {
+								tvNote.setText("Không có");
 							}
 						} catch (JSONException e) {
 							e.printStackTrace();

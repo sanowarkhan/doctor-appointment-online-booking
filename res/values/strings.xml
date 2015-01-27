@@ -39,6 +39,7 @@
 	<string name="status">Trạng thái:</string>
 	<string name="notes">Ghi chú:</string>
 	<string name="pre_notes">Lời dặn:</string>
+	<string name="pre_no_notes">Không có</string>
 	<string name="loading">Đang tải dữ liệu...</string>
 	<string name="processing">Đang xử lý...</string>
 	<string name="status_new">chờ xác nhận</string>

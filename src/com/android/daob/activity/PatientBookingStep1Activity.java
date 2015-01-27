@@ -31,6 +31,7 @@ import com.android.daob.utils.GlobalStorage;
 import com.android.doctor_appointment_online_booking.R;
 import com.android.volley.Request.Method;
 import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -44,6 +45,9 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 
 	private ProgressBar loginProgressBar;
 	private String url = Constants.URL + "processStep1";
+
+	private String urlEmail = Constants.URL + "bookingStep1/"
+			+ MainActivity.patientId;
 
 	RadioButton rbForMe, rbForOther, rbMale, rbFemale;
 
@@ -62,7 +66,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 	String doctorId = "";
 
 	Context context;
-	
+
 	public static String name = "";
 	public static String old = "";
 	public static String sex = "";
@@ -71,7 +75,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 	public static String doctorname = "";
 	public static String meetingDate = "";
 	public static String location = "";
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -113,6 +117,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 
 		btnBooking = (Button) findViewById(R.id.btn_booking);
 		btnBooking.setOnClickListener(this);
+		setEmail();
 	}
 
 	@Override
@@ -173,7 +178,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 	public void onClick(View arg0) {
 		switch (arg0.getId()) {
 		case R.id.btn_booking:
-		    loginProgressBar.setVisibility(View.VISIBLE);
+			loginProgressBar.setVisibility(View.VISIBLE);
 			String email = txtEmail.getText().toString().trim();
 			HashMap<String, String> bookingParams = new HashMap<String, String>();
 			bookingParams.put("email", email);
@@ -187,21 +192,24 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 							try {
 								PatientBookingStep1Activity.this
 										.saveBookingToGlobal();
-								if(isDelegated){
+								if (isDelegated) {
 									name = txtDeName.getText().toString();
 									old = txtDeOld.getText().toString();
-									sex = gender? "Nam" : "Nữ";
+									sex = gender ? "Nam" : "Nữ";
 									phone = txtDePhone.getText().toString();
 									address = txtAddress.getText().toString();
 								}
 								doctorname = tvDoctorName.getText().toString();
-								meetingDate = tvStartTime.getText().toString() + " - " + tvEndTime.getText().toString() 
-										+ "  " + tvBookDate.getText().toString();
+								meetingDate = tvStartTime.getText().toString()
+										+ " - "
+										+ tvEndTime.getText().toString() + "  "
+										+ tvBookDate.getText().toString();
 								location = tvLocation.getText().toString();
 								Intent i = new Intent(context,
 										PatientBookingStep2Activity.class);
 								Log.i("aa", " " + response.getInt("confirmKey"));
-								i.putExtra(Constants.CONFIRM_KEY, response.getInt("confirmKey"));
+								i.putExtra(Constants.CONFIRM_KEY,
+										response.getInt("confirmKey"));
 								context.startActivity(i);
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
@@ -223,6 +231,47 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 
 		}
 
+	}
+
+	void setEmail() {
+		JsonObjectRequest jsonGetEmail = new JsonObjectRequest(urlEmail, null,
+				new Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject json) {
+						try {
+							txtEmail.setText(json.getString("email"));
+							if (json.has("lastDeApp")) {
+								JSONObject delePatient = json.getJSONObject(
+										"lastDeApp").getJSONObject(
+										"delegatedPatient");
+								txtDeName.setText(delePatient.getString("name"));
+								txtDePhone.setText(delePatient
+										.getString("phone"));
+								txtDeOld.setText(delePatient.getString("age"));
+								if (delePatient.getString("gender").equals(
+										"female")) {
+									rbFemale.setChecked(true);
+									rbMale.setChecked(false);
+								} else {
+									rbFemale.setChecked(false);
+									rbMale.setChecked(true);
+								}
+								txtAddress.setText(delePatient
+										.getString("address"));
+							}
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new ErrorListener() {
+					@Override
+					public void onErrorResponse(VolleyError arg0) {
+
+					}
+				});
+		AppController.getInstance().addToRequestQueue(jsonGetEmail,
+				"json_get_email");
 	}
 
 	private void saveBookingToGlobal() throws JSONException {
@@ -255,7 +304,7 @@ public class PatientBookingStep1Activity extends BaseActivity implements
 			delPatient.put("address", deAddress);
 			bookingParams.put("delegatedPatient", delPatient);
 		}
-		
+
 		GlobalStorage.sTempBooking = bookingParams;
 	}
 }
